@@ -16,7 +16,7 @@ public class ParticipationRepository {
 
     public void initParticipation() {
 
-        String x = "CREATE TABLE Participation (participationId INT, position INT, userId INT, competitionId INT, PRIMARY KEY (participationId))";
+        String x = "CREATE TABLE IF NOT EXISTS Participation (participationId INT, position INT, userId INT, competitionId INT, PRIMARY KEY (participationId))";
 
         t.update(x);
 
