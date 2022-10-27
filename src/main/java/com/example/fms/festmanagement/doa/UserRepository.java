@@ -35,7 +35,7 @@ public class UserRepository {
 
         }
 
-        catch(EmptyResultDataAccessException) {
+        catch(EmptyResultDataAccessException e) {
 
             return null;
 
