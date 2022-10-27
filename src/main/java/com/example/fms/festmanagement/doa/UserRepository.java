@@ -16,13 +16,13 @@ public class UserRepository {
 
     public void initUser() {
 
-        String x = "CREATE TABLE IF NOT EXISTS User (userId varchar(20) NOT NULL, firstName varchar(20), lastName varchar(20), emailId varchar(50) NOT NULL, phoneNumber char(10), sex int, college varchar(50), pinCode char(6), city varchar(50), streetName varchar(50), password varchar(50), PRIMARY KEY (userId))";
+        String x = "CREATE TABLE IF NOT EXISTS User (userId VARCHAR(20) NOT NULL, firstName VARCHAR(20), lastName VARCHAR(20), emailId VARCHAR(50) NOT NULL, phoneNumber CHAR(10), sex INT, college VARCHAR(50), pinCode CHAR(6), city VARCHAR(50), streetName VARCHAR(50), password VARCHAR(50), PRIMARY KEY (userId))";
 
         t.update(x);
 
     }
 
-    public void createUser(User user) {
+    public void insertUser(User user) {
 
         String x = "INSERT INTO User VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -30,7 +30,7 @@ public class UserRepository {
 
     }
 
-    public User getUser(String userId) {
+    public User selectUser(String userId) {
 
         try {
 

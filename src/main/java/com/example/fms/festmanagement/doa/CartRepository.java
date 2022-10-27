@@ -16,13 +16,13 @@ public class CartRepository {
 
     public void cartInit() {
 
-        String x = "CREATE TABLE Cart (cartId int, userId varchar(20), PRIMARY KEY(cardId), FOREIGN KEY(userId) REFERENCES User(userId))";
+        String x = "CREATE TABLE IF NOT EXISTS Cart (cartId INT, userId VARCHAR(20), PRIMARY KEY(cardId), FOREIGN KEY(userId) REFERENCES User(userId))";
 
         t.update(x);
 
     }
 
-    public void createCart(Cart cart) {
+    public void insertCart(Cart cart) {
 
         String x = "INSERT INTO Cart VALUES (?, ?)";
 
@@ -30,7 +30,7 @@ public class CartRepository {
 
     }
 
-    public Cart getCart(int cartId) {
+    public Cart selectCart(int cartId) {
 
         try {
 

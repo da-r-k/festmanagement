@@ -16,13 +16,13 @@ public class ItemRepository {
 
     public void initItem() {
 
-        String x = "CREATE TABLE Item (itemId int, itemName varchar(50), price int, quantity int, PRIMARY KEY (itemId))";
+        String x = "CREATE TABLE IF NOT EXISTS Item (itemId INT, itemName VARCHAR(50), price INT, quantity INT, PRIMARY KEY (itemId))";
 
         t.update(x);
 
     }
 
-    public void createItem(Item item) {
+    public void insertItem(Item item) {
 
         String x = "INSERT INTO Item VALUES (?, ?, ?, ?)";
 
@@ -30,7 +30,7 @@ public class ItemRepository {
 
     }
 
-    public Item getItem(int itemId) {
+    public Item selectItem(int itemId) {
 
         try {
 
