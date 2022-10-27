@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Transactional
 public class HomeController {
 
-    @GetMapping
+    @GetMapping("/")
     public String home() {
 
         return "Hello World";
