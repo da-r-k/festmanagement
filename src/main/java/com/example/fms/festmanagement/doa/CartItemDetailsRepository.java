@@ -16,7 +16,7 @@ public class CartItemDetailsRepository {
 
     public void initCid() {
 
-        String x = "CREATE TABLE IF NOT EXISTS CardTransactionDetails (cidId INT, quantity INT, cartId INT, itemId INT, PRIMARY KEY (cidId), FOREIGN KEY (cartId) REFERENCES Cart (cartId))";
+        String x = "CREATE TABLE IF NOT EXISTS CardTransactionDetails (cidId INT, quantity INT, cartId INT, itemId INT, PRIMARY KEY (cidId))";
 
         t.update(x);
 

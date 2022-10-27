@@ -16,7 +16,7 @@ public class MemberRepository {
 
     private void initMember() {
 
-        String x = "CREATE TABLE IF NOT EXISTS Member (memberId INT, firstName VARCHAR(20), lastName VARCHAR(20), emailId VARCHAR(50), phoneNumber CHAR(10), eventId INT, password VARCHAR(20), PRIMARY KEY (memberId), FOREIGN KEY (eventId) REFERENCES Event (eventId))";
+        String x = "CREATE TABLE IF NOT EXISTS Member (memberId INT, firstName VARCHAR(20), lastName VARCHAR(20), emailId VARCHAR(50), phoneNumber CHAR(10), eventId INT, password VARCHAR(20), PRIMARY KEY (memberId))";
 
         t.update(x);
 

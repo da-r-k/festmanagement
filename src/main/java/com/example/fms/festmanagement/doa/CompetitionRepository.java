@@ -16,7 +16,7 @@ public class CompetitionRepository {
 
     public void initCompetition() {
 
-        String x = "CREATE TABLE IF NOT EXISTS Competition (competitionId INT, competitionName varchar(20), prize INT, eventId INT, subeventId INT, PRIMARY KEY (competitionId), FOREIGN KEY (eventId) REFERENCES Event (eventId), FOREIGN KEY (subeventId) REFERENCES SubEvent (subeventId))";
+        String x = "CREATE TABLE IF NOT EXISTS Competition (competitionId INT, competitionName varchar(20), prize INT, eventId INT, subeventId INT, PRIMARY KEY (competitionId))";
 
         t.update(x);
 

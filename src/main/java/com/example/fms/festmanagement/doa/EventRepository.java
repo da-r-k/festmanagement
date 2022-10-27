@@ -16,7 +16,7 @@ public class EventRepository {
 
     public void initEvent() {
 
-        String x = "CREATE TABLE IF NOT EXISTS Event (eventId INT, eventName varchar(20), headId INT, PRIMARY KEY (eventId), FOREIGN KEY REFERENCES Member (memberId))";
+        String x = "CREATE TABLE IF NOT EXISTS Event (eventId INT, eventName varchar(20), headId INT, PRIMARY KEY (eventId))";
 
         t.update(x);
 
