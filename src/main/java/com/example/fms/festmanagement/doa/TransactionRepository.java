@@ -16,7 +16,7 @@ public class TransactionRepository {
 
     public void initTransaction() {
 
-        String x = "CREATE TABLE IF NOT EXISTS Transaction (transactionId int, amount int, dateTime datetime, cartId int)";
+        String x = "CREATE TABLE IF NOT EXISTS Transaction (transactionId int, amount int, dateTime datetime, cartId int, PRIMARY KEY (transactionId), FOREIGN KEY(cartId) REFERENCES Cart(cartId))";
 
         t.update(x);
 
