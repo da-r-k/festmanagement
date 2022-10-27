@@ -53,7 +53,7 @@ public class UserRepository {
 
     public void changePassword(String userId, String password) {
 
-        String x = "UPDATE User SET passowrd = ? WHERE userId = ?";
+        String x = "UPDATE User SET password = ? WHERE userId = ?";
 
         template.update(x, password, userId);
 
