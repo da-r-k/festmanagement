@@ -34,7 +34,7 @@ public class UserRepository {
 
         try {
 
-            String x = "SELECT * FORM User WHERE userId = ?";
+            String x = "SELECT * FROM User WHERE userId = ?";
 
             return t.queryForObject(x, new BeanPropertyRowMapper<>(User.class), new Object[] {userId});
 
