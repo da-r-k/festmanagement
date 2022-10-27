@@ -12,21 +12,21 @@ import org.springframework.stereotype.Repository;
 public class UserRepository {
 
     @Autowired
-    private JdbcTemplate template;
+    private JdbcTemplate t;
 
     public void initUser() {
 
-        String x = "CREATE TABLE IF NOT EXISTS User (userId varchar(20), firstName varchar(20), lastName varchar(20), emailId varchar(50), phoneNumber char(10), sex int, college varchar(50), pinCode char(6), city varchar(50), streetName varchar(50), password varchar(50))";
+        String x = "CREATE TABLE IF NOT EXISTS User (userId varchar(20) NOT NULL, firstName varchar(20), lastName varchar(20), emailId varchar(50) NOT NULL, phoneNumber char(10), sex int, college varchar(50), pinCode char(6), city varchar(50), streetName varchar(50), password varchar(50), PRIMARY KEY (userId))";
 
-        template.update(x);
+        t.update(x);
 
     }
 
     public void createUser(User user) {
 
-        String x = "INSERT INTO User (userId, firstName, lastName, emailId, phoneNumber, sex, college, pinCode, city, streetName, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String x = "INSERT INTO User VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        template.update(x, user.getUserId(), user.getFirstName(), user.getLastName(), user.getEmailId(), user.getPhoneNumber(), user.getSex(), user.getCollege(), user.getPinCode(), user.getCity(), user.getStreetName(), user.getPassword());
+        t.update(x, user.getUserId(), user.getFirstName(), user.getLastName(), user.getEmailId(), user.getPhoneNumber(), user.getSex(), user.getCollege(), user.getPinCode(), user.getCity(), user.getStreetName(), user.getPassword());
 
     }
 
@@ -36,7 +36,7 @@ public class UserRepository {
 
             String x = "SELECT * FORM User WHERE userId = ?";
 
-            return template.queryForObject(x, new BeanPropertyRowMapper<>(User.class), new Object[] {userId});
+            return t.queryForObject(x, new BeanPropertyRowMapper<>(User.class), new Object[] {userId});
 
         }
 
@@ -50,9 +50,9 @@ public class UserRepository {
 
     public void updateUser(User user) {
 
-        String x = "UPDATE User SET firstName = ?, lastName, = ?, emailId = ?, phoneNumber = ?, sex = ?, college = ?, pinCode = ?, city = ?, streetName = ?";
+        String x = "UPDATE User SET firstName = ?, lastName, = ?, emailId = ?, phoneNumber = ?, sex = ?, college = ?, pinCode = ?, city = ?, streetName = ? WHERE userId = ?";
 
-        template.update(x, user.getFirstName(), user.getLastName(), user.getEmailId(), user.getPhoneNumber(), user.getStreetName(), user.getCollege(), user.getPinCode(), user.getCity(), user.getStreetName());
+        t.update(x, user.getFirstName(), user.getLastName(), user.getEmailId(), user.getPhoneNumber(), user.getStreetName(), user.getCollege(), user.getPinCode(), user.getCity(), user.getStreetName(), user.getUserId());
 
     }
 
@@ -60,7 +60,7 @@ public class UserRepository {
 
         String x = "UPDATE User SET password = ? WHERE userId = ?";
 
-        template.update(x, password, userId);
+        t.update(x, password, userId);
 
     }
 
@@ -68,7 +68,7 @@ public class UserRepository {
 
         String x = "DELETE FROM User WHERE userId = ?";
 
-        template.update(x, userId);
+        t.update(x, userId);
 
     }
 
