@@ -14,8 +14,13 @@ public class UserRepository {
     @Autowired
     private JdbcTemplate template;
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    public void initUser() {
+
+        String x = "CREATE TABLE IF NOT EXISTS User (userId varchar(20), firstName varchar(20), lastName varchar(20), emailId varchar(50), phoneNumber char(10), sex int, college varchar(50), pinCode char(6), city varchar(50), streetName varchar(50), password varchar(50))";
+
+        template.update(x);
+
+    }
 
     public void createUser(User user) {
 
