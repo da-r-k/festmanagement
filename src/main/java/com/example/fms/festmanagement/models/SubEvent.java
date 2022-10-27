@@ -1,6 +1,6 @@
 package com.example.fms.festmanagement.models;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class SubEvent {
 

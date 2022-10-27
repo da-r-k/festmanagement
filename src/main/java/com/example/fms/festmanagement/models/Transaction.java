@@ -2,7 +2,7 @@ package com.example.fms.festmanagement.models;
 
 import jakarta.validation.constraints.NotBlank;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Transaction {
 
