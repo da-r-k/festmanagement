@@ -24,7 +24,7 @@ public class ItemRepository {
 
     public void createItem(Item item) {
 
-        String x = "INSERT INTO TABLE Item VALUES (?, ?, ?, ?)";
+        String x = "INSERT INTO Item VALUES (?, ?, ?, ?)";
 
         t.update(x, item.getItemId(), item.getItemName(), item.getPrice(), item.getQuantity());
 
