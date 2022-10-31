@@ -1,12 +1,9 @@
 package com.example.fms.festmanagement.models;
 
-import jakarta.validation.constraints.NotBlank;
-
-import java.sql.Date;
+import java.util.Date;
 
 public class Transaction {
 
-    @NotBlank
     private int transactionId;
 
     private int amount;

@@ -6,7 +6,7 @@ public class Event {
 
     private String eventName;
 
-    private int headId;
+    private String headEmail;
 
     public int getEventId() {
         return eventId;
@@ -24,12 +24,12 @@ public class Event {
         this.eventName = eventName;
     }
 
-    public int getHeadId() {
-        return headId;
+    public String getHeadEmail() {
+        return headEmail;
     }
 
-    public void setHeadId(int headId) {
-        this.headId = headId;
+    public void setHeadEmail(String headEmail) {
+        this.headEmail = headEmail;
     }
 
 }

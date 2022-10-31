@@ -1,13 +1,10 @@
 package com.example.fms.festmanagement.models;
 
-import jakarta.validation.constraints.NotBlank;
-
 public class Cart {
 
-    @NotBlank
     private int cartId;
 
-    private String userId;
+    private int participantId;
 
     public int getCartId() {
         return cartId;
@@ -17,12 +14,12 @@ public class Cart {
         this.cartId = cartId;
     }
 
-    public String getUserId() {
-        return userId;
+    public int getParticipantId() {
+        return participantId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserId(int userId) {
+        this.participantId = userId;
     }
 
 }

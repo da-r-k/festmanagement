@@ -1,6 +1,6 @@
 package com.example.fms.festmanagement.models;
 
-public class Funding {
+public class Fund {
 
     private int fundId;
 

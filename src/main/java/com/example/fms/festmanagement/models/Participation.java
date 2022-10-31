@@ -6,7 +6,7 @@ public class Participation {
 
     private int position;
 
-    private int userId;
+    private String participantEmail;
 
     private int competitionId;
 
@@ -26,12 +26,12 @@ public class Participation {
         this.position = position;
     }
 
-    public int getUserId() {
-        return userId;
+    public String getParticipantEmail() {
+        return participantEmail;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setParticipantEmail(String participantEmail) {
+        this.participantEmail = participantEmail;
     }
 
     public int getCompetitionId() {

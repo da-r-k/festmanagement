@@ -1,17 +1,14 @@
 package com.example.fms.festmanagement.models;
 
-import jakarta.validation.constraints.NotBlank;
-
 public class Item {
 
-    @NotBlank
     private int itemId;
 
     private String itemName;
 
     private int price;
 
-    private int quantity;
+    private int stock;
 
     public int getItemId() {
         return itemId;
@@ -37,12 +34,12 @@ public class Item {
         this.price = price;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getStock() {
+        return stock;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
 }

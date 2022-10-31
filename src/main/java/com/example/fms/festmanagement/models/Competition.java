@@ -6,11 +6,11 @@ public class Competition {
 
     private String competitionName;
 
-    private String prize;
+    private int prize;
 
     private int eventId;
 
-    private int subeventId;
+    private int subEventId;
 
     public int getCompetitionId() {
         return competitionId;
@@ -28,11 +28,11 @@ public class Competition {
         this.competitionName = competitionName;
     }
 
-    public String getPrize() {
+    public int getPrize() {
         return prize;
     }
 
-    public void setPrize(String prize) {
+    public void setPrize(int prize) {
         this.prize = prize;
     }
 
@@ -44,12 +44,12 @@ public class Competition {
         this.eventId = eventId;
     }
 
-    public int getSubeventId() {
-        return subeventId;
+    public int getSubEventId() {
+        return subEventId;
     }
 
-    public void setSubeventId(int subeventId) {
-        this.subeventId = subeventId;
+    public void setSubEventId(int subEventId) {
+        this.subEventId = subEventId;
     }
 
 }

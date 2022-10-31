@@ -1,10 +1,10 @@
 package com.example.fms.festmanagement.models;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class SubEvent {
 
-    private int subeventId;
+    private int subEventId;
 
     private Date startDate;
 
@@ -14,12 +14,12 @@ public class SubEvent {
 
     private int eventId;
 
-    public int getSubeventId() {
-        return subeventId;
+    public int getSubEventId() {
+        return subEventId;
     }
 
-    public void setSubeventId(int subeventId) {
-        this.subeventId = subeventId;
+    public void setSubEventId(int subEventId) {
+        this.subEventId = subEventId;
     }
 
     public Date getStartDate() {

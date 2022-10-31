@@ -1,11 +1,8 @@
 package com.example.fms.festmanagement.models;
 
-import jakarta.validation.constraints.NotBlank;
-
 public class CartItemDetails {
 
-    @NotBlank
-    private int cidId;
+    private int cartItemId;
 
     private int quantity;
 
@@ -13,12 +10,12 @@ public class CartItemDetails {
 
     private int itemId;
 
-    public int getCidId() {
-        return cidId;
+    public int getCartItemId() {
+        return cartItemId;
     }
 
-    public void setCidId(int cidId) {
-        this.cidId = cidId;
+    public void setCartItemId(int cartItemId) {
+        this.cartItemId = cartItemId;
     }
 
     public int getQuantity() {
