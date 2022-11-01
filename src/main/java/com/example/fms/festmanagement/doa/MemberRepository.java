@@ -26,7 +26,7 @@ public class MemberRepository {
 
         String x = "INSERT INTO Member VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        t.update(x, member.getMemberId(), member.getFirstName(), member.getLastName(), member.getEmailId(), member.getPhoneNumber(), member.getEventId(), member.getPassword());
+        t.update(x, member.getMemberId(), member.getFirstName(), member.getLastName(), member.getemailId(), member.getPhoneNumber(), member.getEventId(), member.getPassword());
 
     }
 

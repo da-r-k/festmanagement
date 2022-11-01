@@ -44,11 +44,11 @@ public class Member {
         this.lastName = lastName;
     }
 
-    public String getEmailId() {
+    public String getemailId() {
         return emailId;
     }
 
-    public void setEmailId(String emailId) {
+    public void setemailId(String emailId) {
         this.emailId = emailId;
     }
 
