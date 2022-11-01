@@ -10,6 +10,8 @@ public class Item {
 
     private int stock;
 
+    private int cost;
+
     public int getItemId() {
         return itemId;
     }
@@ -40,6 +42,14 @@ public class Item {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public int getCost() {
+        return this.cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 
 }
