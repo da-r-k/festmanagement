@@ -4,7 +4,7 @@ public class Sponsor {
 
     private int sponsorId;
 
-    private int sponsorName;
+    private String sponsorName;
 
     private int amount;
 
@@ -16,11 +16,11 @@ public class Sponsor {
         this.sponsorId = sponsorId;
     }
 
-    public int getSponsorName() {
+    public String getSponsorName() {
         return sponsorName;
     }
 
-    public void setSponsorName(int sponsorName) {
+    public void setSponsorName(String sponsorName) {
         this.sponsorName = sponsorName;
     }
 
