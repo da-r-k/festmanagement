@@ -37,4 +37,13 @@ public class User {
         this.role = role;
     }
 
+    @Override
+    public String toString() {
+        return "{" +
+            " userEmail='" + getUserEmail() + "'" +
+            ", password='" + getPassword() + "'" +
+            ", role='" + getRole() + "'" +
+            "}";
+    }
+
 }

@@ -85,4 +85,20 @@ public class Participant {
         this.streetName = streetName;
     }
 
+
+    @Override
+    public String toString() {
+        return "{" +
+            " participantEmail='" + getParticipantEmail() + "'" +
+            ", firstName='" + getFirstName() + "'" +
+            ", lastName='" + getLastName() + "'" +
+            ", mobileNumber='" + getMobileNumber() + "'" +
+            ", sex='" + getSex() + "'" +
+            ", college='" + getCollege() + "'" +
+            ", pinCode='" + getPinCode() + "'" +
+            ", streetName='" + getStreetName() + "'" +
+            "}";
+    }
+
+
 }
