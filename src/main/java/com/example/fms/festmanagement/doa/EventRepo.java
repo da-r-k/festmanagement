@@ -16,7 +16,7 @@ public class EventRepo {
 
     private void initEvent() {
 
-        String x = "CREATE TABLE IF NOT EXITS Event (eventId int PRIMARY KEY, eventName varchar(255), headEmail varchar(255))";
+        String x = "CREATE TABLE IF NOT EXITS Event (eventId INT PRIMARY KEY, eventName VARCHAR(255), headEmail VARCHAR(255))";
 
         t.update(x);
 

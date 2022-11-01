@@ -13,7 +13,7 @@ public class TransactionRepo {
 
     public void initTransaction() {
 
-        String x = "CREATE TABLE IF NOT EXISTS Transaction (transactionId int PRIMARY KEY, amount int, dateTime DATETIME, cartId int)";
+        String x = "CREATE TABLE IF NOT EXISTS Transaction (transactionId INT PRIMARY KEY, amount INT NOT NULL, dateTime DATETIME, cartId INT NOT NULL)";
 
         t.update(x);
 

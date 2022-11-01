@@ -6,11 +6,11 @@ public class Item {
 
     private String itemName;
 
-    private int price;
+    private int sellingPrice;
+
+    private int costPrice;
 
     private int stock;
-
-    private int cost;
 
     public int getItemId() {
         return itemId;
@@ -28,12 +28,20 @@ public class Item {
         this.itemName = itemName;
     }
 
-    public int getPrice() {
-        return price;
+    public int getSellingPrice() {
+        return sellingPrice;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setSellingPrice(int sellingPrice) {
+        this.sellingPrice = sellingPrice;
+    }
+
+    public int getCostPrice() {
+        return costPrice;
+    }
+
+    public void setCostPrice(int costPrice) {
+        this.costPrice = costPrice;
     }
 
     public int getStock() {
@@ -42,14 +50,6 @@ public class Item {
 
     public void setStock(int stock) {
         this.stock = stock;
-    }
-
-    public int getCost() {
-        return this.cost;
-    }
-
-    public void setCost(int cost) {
-        this.cost = cost;
     }
 
 }

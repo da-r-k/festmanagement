@@ -16,7 +16,7 @@ public class SponsorRepo {
 
     public void initSponsor() {
 
-        String x = "CREATE TABLE IF NOT EXISTS Sponsor (sponsorId int PRIMARY KEY, sponsorName varchar(255), amount int)";
+        String x = "CREATE TABLE IF NOT EXISTS Sponsor (sponsorId INT PRIMARY KEY, sponsorName VARCHAR(255) NOT NULL, amount INT NOT NULL)";
 
         t.update(x);
 

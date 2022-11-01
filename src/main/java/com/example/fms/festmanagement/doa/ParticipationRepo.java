@@ -13,7 +13,7 @@ public class ParticipationRepo {
 
     public void initParticipation() {
 
-        String x = "CREATE TABLE IF NOT EXISTS Participation (participationId int PRIMARY KEY, position int, participationEmail varchar(255), competitionId int)";
+        String x = "CREATE TABLE IF NOT EXISTS Participation (participantEmail VARCHAR(255), position INT, competitionId INT, PRIMARY KEY (participationEmail, competitionId))";
 
         t.update(x);
 
@@ -21,17 +21,17 @@ public class ParticipationRepo {
 
     public void insertParticipation(Participation p) {
 
-        String x = "INSERT INTO Participation VALUES (?, ?, ?, ?)";
+        String x = "INSERT INTO Participation VALUES (?, ?, ?)";
 
-        t.update(x, p.getParticipationId(), p.getPosition(), p.getParticipantEmail(), p.getCompetitionId());
+        t.update(x, p.getParticipantEmail(), p.getPosition(), p.getCompetitionId());
 
     }
 
-    public void deleteParticipation(int p) {
+    public void deleteParticipation(String p, int c) {
 
-        String x = "DELETE FROM Participation WHERE participationId = ?";
+        String x = "DELETE FROM Participation WHERE participantEmail = ? AND competitionId = ?";
 
-        t.update(x, p);
+        t.update(x, p, c);
 
     }
 

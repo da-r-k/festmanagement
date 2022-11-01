@@ -13,7 +13,7 @@ public class ItemRepo {
 
     public void initItem() {
 
-        String x = "CREATE TABLE IF NOT EXISTS Item (itemId int PRIMARY KEY, itemName varchar(255), price int, stock int)";
+        String x = "CREATE TABLE IF NOT EXISTS Item (itemId INT PRIMARY KEY, itemName VARCHAR(255) NOT NULL, sellingPrice INT NOT NULL, costPrice INT NOT NULL DEFAULT 0, stock INT)";
 
         t.update(x);
 
@@ -21,9 +21,9 @@ public class ItemRepo {
 
     public void insertItem(Item i) {
 
-        String x = "INSERT INTO Item VALUES (?, ?, ?, ?)";
+        String x = "INSERT INTO Item VALUES (?, ?, ?, ?, ?)";
 
-        t.update(x, i.getItemId(), i.getItemName(), i.getPrice(), i.getStock());
+        t.update(x, i.getItemId(), i.getItemName(), i.getSellingPrice(), i.getCostPrice(), i.getStock());
 
     }
 

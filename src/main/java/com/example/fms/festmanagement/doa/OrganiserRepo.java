@@ -14,9 +14,9 @@ public class OrganiserRepo {
     @Autowired
     private JdbcTemplate t;
 
-    private void init() {
+    private void initOrganiser() {
 
-        String x = "CREATE TABLE IF NOT EXISTS Organiser (organiserEmail varchar(255) PRIMARY KEY, fistName varchar(255), lastName varchar(255), mobileNumber varchar(10), eventId int)";
+        String x = "CREATE TABLE IF NOT EXISTS Organiser (organiserEmail VARCHAR(255) PRIMARY KEY, fistName VARCHAR(255), lastName VARCHAR(255), mobileNumber CHAR(10), eventId INT)";
 
         t.update(x);
 

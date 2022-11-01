@@ -2,20 +2,18 @@ package com.example.fms.festmanagement.models;
 
 public class Participation {
 
-    private int participationId;
+    private String participantEmail;
 
     private int position;
 
-    private String participantEmail;
-
     private int competitionId;
 
-    public int getParticipationId() {
-        return participationId;
+    public String getParticipantEmail() {
+        return participantEmail;
     }
 
-    public void setParticipationId(int participationId) {
-        this.participationId = participationId;
+    public void setParticipantEmail(String participantEmail) {
+        this.participantEmail = participantEmail;
     }
 
     public int getPosition() {
@@ -24,14 +22,6 @@ public class Participation {
 
     public void setPosition(int position) {
         this.position = position;
-    }
-
-    public String getParticipantEmail() {
-        return participantEmail;
-    }
-
-    public void setParticipantEmail(String participantEmail) {
-        this.participantEmail = participantEmail;
     }
 
     public int getCompetitionId() {

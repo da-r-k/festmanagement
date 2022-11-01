@@ -13,7 +13,7 @@ public class CompetitionRepo {
 
     public void initCompetition() {
 
-        String x = "CREATE TABLE IF NOT EXISTS Competition (competitionId int PRIMARY KEY, competitionName varchar(255), prize int, eventId int, subEventId int)";
+        String x = "CREATE TABLE IF NOT EXISTS Competition (competitionId INT, competitionName VARCHAR(255) NOT NULL, prize INT DEFAULT 0, eventId INT NOT NULL, subEventId INT NOT NULL, PRIMARY KEY (competitionId, eventId, subEventId))";
 
         t.update(x);
 
@@ -27,11 +27,11 @@ public class CompetitionRepo {
 
     }
 
-    public void deleteCompetition(int c) {
+    public void deleteCompetition(int c, int s, int e) {
 
-        String x = "DELETE FROM Competition WHERE competitonId = ?";
+        String x = "DELETE FROM Competition WHERE competitionId = ? AND subEventId = ? AND eventId = ?";
 
-        t.update(x, c);
+        t.update(x, c, s, e);
 
     }
 

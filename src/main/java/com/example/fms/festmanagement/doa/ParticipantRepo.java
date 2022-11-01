@@ -16,7 +16,7 @@ public class ParticipantRepo {
 
     public void initParticipant() {
 
-        String x = "CREATE TABLE IF NOT EXISTS Participant (participantEmail varchar(255) PRIMARY KEY, firstName varchar(255), lastName varchar(255), mobileNumber varchar(10), sex varchar(255), college varchar(255), pinCode varchar(6), streetName varchar(255))";
+        String x = "CREATE TABLE IF NOT EXISTS Participant (participantEmail VARCHAR(255) PRIMARY KEY, firstName VARCHAR(255), lastName VARCHAR(255), mobileNumber CHAR(10), sex VARCHAR(255), college VARCHAR(255), pinCode VARCHAR(6), streetName VARCHAR(255))";
 
         t.update(x);
 

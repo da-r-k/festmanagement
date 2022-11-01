@@ -16,7 +16,7 @@ public class FundRepo {
 
     public void initFund() {
 
-        String x = "CREATE TABLE IF NOT EXISTS Fund (fundId int PRIMARY KEY, sponsorId int, eventId int)";
+        String x = "CREATE TABLE IF NOT EXISTS Fund (fundId INT PRIMARY KEY, sponsorId INT NOT NULL, eventId INT NOT NULL)";
 
         t.update(x);
 

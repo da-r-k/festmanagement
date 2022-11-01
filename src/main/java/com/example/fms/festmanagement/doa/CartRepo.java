@@ -14,7 +14,7 @@ public class CartRepo {
 
     public void initCart() {
 
-        String x = "CREATE TABLE IF NOT EXISTS Cart (cartId int PRIMARY KEY, participantEmail varchar(255))";
+        String x = "CREATE TABLE IF NOT EXISTS Cart (cartId INT PRIMARY KEY, participantEmail VARCHAR(255) NOT NULL)";
 
         t.update(x);
 

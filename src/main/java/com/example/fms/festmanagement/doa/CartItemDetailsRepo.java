@@ -13,7 +13,7 @@ public class CartItemDetailsRepo {
 
     public void initCartItemDetails() {
 
-        String x = "CREATE TABLE IF NOT EXISTS CartItemDetails (cartItemId int PRIMARY KEY, quantity int, cartId int, itemId int)";
+        String x = "CREATE TABLE IF NOT EXISTS CartItemDetails (cartItemId INT PRIMARY KEY, quantity INT DEFAULT 0, cartId INT NOT NULL, itemId INT NOT NULL)";
 
         t.update(x);
 
