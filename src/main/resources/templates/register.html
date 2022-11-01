@@ -64,7 +64,7 @@
                           <i class="ti-email text-primary"></i>
                         </span>
                       </div>
-                      <input th:value="${users.userEmail}"
+                      <input required th:value="${users.userEmail}"
                         type="email"
                         class="form-control form-control-lg border-left-0"
                         placeholder="Email"
@@ -82,7 +82,7 @@
                           <i class="ti-user text-primary"></i>
                         </span>
                       </div>
-                      <input
+                      <input required
                         th:value="${participant.firstName}"
                         type="text"
                         class="form-control form-control-lg border-left-0"
@@ -101,7 +101,7 @@
                           <i class="ti-user text-primary"></i>
                         </span>
                       </div>
-                      <input
+                      <input required
                         th:value="${participant.lastName}"
                         type="text"
                         class="form-control form-control-lg border-left-0"
@@ -120,7 +120,7 @@
                           <i class="ti-mobile text-primary"></i>
                         </span>
                       </div>
-                      <input
+                      <input required
                         th:value="${participant.mobileNumber}"
                         type="text"
                         class="form-control form-control-lg border-left-0"
@@ -148,7 +148,7 @@
                           <i class="ti-medall-alt text-primary"></i>
                         </span>
                       </div>
-                      <input
+                      <input required
                         name="college"
                         th:value="${participant.college}"
                         type="text"
@@ -167,7 +167,7 @@
                           <i class="ti-lock text-primary"></i>
                         </span>
                       </div>
-                      <input
+                      <input required
                         type="password"
                         th:value="${users.password}"
                         class="form-control form-control-lg border-left-0"
@@ -187,7 +187,7 @@
                   </div>
                   <div class="text-center mt-4 font-weight-light">
                     Already have an account?
-                    <a href="login.html" class="text-primary">Login</a>
+                    <a th:href="@{/login}" class="text-primary">Login</a>
                   </div>
                 </form>
               </div>

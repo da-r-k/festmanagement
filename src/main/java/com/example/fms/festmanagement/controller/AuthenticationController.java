@@ -21,7 +21,7 @@ public class AuthenticationController {
     @GetMapping("/login")
     public String login(Model model, HttpSession session) {
         if (authenticationService.isAuthenticated(session)) {
-            return "redirect:/";
+            return "redirect:/dashboard";
         }
 
         model.addAttribute("credentials", new User());
@@ -32,7 +32,7 @@ public class AuthenticationController {
     public String postLogin(@ModelAttribute User credentials, Model model, HttpSession session,
             RedirectAttributes redirectAttributes) {
         if (authenticationService.isAuthenticated(session)) {
-            return "redirect:/";
+            return "redirect:/dashboard";
         }
 
         String emailId = credentials.getUserEmail();
