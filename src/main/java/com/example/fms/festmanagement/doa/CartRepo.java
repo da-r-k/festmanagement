@@ -24,7 +24,7 @@ public class CartRepo {
 
         String x = "INSERT INTO Cart VALUES (?, ?)";
 
-        t.update(x, c.getCartId(), c.getParticipantId());
+        t.update(x, c.getCartId(), c.getParticipantEmail());
 
     }
 

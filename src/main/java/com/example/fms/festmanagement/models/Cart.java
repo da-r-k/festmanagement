@@ -4,7 +4,7 @@ public class Cart {
 
     private int cartId;
 
-    private int participantId;
+    private String participantEmail;
 
     public int getCartId() {
         return cartId;
@@ -14,12 +14,12 @@ public class Cart {
         this.cartId = cartId;
     }
 
-    public int getParticipantId() {
-        return participantId;
+    public String getParticipantEmail() {
+        return this.participantEmail;
     }
 
-    public void setUserId(int userId) {
-        this.participantId = userId;
+    public void setParticipantEmail(String participantEmail) {
+        this.participantEmail = participantEmail;
     }
 
 }
