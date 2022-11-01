@@ -13,7 +13,7 @@ public class CompetitionRepo {
 
     public void initCompetition() {
 
-        String x = "CREATE TABLE IF NOT EXISTS Competition (competitionId int PRIMARY KEY, competitionName varchar(64), prize int, eventId int, subEventId int)";
+        String x = "CREATE TABLE IF NOT EXISTS Competition (competitionId int PRIMARY KEY, competitionName varchar(255), prize int, eventId int, subEventId int)";
 
         t.update(x);
 

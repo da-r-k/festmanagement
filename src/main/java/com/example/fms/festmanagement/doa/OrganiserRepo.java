@@ -16,7 +16,7 @@ public class OrganiserRepo {
 
     private void init() {
 
-        String x = "CREATE TABLE IF NOT EXISTS Organiser (organiserEmail varchar(64) PRIMARY KEY, fistName varchar(64), lastName varchar(64), mobileNumber varchar(10), eventId int)";
+        String x = "CREATE TABLE IF NOT EXISTS Organiser (organiserEmail varchar(255) PRIMARY KEY, fistName varchar(255), lastName varchar(255), mobileNumber varchar(10), eventId int)";
 
         t.update(x);
 

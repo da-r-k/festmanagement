@@ -13,7 +13,7 @@ public class ItemRepo {
 
     public void initItem() {
 
-        String x = "CREATE TABLE IF NOT EXISTS Item (itemId int PRIMARY KEY, itemName varchar(64), price int, stock int)";
+        String x = "CREATE TABLE IF NOT EXISTS Item (itemId int PRIMARY KEY, itemName varchar(255), price int, stock int)";
 
         t.update(x);
 

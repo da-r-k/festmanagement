@@ -19,7 +19,7 @@ public class UserRepo {
 
     public void initUser() {
 
-        String x = "CREATE TABLE IF NOT EXISTS User (userEmail varchar(64) PRIMARY KEY, password varchar(64), role varchar(64))";
+        String x = "CREATE TABLE IF NOT EXISTS User (userEmail varchar(255) PRIMARY KEY, password varchar(255), role varchar(255))";
 
         t.update(x);
 

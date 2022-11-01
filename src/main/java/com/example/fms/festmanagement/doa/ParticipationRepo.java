@@ -13,7 +13,7 @@ public class ParticipationRepo {
 
     public void initParticipation() {
 
-        String x = "CREATE TABLE IF NOT EXISTS Participation (participationId int PRIMARY KEY, position int, participationEmail varchar(64), competitionId int)";
+        String x = "CREATE TABLE IF NOT EXISTS Participation (participationId int PRIMARY KEY, position int, participationEmail varchar(255), competitionId int)";
 
         t.update(x);
 

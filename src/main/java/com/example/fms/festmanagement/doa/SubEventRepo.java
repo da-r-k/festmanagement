@@ -13,7 +13,7 @@ public class SubEventRepo {
 
     public void initSubEvent() {
 
-        String x = "CREATE TABLE IF NOT EXISTS SubEvent (subEventId int PRIMARY KEY, startDate DATETIME, endDate DATETIME, venue varchar(64), eventId int)";
+        String x = "CREATE TABLE IF NOT EXISTS SubEvent (subEventId int PRIMARY KEY, startDate DATETIME, endDate DATETIME, venue varchar(255), eventId int)";
 
         t.update(x);
 
