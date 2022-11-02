@@ -28,9 +28,6 @@ import jakarta.servlet.http.HttpSession;
 public class OrganiserDashboardController extends Helper{
 
     @Autowired
-    private DashboardService dashboardService;
-
-    @Autowired
     private RegistrationService registrationService;
 
     @Autowired
@@ -69,11 +66,25 @@ public class OrganiserDashboardController extends Helper{
         return "vieworganisers";
     } 
 
+    @GetMapping("{organiseremail}/del")
+    public String DeleteOrganisers(@PathVariable("organiseremail") String organiserEmail, Model model, HttpSession session){
+        organiserDashboardService.deleteOrganiser(organiserEmail);
+        authenticationService.deleteUser(organiserEmail);
+        return "vieworganisers";
+    } 
+
     @GetMapping("viewsubevents")
     public String ViewSubEvents(Model model,HttpSession session){
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
         model.addAttribute("subevents",organiserDashboardService.getSubEvents(e));
         return "viewsubevents";
+    }
+
+    @GetMapping("viewsubevents/{subEventId}/del")
+    public String DeleteSubEvent(Model model,HttpSession session,@PathVariable("subeventId") int subEventId){
+        Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
+        organiserDashboardService.DeleteSubEvent(subEventId,e);
+        return "redirect:/viewsubevents";
     }
 
     @GetMapping("addsubevent")
@@ -126,6 +137,15 @@ public class OrganiserDashboardController extends Helper{
         Competition c =organiserDashboardService.getCompetitionById(competitionId,s);
         model.addAttribute(organiserDashboardService.getAllParticipants(c));
         return "viewparticipants";
+    }
+
+    @GetMapping("viewsubevents/{subEventId}/{competitionId}/del")
+    public String DeleteCompetition(Model model, @PathVariable("subeventId") int subEventId, @PathVariable("competitionId") int competitionId, HttpSession session){
+        Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
+        SubEvent s = organiserDashboardService.getSubEventById(subEventId,e);
+        Competition c =organiserDashboardService.getCompetitionById(competitionId,s);
+        organiserDashboardService.deleteCompetition(c);
+        return "redirect:/viewsubevents";
     }
 
     @GetMapping("{subeventId}/{competitionId}/{participantEmail}/del")

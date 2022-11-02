@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpSession;
 public class AuthenticationService {
 
     @Autowired
-    private UserRepo UserRepo;
+    private UserRepo userRepo;
 
     @Autowired
     private QueriesRepo queriesRepo;
@@ -50,6 +50,10 @@ public class AuthenticationService {
     public String getRole(String emailId) {
         User User = queriesRepo.selectUser(emailId);
         return User.getRole();
+    }
+
+    public void deleteUser(String organiserEmail) {
+        userRepo.deleteUser(organiserEmail);
     }
 
 }
