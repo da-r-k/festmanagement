@@ -26,8 +26,15 @@ public class UserDashboardController extends Helper {
         }
 
         addDefaultAttributes(model, session);
-        model.addAttribute("subevents", dashboardService.getSubEventToday());
-        model.addAttribute("correspondingevents", dashboardService.getEventFromSubEvent(dashboardService.getSubEventToday()));
-        return "dashboard";
+        System.out.println(model.getAttribute("userRole"));
+        if(model.getAttribute("userRole").equals("participant")){
+            model.addAttribute("subevents", dashboardService.getSubEventToday());
+            model.addAttribute("correspondingevents", dashboardService.getEventFromSubEvent(dashboardService.getSubEventToday()));
+            return "dashboard";
+        }
+        else if(model.getAttribute("userRole").equals("organiser")){
+            return "redirect:organiserdashboard";
+        }
+        return "redirect:/";
     }
 }

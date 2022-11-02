@@ -35,11 +35,29 @@ public class EventRepo {
 
     }
 
-    private Event selectEvent(int v) {
+    public Event selectEvent(int v) {
 
         try {
 
             String x = "SELECT * FROM Event WHERE eventId = ?";
+
+            return t.queryForObject(x, new BeanPropertyRowMapper<>(Event.class), new Object[] { v });
+
+        }
+
+        catch (EmptyResultDataAccessException e) {
+
+            return null;
+
+        }
+
+    }
+
+    public Event selectEventFromOrganiser(String v) {
+
+        try {
+
+            String x = "SELECT * FROM Event WHERE headEmail = '?'";
 
             return t.queryForObject(x, new BeanPropertyRowMapper<>(Event.class), new Object[] { v });
 
