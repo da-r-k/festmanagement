@@ -4,7 +4,7 @@ public class Participation {
 
     private String participantEmail;
 
-    private int position;
+    private int leaderBoardPosition;
 
     private int competitionId;
 
@@ -21,11 +21,11 @@ public class Participation {
     }
 
     public int getPosition() {
-        return position;
+        return leaderBoardPosition;
     }
 
     public void setPosition(int position) {
-        this.position = position;
+        this.leaderBoardPosition = position;
     }
 
     public int getCompetitionId() {

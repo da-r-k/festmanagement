@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<head th:replace="organiserbaseh"></head>
+<div class="main-panel">
+  <div class="content-wrapper">
+<div class="card">
+  <div class="card-body">
+    <h3 class="card-title" th:inline="text">Add organiser to [[${event.eventName}]]</h3>
+    <p class="card-description">
+      TO BE DECIDED
+    </p>
+    <form class="forms-sample" method="POST" th:action="@{/addorganisers}">
+      <div class="form-group row">
+        <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Email Address</label>
+        <div class="col-sm-9">
+          <input type="email" class="form-control" id="exampleInputUsername2" placeholder="Email" th:value="${user.userEmail}" name="userEmail">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="exampleInputEmail2" class="col-sm-3 col-form-label">First Name</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="exampleInputEmail2" placeholder="First Name" th:value="${organiser.firstName}" name="firstName">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Last Name</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Last Name" th:value="${organiser.lastName}" name="lastName">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="exampleInputMobile" class="col-sm-3 col-form-label">Mobile</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="exampleInputMobile" placeholder="Mobile number" spellcheck="false" data-ms-editor="true" th:value="${organiser.mobileNumber}" name="MobileNumber">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Set a Password</label>
+        <div class="col-sm-9">
+          <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" th:value="${user.password}" name="password">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg btn-block me-2">Submit</button>
+      <button class="btn btn-light btn-block" type="Reset">Cancel</button>
+    </form>
+  </div>
+</div>
+</div>
+</div>
+</div>
+<footer th:replace="userbasef"></footer>
