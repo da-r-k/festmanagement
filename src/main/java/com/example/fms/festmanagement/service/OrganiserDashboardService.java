@@ -60,7 +60,7 @@ public class OrganiserDashboardService {
     }
 
     public SubEvent getSubEventById(int i, Event e){
-        return queriesRepo.getSubEventById(i,e);
+        return queriesRepo.getSubEventById(i, e.getEventId());
     }
 
     public void AddCompetition(Competition competition) {
@@ -68,7 +68,7 @@ public class OrganiserDashboardService {
     }
 
     public Competition getCompetitionById(int competitionId, SubEvent s) {
-        return queriesRepo.getCompetitionById(competitionId,s,s.getSubEventId(), s.getEventId());
+        return queriesRepo.getCompetitionById(competitionId, s.getSubEventId(), s.getEventId());
     }
 
     public List<Participant> getAllParticipants(Competition c) {
@@ -90,7 +90,7 @@ public class OrganiserDashboardService {
     }
 
     public void DeleteSubEvent(int subeventId, Event e) {
-        subEventRepo.deleteSubEvent(subeventId,e.getEventId());
+        subEventRepo.deleteSubEvent(subeventId, e.getEventId());
     }
 
     public void deleteCompetition(Competition c) {

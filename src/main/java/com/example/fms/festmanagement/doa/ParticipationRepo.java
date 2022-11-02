@@ -35,4 +35,11 @@ public class ParticipationRepo {
 
     }
 
+    public void updateParticipation(Participation p) {
+
+        String x = "UPDATE Participation SET leaderBoardPosition = ? WHERE participantEmail = ? AND competitionId = ? AND subEventId = ? AND eventId = ?";
+
+        t.update(x, p.getPosition(), p.getParticipantEmail(), p.getCompetitionId(), p.getSubEventId(), p.getEventId());
+
+    }
 }
