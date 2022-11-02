@@ -82,4 +82,10 @@ public class OrganiserDashboardService {
     public List<Participation> getAllParticipations(Competition c) {
         return queriesRepo.getAllParticipations(c.getCompetitionId(),c.getSubEventId(),c.getEventId());
     }
+
+    public void updateLeaderboard(List<Participation> allParticipations, Competition c) {
+        for(Participation p : allParticipations){
+            participationRepo.updateParticipation(p);
+        }
+    }
 }
