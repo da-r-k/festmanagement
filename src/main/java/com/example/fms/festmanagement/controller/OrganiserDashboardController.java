@@ -121,17 +121,31 @@ public class OrganiserDashboardController extends Helper{
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
         SubEvent s = organiserDashboardService.getSubEventById(subEventId,e);
         Competition c =organiserDashboardService.getCompetitionById(competitionId,s);
-        model.addAttribute(organiserDashboardService.getAllParticipants(c);
+        model.addAttribute(organiserDashboardService.getAllParticipants(c));
         return "viewparticipants";
     }
 
     @GetMapping("{subeventId}/{competitionId}/{participantEmail}/del")
     public String DeleteParticipant(Model model, @PathVariable("subeventId") int subEventId, @PathVariable("competitionId") int competitionId,@PathVariable("participantEmail") String participantEmail, HttpSession session){
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
-        SubEvent s = organiserDashboardService.getSubEventById(subEventId,e));
+        SubEvent s = organiserDashboardService.getSubEventById(subEventId,e);
         Competition c =organiserDashboardService.getCompetitionById(competitionId,s);
         organiserDashboardService.deleteParticipation(participantEmail,c);
         return "redirect:/viewparticipants";
+    }
+
+    @GetMapping("{subeventId}/{competitionId}/updateLeaderboard")
+    public String UpdateLeaderboard(Model model,@PathVariable("subeventId") int subEventId, @PathVariable("competitionId") int competitionId,@PathVariable("participantEmail") String participantEmail, HttpSession session){
+        Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
+        SubEvent s = organiserDashboardService.getSubEventById(subEventId,e);
+        Competition c =organiserDashboardService.getCompetitionById(competitionId,s);
+        model.addAttribute("participants",organiserDashboardService.getAllParticipations(c));
+        return "updateLeaderboard";
+    }
+
+    @PostMapping("{subeventId}/{competitionId}/updateLeaderboard")
+    public String PostUpdateLeaderboard(@ModelAttribute List<Participation> allParticipations, HttpSession session){
+        
     }
 
 
