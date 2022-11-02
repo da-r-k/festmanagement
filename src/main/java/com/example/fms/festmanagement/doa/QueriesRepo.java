@@ -37,6 +37,24 @@ public class QueriesRepo {
 
     }
 
+    public List<Participant> getAllParticipants(int c, int s, int ee) {
+
+        try {
+
+            String x = "SELECT * FROM Participation WHERE competitionId = ? AND subEventId = ? AND eventId = ?";
+
+            return t.query(x, new BeanPropertyRowMapper<>(Participant.class), c, s, ee);
+
+        }
+
+        catch (EmptyResultDataAccessException e) {
+
+            return null;
+
+        }
+
+    }
+
     public List<Competition> getCompetitions(int i, int j) {
 
         String x = "SELECT * FROM Competition WHERE subEventId = ? AND EventId = ?";
@@ -185,13 +203,13 @@ public class QueriesRepo {
 
     }
 
-    public SubEvent getSubEventById(int i){
+    public SubEvent getSubEventById(int i, int ee){
 
         try {
 
-            String x = "SELECT * FROM SubEvent WHERE subEventId = ?";
+            String x = "SELECT * FROM SubEvent WHERE subEventId = ? AND eventId = ?";
 
-            return t.queryForObject(x, new BeanPropertyRowMapper<>(SubEvent.class), new Object[] { i });
+            return t.queryForObject(x, new BeanPropertyRowMapper<>(SubEvent.class), new Object[] {i, ee});
 
         }
 
@@ -207,6 +225,60 @@ public class QueriesRepo {
         String x="SELECT * FROM Organiser WHERE eventId =?";
 
         return t.query(x, new BeanPropertyRowMapper<>(Organiser.class), i);
+
+    }
+
+    public Competition getCompetitionById(int c, int s, int ee) {
+
+        try {
+
+            String x = "SELECT * FROM Competition WHERE competitionId AND subEventId = AND eventId = ?";
+
+            return t.queryForObject(x, new BeanPropertyRowMapper<>(Competition.class), new Object[] { c, s, ee });
+
+        }
+
+        catch (EmptyResultDataAccessException e) {
+
+            return null;
+
+        }
+
+    }
+
+    public List<Participation> getAllParticipations(int c, int s, int ee) {
+
+        try {
+
+            String x = "SELECT * FROM Participation WHERE competitionId = ? AND subEventId = ? AND eventId = ?";
+
+            return t.query(x, new BeanPropertyRowMapper<>(Participation.class), c, s, ee);
+
+        }
+
+        catch (EmptyResultDataAccessException e) {
+
+            return null;
+
+        }
+
+    }
+
+    public Cart activeCart(int u) {
+
+        try {
+
+            String x = "SELECT * FROM Cart WHERE cartId NOT IN (SELECT cartId FROM Transaction) AND userId = ?";
+
+            return t.queryForObject(x, new BeanPropertyRowMapper<>(Cart.class), u);
+
+        }
+
+        catch (EmptyResultDataAccessException e) {
+
+            return null;
+
+        }
 
     }
 
