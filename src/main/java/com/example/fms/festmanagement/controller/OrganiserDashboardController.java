@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.fms.festmanagement.models.Competition;
+import com.example.fms.festmanagement.models.Event;
 import com.example.fms.festmanagement.models.Organiser;
 import com.example.fms.festmanagement.models.SubEvent;
 import com.example.fms.festmanagement.models.User;
@@ -37,8 +38,6 @@ public class OrganiserDashboardController extends Helper{
 
     @GetMapping("organiserdashboard")
     public String OrganiserDashboard(Model model, HttpSession session, RedirectAttributes attributes){
-        model.addAttribute("subevents", dashboardService.getSubEventToday());
-        model.addAttribute("correspondingevents", dashboardService.getEventFromSubEvent(dashboardService.getSubEventToday()));
         return "organiserdashboard";
     }
 
@@ -62,39 +61,46 @@ public class OrganiserDashboardController extends Helper{
 
     @GetMapping("vieworganisers")
     public String ViewOrganisers(Model model, HttpSession session){
-        model.addAttribute("organisers", organiserDashboardService.getOrganisersByEvent(organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session))));
+        Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
+        model.addAttribute("organisers", organiserDashboardService.getOrganisersByEvent(e));
         return "vieworganisers";
     } 
 
     @GetMapping("viewsubevents")
     public String ViewSubEvents(Model model,HttpSession session){
-        model.addAttribute("subevents",organiserDashboardService.getSubEvents((organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session)))));
+        Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
+        model.addAttribute("subevents",organiserDashboardService.getSubEvents(e));
         return "viewsubevents";
     }
 
     @GetMapping("addsubevent")
     public String AddSubEvents(Model model, HttpSession session, RedirectAttributes attributes){
+        Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
         model.addAttribute("subevent",new SubEvent());
-        model.addAttribute("event",organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session)));
+        model.addAttribute("event",e);
         return "addsubevent";
     }
 
     @PostMapping("addsubevent")
     public String PostAddSubEvent(@ModelAttribute SubEvent subEvent, HttpSession session){
+        Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
+        subEvent.setEventId(e.getEventId());
         organiserDashboardService.AddSubEvent(subEvent);
         return "redirect:viewsubevents";
     }
 
     @GetMapping("{subeventId}/viewcompetitions")
     public String ViewCompetition(@PathVariable("subEventId") int subEventId, Model model, HttpSession session){
-        SubEvent s = organiserDashboardService.getSubEventById(subEventId);
+        Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
+        SubEvent s = organiserDashboardService.getSubEventById(subEventId,e.getEventId());
         model.addAttribute("competitions",organiserDashboardService.getCompetions(s));
         return "viewcompetions";
     }
 
     @GetMapping("{subeventId}/addcompetition")
     public String AddCompetition(@PathVariable("subEventId") int subEventId, Model model, HttpSession session){
-        SubEvent s = organiserDashboardService.getSubEventById(subEventId);
+        Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
+        SubEvent s = organiserDashboardService.getSubEventById(subEventId,e.getEventId());
         model.addAttribute("competition",new Competition());
         model.addAttribute("subEvent",s);
         return "addsubevent";
@@ -102,16 +108,23 @@ public class OrganiserDashboardController extends Helper{
 
     @PostMapping("{subeventId}/addcompetition")
     public String PostAddCompetition(@PathVariable("subEventId") int subEventId,@ModelAttribute Competition competition, HttpSession session){
-        SubEvent s = organiserDashboardService.getSubEventById(subEventId);
+        Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
+        SubEvent s = organiserDashboardService.getSubEventById(subEventId,e.getEventId());
         competition.setEventId(s.getEventId());
         competition.setSubEventId(s.getSubEventId());
         organiserDashboardService.AddCompetition(competition);
         return "redirect:{subeventId}/viewcompetitions";
     }
 
+    @GetMapping("{subeventId}/{competitionId}/viewparticipants")
+    public String ViewParticipants(Model model, @PathVariable("subeventId") int subEventId, @PathVariable("competitionId") int competitionId, HttpSession session){
+        Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
+        SubEvent s = organiserDashboardService.getSubEventById(subEventId,e.getEventId());
+        Competition c =organiserDashboardService.getCompetitionById(competitionId,s.getSubEventId(),s.getEventId());
+        model.addAttribute(organiserDashboardService.getAllParticipants(c.getCompetitionId(),c.getEventId(),c.getSubEventId()));
+        return "viewparticipants";
+
+    }
     
-
-
-
 
 }
