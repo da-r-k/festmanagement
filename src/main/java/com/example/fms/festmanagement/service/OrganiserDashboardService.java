@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.example.fms.festmanagement.doa.CompetitionRepo;
 import com.example.fms.festmanagement.doa.EventRepo;
 import com.example.fms.festmanagement.doa.OrganiserRepo;
+import com.example.fms.festmanagement.doa.ParticipationRepo;
 import com.example.fms.festmanagement.doa.QueriesRepo;
 import com.example.fms.festmanagement.doa.SubEventRepo;
 import com.example.fms.festmanagement.models.Competition;
@@ -32,6 +33,9 @@ public class OrganiserDashboardService {
     private CompetitionRepo competitionRepo;
 
     @Autowired
+    private ParticipationRepo participationRepo;
+
+    @Autowired
     private QueriesRepo queriesRepo;
 
     public Event getEventFromOrganiser(String email){
@@ -54,19 +58,23 @@ public class OrganiserDashboardService {
         return queriesRepo.getCompetitions(subEvent.getSubEventId(),subEvent.getEventId());
     }
 
-    public SubEvent getSubEventById(int i, int j){
-        return queriesRepo.getSubEventById(i,j);
+    public SubEvent getSubEventById(int i, Event e){
+        return queriesRepo.getSubEventById(i,e.getEventId());
     }
 
     public void AddCompetition(Competition competition) {
         competitionRepo.insertCompetition(competition);
     }
 
-    public Competition getCompetitionById(int competitionId, int subEventId, int eventId) {
-        return queriesRepo.getCompetitionById(competitionId,subEventId,eventId);
+    public Competition getCompetitionById(int competitionId, SubEvent s) {
+        return queriesRepo.getCompetitionById(competitionId,s.getSubEventId(),s.getEventId());
     }
 
-    public List<Participant> getAllParticipants(int competitionId, int eventId, int subEventId) {
-        return queriesRepo.getAllParticipants(competitionId,eventId,subEventId);
+    public List<Participant> getAllParticipants(Competition c) {
+        return queriesRepo.getAllParticipants(c.getCompetitionId(),c.getSubEventId(),c.getEventId());
+    }
+
+    public void deleteParticipation(String participantEmail, Competition c) {
+        participationRepo.deleteParticipation(participantEmail,c.getCompetitionId(),c.getSubEventId(),c.getEventId());
     }
 }

@@ -92,7 +92,7 @@ public class OrganiserDashboardController extends Helper{
     @GetMapping("{subeventId}/viewcompetitions")
     public String ViewCompetition(@PathVariable("subEventId") int subEventId, Model model, HttpSession session){
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
-        SubEvent s = organiserDashboardService.getSubEventById(subEventId,e.getEventId());
+        SubEvent s = organiserDashboardService.getSubEventById(subEventId,e);
         model.addAttribute("competitions",organiserDashboardService.getCompetions(s));
         return "viewcompetions";
     }
@@ -100,7 +100,7 @@ public class OrganiserDashboardController extends Helper{
     @GetMapping("{subeventId}/addcompetition")
     public String AddCompetition(@PathVariable("subEventId") int subEventId, Model model, HttpSession session){
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
-        SubEvent s = organiserDashboardService.getSubEventById(subEventId,e.getEventId());
+        SubEvent s = organiserDashboardService.getSubEventById(subEventId,e);
         model.addAttribute("competition",new Competition());
         model.addAttribute("subEvent",s);
         return "addsubevent";
@@ -119,12 +119,24 @@ public class OrganiserDashboardController extends Helper{
     @GetMapping("{subeventId}/{competitionId}/viewparticipants")
     public String ViewParticipants(Model model, @PathVariable("subeventId") int subEventId, @PathVariable("competitionId") int competitionId, HttpSession session){
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
-        SubEvent s = organiserDashboardService.getSubEventById(subEventId,e.getEventId());
-        Competition c =organiserDashboardService.getCompetitionById(competitionId,s.getSubEventId(),s.getEventId());
-        model.addAttribute(organiserDashboardService.getAllParticipants(c.getCompetitionId(),c.getEventId(),c.getSubEventId()));
+        SubEvent s = organiserDashboardService.getSubEventById(subEventId,e);
+        Competition c =organiserDashboardService.getCompetitionById(competitionId,s);
+        model.addAttribute(organiserDashboardService.getAllParticipants(c);
         return "viewparticipants";
-
     }
+
+    @GetMapping("{subeventId}/{competitionId}/{participantEmail}/del")
+    public String DeleteParticipant(Model model, @PathVariable("subeventId") int subEventId, @PathVariable("competitionId") int competitionId,@PathVariable("participantEmail") String participantEmail, HttpSession session){
+        Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
+        SubEvent s = organiserDashboardService.getSubEventById(subEventId,e));
+        Competition c =organiserDashboardService.getCompetitionById(competitionId,s);
+        organiserDashboardService.deleteParticipation(participantEmail,c);
+        return "redirect:/viewparticipants";
+    }
+
+    
+
+
     
 
 }
