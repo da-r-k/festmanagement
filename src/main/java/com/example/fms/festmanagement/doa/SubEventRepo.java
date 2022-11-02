@@ -35,11 +35,11 @@ public class SubEventRepo {
 
     }
 
-    public void deleteSubEvent(int s) {
+    public void deleteSubEvent(int s, int e) {
 
-        String x = "DELETE FROM SubEvent WHERE subEventId = ?";
+        String x = "DELETE FROM SubEvent WHERE subEventId = ? AND eventId = ?";
 
-        t.update(x, s);
+        t.update(x, s, e);
 
     }
 
