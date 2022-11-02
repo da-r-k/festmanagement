@@ -8,6 +8,10 @@ public class Participation {
 
     private int competitionId;
 
+    private int subEventId;
+
+    private int eventId;
+
     public String getParticipantEmail() {
         return participantEmail;
     }
@@ -30,6 +34,22 @@ public class Participation {
 
     public void setCompetitionId(int competitionId) {
         this.competitionId = competitionId;
+    }
+
+    public int getSubEventId() {
+        return subEventId;
+    }
+
+    public void setSubEventId(int subEventId) {
+        this.subEventId = subEventId;
+    }
+
+    public int getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
     }
 
 }
