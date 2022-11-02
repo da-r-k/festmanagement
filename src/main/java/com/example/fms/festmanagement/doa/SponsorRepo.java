@@ -30,24 +30,6 @@ public class SponsorRepo {
 
     }
 
-    public Sponsor selectSponsor(int s) {
-
-        try {
-
-            String x = "SELECT * FROM Sponsor WHERE sponsorId = ?";
-
-            return t.queryForObject(x, new BeanPropertyRowMapper<>(Sponsor.class), new Object[] { s });
-
-        }
-
-        catch (EmptyResultDataAccessException e) {
-
-            return null;
-
-        }
-
-    }
-
     public void updateSponsor(Sponsor s) {
 
         String x = "UPDATE Sponsor SET amount = ? WHERE sponsorId = ?";

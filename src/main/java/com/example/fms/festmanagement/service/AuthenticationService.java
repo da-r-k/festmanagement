@@ -1,5 +1,6 @@
 package com.example.fms.festmanagement.service;
 
+import com.example.fms.festmanagement.doa.QueriesRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +14,13 @@ public class AuthenticationService {
 
     @Autowired
     private UserRepo UserRepo;
+
+    @Autowired
+    private QueriesRepo queriesRepo;
     private String SESSION_AUTH_KEY = "AUTH_USER";
 
     public Boolean checkCredentials(String emailId, String password) {
-        User User = UserRepo.selectUser(emailId);
+        User User = queriesRepo.selectUser(emailId);
         System.out.println("Checking credentials");
         System.out.println(User.toString());
         System.out.println(User.getPassword());
@@ -44,7 +48,7 @@ public class AuthenticationService {
     }
 
     public String getRole(String emailId) {
-        User User=UserRepo.selectUser(emailId);
+        User User = queriesRepo.selectUser(emailId);
         return User.getRole();
     }
 

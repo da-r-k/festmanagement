@@ -35,42 +35,6 @@ public class EventRepo {
 
     }
 
-    public Event selectEvent(int v) {
-
-        try {
-
-            String x = "SELECT * FROM Event WHERE eventId = ?";
-
-            return t.queryForObject(x, new BeanPropertyRowMapper<>(Event.class), new Object[] { v });
-
-        }
-
-        catch (EmptyResultDataAccessException e) {
-
-            return null;
-
-        }
-
-    }
-
-    public Event selectEventFromOrganiser(String v) {
-
-        try {
-
-            String x = "SELECT * FROM Event WHERE headEmail = '?'";
-
-            return t.queryForObject(x, new BeanPropertyRowMapper<>(Event.class), new Object[] { v });
-
-        }
-
-        catch (EmptyResultDataAccessException e) {
-
-            return null;
-
-        }
-
-    }
-
     private void updateEvent(Event e) {
 
         String x = "UPDATE Event SET eventName = ?, headEmail = ? WHERE eventId = ?";
@@ -85,15 +49,6 @@ public class EventRepo {
 
         t.update(x, e);
 
-    }
-
-    public List<Event> getEventFromSubevent(List<SubEvent> s) {
-        List<Event>e=new ArrayList<Event>();
-        for (int i = 0; i < s.size(); i++) 
-        {
-            e.add(selectEvent(s.get(i).getEventId()));
-        }
-        return e;
     }
 
 }

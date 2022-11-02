@@ -39,13 +39,4 @@ public class CompetitionRepo {
 
     }
 
-    public List<Competition> getCompetitions(int i, int j) {
-
-        String x = "SELECT * FROM Competition WHERE subEventId = ? AND EventId = ?";
-
-        return t.query(x, new BeanPropertyRowMapper<>(Competition.class),i,j);
-
-    }
-    
-
 }

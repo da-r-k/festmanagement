@@ -33,38 +33,12 @@ public class OrganiserRepo {
 
     }
 
-    public Organiser selectOrganiser(String o) {
-
-        try {
-
-            String x = "SELECT * FROM Organiser WHERE organiserEmail = ?";
-
-            return t.queryForObject(x, new BeanPropertyRowMapper<>(Organiser.class), new Object[] { o });
-
-        }
-
-        catch (EmptyResultDataAccessException e) {
-
-            return null;
-
-        }
-
-    }
-
     public void deleteOrganiser(String o) {
 
         String x = "DELETE FROM Organiser WHERE organiserEmail = ?";
 
         t.update(x, o);
 
-    }
-
-    public List<Organiser> getOrganiserByEvent(int i){
-
-        String x="SELECT * FROM Organiser WHERE eventId =?";
-
-        return t.query(x, new BeanPropertyRowMapper<>(Organiser.class), i);
-        
     }
 
 }

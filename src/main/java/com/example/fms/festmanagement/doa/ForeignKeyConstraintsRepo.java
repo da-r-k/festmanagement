@@ -61,7 +61,7 @@ public class ForeignKeyConstraintsRepo {
 
     public void initFK7() {
 
-        String x = "ALTER TABLE Participation ADD CONSTRAINT FK_Competition_TO_Participation FOREIGN KEY (competitionId) REFERENCES Competition (competitionId)";
+        String x = "ALTER TABLE Participation ADD CONSTRAINT FK_Competition_TO_Participation FOREIGN KEY (competitionId) REFERENCES Competition (competitionId, subEventId, eventId)";
 
         t.update(x);
 
