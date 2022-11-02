@@ -20,11 +20,17 @@ public class AuthenticationService {
     private String SESSION_AUTH_KEY = "AUTH_USER";
 
     public Boolean checkCredentials(String emailId, String password) {
+
         User User = queriesRepo.selectUser(emailId);
+
         System.out.println("Checking credentials");
+
         System.out.println(User.toString());
+
         System.out.println(User.getPassword());
+
         return User.getPassword().equals(password);
+
     }
 
     public void loginUser(HttpSession session, String emailId) {
@@ -36,10 +42,17 @@ public class AuthenticationService {
     }
 
     public String getCurrentUser(HttpSession session) {
+
         try {
+
             return session.getAttribute(SESSION_AUTH_KEY).toString();
-        } catch (Exception e) {
+
+        }
+
+        catch (Exception e) {
+
             return null;
+
         }
     }
 
@@ -48,7 +61,9 @@ public class AuthenticationService {
     }
 
     public String getRole(String emailId) {
+
         User User = queriesRepo.selectUser(emailId);
+
         return User.getRole();
     }
 

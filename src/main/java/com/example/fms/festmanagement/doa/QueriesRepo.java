@@ -210,4 +210,22 @@ public class QueriesRepo {
 
     }
 
+    public Competition getCompetitionById(int c, int s, int e) {
+
+        try {
+
+            String x = "SELECT * FROM Competition WHERE competitionId AND subEventId = AND eventId = ?";
+
+            return t.queryForObject(x, new BeanPropertyRowMapper<>(Competition.class), new Object[] { c, s, e });
+
+        }
+
+        catch (EmptyResultDataAccessException e) {
+
+            return null;
+
+        }
+
+    }
+
 }
