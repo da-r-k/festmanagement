@@ -1,7 +1,12 @@
 package com.example.fms.festmanagement.doa;
 
 import com.example.fms.festmanagement.models.Event;
+import com.example.fms.festmanagement.models.SubEvent;
 import com.example.fms.festmanagement.models.User;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -62,6 +67,15 @@ public class EventRepo {
 
         t.update(x, e);
 
+    }
+
+    public List<Event> getEventFromSubevent(List<SubEvent> s) {
+        List<Event>e=new ArrayList<Event>();
+        for (int i = 0; i < s.size(); i++) 
+        {
+            e.add(selectEvent(s.get(i).getEventId()));
+        }
+        return e;
     }
 
 }
