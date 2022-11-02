@@ -13,7 +13,7 @@ public class SubEventRepo {
 
     public void initSubEvent() {
 
-        String x = "CREATE TABLE IF NOT EXISTS SubEvent (subEventId INT, startDate DATETIME, endDate DATETIME, venue VARCHAR(255), eventId INT, PRIMARY KEY (subEventId, eventId))";
+        String x = "CREATE TABLE IF NOT EXISTS SubEvent (subEventId INT, subEventName VARCHAR(255), startDate DATETIME, endDate DATETIME, venue VARCHAR(255), eventId INT, PRIMARY KEY (subEventId, eventId))";
 
         t.update(x);
 
@@ -21,9 +21,9 @@ public class SubEventRepo {
 
     public void insertSubEvent(SubEvent s) {
 
-        String x = "INSERT INTO TABLE SubEvent VALUES (?, ?, ?, ?, ?)";
+        String x = "INSERT INTO TABLE SubEvent VALUES (?, ?, ?, ?, ?, ?)";
 
-        t.update(x, s.getSubEventId(), s.getStartDate(), s.getEndDate(), s.getVenue(), s.getEventId());
+        t.update(x, s.getSubEventId(), s.getSubEventName(), s.getStartDate(), s.getEndDate(), s.getVenue(), s.getEventId());
 
     }
 

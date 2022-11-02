@@ -6,6 +6,8 @@ public class SubEvent {
 
     private int subEventId;
 
+    private String subEventName;
+
     private Date startDate;
 
     private Date endDate;
@@ -50,8 +52,9 @@ public class SubEvent {
         return eventId;
     }
 
-    public void setEventId(int eventId) {
-        this.eventId = eventId;
-    }
+    public void setEventId(int eventId) { this.eventId = eventId; }
 
+    public String getSubEventName() { return subEventName; }
+
+    public void setSubEventName(String subEventName) { this.subEventName = subEventName; }
 }
