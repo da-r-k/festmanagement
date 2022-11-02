@@ -32,7 +32,7 @@ public class UserRepo {
 
     public void deleteUser(String u) {
 
-        String x = "DELETE FROM User WHERE userEmail = ?";
+        String x = "DELETE FROM Users WHERE userEmail = ?";
 
         t.update(x, u);
 

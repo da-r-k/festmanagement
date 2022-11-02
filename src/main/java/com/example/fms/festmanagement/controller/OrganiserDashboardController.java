@@ -69,6 +69,7 @@ public class OrganiserDashboardController extends Helper{
     public String ViewOrganisers(Model model, HttpSession session){
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
         model.addAttribute("organisers", organiserDashboardService.getOrganisersByEvent(e));
+        model.addAttribute("event", e);
         return "vieworganisers";
     } 
 
@@ -76,7 +77,7 @@ public class OrganiserDashboardController extends Helper{
     public String DeleteOrganisers(@PathVariable("organiseremail") String organiserEmail, Model model, HttpSession session){
         organiserDashboardService.deleteOrganiser(organiserEmail);
         authenticationService.deleteUser(organiserEmail);
-        return "vieworganisers";
+        return "redirect:/vieworganisers";
     } 
 
     @GetMapping("viewsubevents")
