@@ -32,4 +32,14 @@ public class Event {
         this.headEmail = headEmail;
     }
 
+
+    @Override
+    public String toString() {
+        return "{" +
+            " eventId='" + getEventId() + "'" +
+            ", eventName='" + getEventName() + "'" +
+            ", headEmail='" + getHeadEmail() + "'" +
+            "}";
+    }
+
 }

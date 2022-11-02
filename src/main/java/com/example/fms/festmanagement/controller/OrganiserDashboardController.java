@@ -46,7 +46,13 @@ public class OrganiserDashboardController extends Helper{
         if (!isAuthenticated(session)) {
             return "redirect:/";
         }
-
+        addDefaultAttributes(model,session);
+        
+        Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
+        model.addAttribute("user", new User());
+        model.addAttribute("organiser", new Organiser());
+        model.addAttribute("event", e);
+        System.out.print(e.toString());
         return "addorganisers";
     }
 

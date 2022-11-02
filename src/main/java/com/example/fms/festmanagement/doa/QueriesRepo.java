@@ -67,7 +67,7 @@ public class QueriesRepo {
 
         try {
 
-            String x = "SELECT * FROM Event WHERE headEmail = '?'";
+            String x = "SELECT * FROM Event WHERE headEmail = ?";
 
             return t.queryForObject(x, new BeanPropertyRowMapper<>(Event.class), new Object[] { v });
 
