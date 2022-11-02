@@ -30,24 +30,6 @@ public class ParticipantRepo {
 
     }
 
-    public Participant selectParticipant(String p) {
-
-        try {
-
-            String x = "SELECT * FROM Participant WHERE participantEmail = ?";
-
-            return t.queryForObject(x, new BeanPropertyRowMapper<>(Participant.class), new Object[] { p });
-
-        }
-
-        catch (EmptyResultDataAccessException e) {
-
-            return null;
-
-        }
-
-    }
-
     public void updateParticipant(Participant p) {
 
         String x = "UPDATE Participant SET firstName = ?, lastName = ?, mobileNumber = ?, sex = ?, college = ?, pinCode = ?, streetName = ? WHERE participantEmail = ?";

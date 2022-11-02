@@ -43,42 +43,4 @@ public class SubEventRepo {
 
     }
 
-    public List<SubEvent> getSubEventByDate(Date d) {
-
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String dd = df.format(d);
-        String x = "SELECT * FROM SubEvent WHERE startDate = '"+dd+"'";
-        
-
-        
-
-        return t.query(x, new BeanPropertyRowMapper<>(SubEvent.class));
-
-    }
-
-    public List<SubEvent> getSubEventsByEvent(int i) {
-
-        String x = "SELECT * FROM SubEvent WHERE eventId = '"+i+"'";
-
-        return t.query(x, new BeanPropertyRowMapper<>(SubEvent.class));
-
-    }
-
-    public SubEvent getSubEventById(int i){
-
-        try {
-
-            String x = "SELECT * FROM SubEvent WHERE subEventId = ?";
-
-            return t.queryForObject(x, new BeanPropertyRowMapper<>(SubEvent.class), new Object[] { i });
-
-        }
-
-        catch (EmptyResultDataAccessException e) {
-
-            return null;
-
-        }
-    }
-
 }

@@ -30,24 +30,6 @@ public class UserRepo {
 
     }
 
-    public User selectUser(String u) {
-
-        try {
-
-            String x = "SELECT * FROM Users WHERE userEmail = ?";
-
-            return t.queryForObject(x, new BeanPropertyRowMapper<>(User.class),u);
-
-        }
-
-        catch (EmptyResultDataAccessException e) {
-
-            return null;
-
-        }
-
-    }
-
     public void deleteUser(String u) {
 
         String x = "DELETE FROM User WHERE userEmail = ?";

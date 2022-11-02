@@ -30,24 +30,6 @@ public class FundRepo {
 
     }
 
-    public Fund selectFund(int f) {
-
-        try {
-
-            String x = "SELECT * FROM Fund WHERE fundId = ?";
-
-            return t.queryForObject(x, new BeanPropertyRowMapper<>(Fund.class), new Object[] { f });
-
-        }
-
-        catch (EmptyResultDataAccessException e) {
-
-            return null;
-
-        }
-
-    }
-
     public void deleteFund(int f) {
 
         String x = "DELETE FROM Fund WHERE fundId = ?";
