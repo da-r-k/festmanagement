@@ -15,6 +15,7 @@ import com.example.fms.festmanagement.models.Competition;
 import com.example.fms.festmanagement.models.Event;
 import com.example.fms.festmanagement.models.Organiser;
 import com.example.fms.festmanagement.models.Participant;
+import com.example.fms.festmanagement.models.Participation;
 import com.example.fms.festmanagement.models.SubEvent;
 
 @Service
@@ -76,5 +77,15 @@ public class OrganiserDashboardService {
 
     public void deleteParticipation(String participantEmail, Competition c) {
         participationRepo.deleteParticipation(participantEmail,c.getCompetitionId(),c.getSubEventId(),c.getEventId());
+    }
+
+    public List<Participation> getAllParticipations(Competition c) {
+        return queriesRepo.getAllParticipations(c.getCompetitionId(),c.getSubEventId(),c.getEventId());
+    }
+
+    public void updateLeaderboard(List<Participation> allParticipations, Competition c) {
+        for(Participation p : allParticipations){
+            participationRepo.updateParticipation(p);
+        }
     }
 }

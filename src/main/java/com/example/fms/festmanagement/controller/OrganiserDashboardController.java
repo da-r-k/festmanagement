@@ -1,5 +1,7 @@
 package com.example.fms.festmanagement.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.fms.festmanagement.models.Competition;
 import com.example.fms.festmanagement.models.Event;
 import com.example.fms.festmanagement.models.Organiser;
+import com.example.fms.festmanagement.models.Participation;
 import com.example.fms.festmanagement.models.SubEvent;
 import com.example.fms.festmanagement.models.User;
 import com.example.fms.festmanagement.service.AuthenticationService;
@@ -93,7 +96,7 @@ public class OrganiserDashboardController extends Helper{
     public String ViewCompetition(@PathVariable("subEventId") int subEventId, Model model, HttpSession session){
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
         SubEvent s = organiserDashboardService.getSubEventById(subEventId,e);
-        model.addAttribute("competitions",organiserDashboardService.getCompetions(s));
+        model.addAttribute("competitions",organiserDashboardService.getCompetitions(s));
         return "viewcompetions";
     }
 
@@ -121,16 +124,34 @@ public class OrganiserDashboardController extends Helper{
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
         SubEvent s = organiserDashboardService.getSubEventById(subEventId,e);
         Competition c =organiserDashboardService.getCompetitionById(competitionId,s);
-        model.addAttribute(organiserDashboardService.getAllParticipants(c);
+        model.addAttribute(organiserDashboardService.getAllParticipants(c));
         return "viewparticipants";
     }
 
     @GetMapping("{subeventId}/{competitionId}/{participantEmail}/del")
     public String DeleteParticipant(Model model, @PathVariable("subeventId") int subEventId, @PathVariable("competitionId") int competitionId,@PathVariable("participantEmail") String participantEmail, HttpSession session){
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
-        SubEvent s = organiserDashboardService.getSubEventById(subEventId,e));
+        SubEvent s = organiserDashboardService.getSubEventById(subEventId,e);
         Competition c =organiserDashboardService.getCompetitionById(competitionId,s);
         organiserDashboardService.deleteParticipation(participantEmail,c);
+        return "redirect:/viewparticipants";
+    }
+
+    @GetMapping("{subeventId}/{competitionId}/updateLeaderboard")
+    public String UpdateLeaderboard(Model model,@PathVariable("subeventId") int subEventId, @PathVariable("competitionId") int competitionId, String participantEmail, HttpSession session){
+        Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
+        SubEvent s = organiserDashboardService.getSubEventById(subEventId,e);
+        Competition c =organiserDashboardService.getCompetitionById(competitionId,s);
+        model.addAttribute("participants",organiserDashboardService.getAllParticipations(c));
+        return "updateLeaderboard";
+    }
+
+    @PostMapping("{subeventId}/{competitionId}/updateLeaderboard")
+    public String PostUpdateLeaderboard(@ModelAttribute List<Participation> allParticipations,@PathVariable("subeventId") int subEventId, @PathVariable("competitionId") int competitionId, HttpSession session){
+        Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
+        SubEvent s = organiserDashboardService.getSubEventById(subEventId,e);
+        Competition c =organiserDashboardService.getCompetitionById(competitionId,s);
+        organiserDashboardService.updateLeaderboard(allParticipations,c);
         return "redirect:/viewparticipants";
     }
 
