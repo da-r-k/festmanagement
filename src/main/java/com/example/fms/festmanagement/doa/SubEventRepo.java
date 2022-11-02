@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -53,6 +54,31 @@ public class SubEventRepo {
 
         return t.query(x, new BeanPropertyRowMapper<>(SubEvent.class));
 
+    }
+
+    public List<SubEvent> getSubEventsByEvent(int i) {
+
+        String x = "SELECT * FROM SubEvent WHERE eventId = '"+i+"'";
+
+        return t.query(x, new BeanPropertyRowMapper<>(SubEvent.class));
+
+    }
+
+    public SubEvent getSubEventById(int i){
+
+        try {
+
+            String x = "SELECT * FROM SubEvent WHERE subEventId = ?";
+
+            return t.queryForObject(x, new BeanPropertyRowMapper<>(SubEvent.class), new Object[] { i });
+
+        }
+
+        catch (EmptyResultDataAccessException e) {
+
+            return null;
+
+        }
     }
 
 }

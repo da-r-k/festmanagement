@@ -1,7 +1,11 @@
 package com.example.fms.festmanagement.doa;
 
 import com.example.fms.festmanagement.models.Competition;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -34,5 +38,14 @@ public class CompetitionRepo {
         t.update(x, c, s, e);
 
     }
+
+    public List<Competition> getCompetitions(int i, int j) {
+
+        String x = "SELECT * FROM Competition WHERE subEventId = ? AND EventId = ?";
+
+        return t.query(x, new BeanPropertyRowMapper<>(Competition.class),i,j);
+
+    }
+    
 
 }
