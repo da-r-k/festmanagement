@@ -93,7 +93,7 @@ public class OrganiserDashboardController extends Helper{
     public String ViewCompetition(@PathVariable("subEventId") int subEventId, Model model, HttpSession session){
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
         SubEvent s = organiserDashboardService.getSubEventById(subEventId,e.getEventId());
-        model.addAttribute("competitions",organiserDashboardService.getCompetions(s));
+        model.addAttribute("competitions",organiserDashboardService.getCompetitions(s));
         return "viewcompetions";
     }
 
