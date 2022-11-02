@@ -2,13 +2,10 @@ package com.example.fms.festmanagement.service;
 
 import java.util.List;
 
+import com.example.fms.festmanagement.doa.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.fms.festmanagement.doa.CompetitionRepo;
-import com.example.fms.festmanagement.doa.EventRepo;
-import com.example.fms.festmanagement.doa.OrganiserRepo;
-import com.example.fms.festmanagement.doa.SubEventRepo;
 import com.example.fms.festmanagement.models.Competition;
 import com.example.fms.festmanagement.models.Event;
 import com.example.fms.festmanagement.models.Organiser;
@@ -29,28 +26,31 @@ public class OrganiserDashboardService {
     @Autowired
     private CompetitionRepo competitionRepo;
 
+    @Autowired
+    private QueriesRepo queriesRepo;
+
     public Event getEventFromOrganiser(String email){
-        return eventRepo.selectEventFromOrganiser(email);
+        return queriesRepo.selectEventFromOrganiser(email);
     }
 
     public List<Organiser> getOrganisersByEvent(Event e) {
-        return organiserRepo.getOrganiserByEvent(e.getEventId());
+        return queriesRepo.getOrganiserByEvent(e.getEventId());
     }
 
     public List<SubEvent> getSubEvents(Event e){
-        return subEventRepo.getSubEventsByEvent(e.getEventId());
+        return queriesRepo.getSubEventsByEvent(e.getEventId());
     }
 
     public void AddSubEvent(SubEvent subEvent) {
         subEventRepo.insertSubEvent(subEvent);
     }
 
-    public List<Competition> getCompetions(SubEvent subEvent) {
-        return competitionRepo.getCompetitions(subEvent.getSubEventId(),subEvent.getEventId());
+    public List<Competition> getCompetitions(SubEvent subEvent) {
+        return queriesRepo.getCompetitions(subEvent.getSubEventId(),subEvent.getEventId());
     }
 
     public SubEvent getSubEventById(int i){
-        return subEventRepo.getSubEventById(i);
+        return queriesRepo.getSubEventById(i);
     }
 
     public void AddCompetition(Competition competition) {
