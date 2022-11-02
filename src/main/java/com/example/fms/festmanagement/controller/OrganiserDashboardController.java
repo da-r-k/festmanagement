@@ -109,7 +109,7 @@ public class OrganiserDashboardController extends Helper{
     @PostMapping("{subeventId}/addcompetition")
     public String PostAddCompetition(@PathVariable("subEventId") int subEventId,@ModelAttribute Competition competition, HttpSession session){
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
-        SubEvent s = organiserDashboardService.getSubEventById(subEventId,e.getEventId());
+        SubEvent s = organiserDashboardService.getSubEventById(subEventId,e);
         competition.setEventId(s.getEventId());
         competition.setSubEventId(s.getSubEventId());
         organiserDashboardService.AddCompetition(competition);

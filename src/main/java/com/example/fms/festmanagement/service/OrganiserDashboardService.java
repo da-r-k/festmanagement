@@ -14,6 +14,7 @@ import com.example.fms.festmanagement.doa.SubEventRepo;
 import com.example.fms.festmanagement.models.Competition;
 import com.example.fms.festmanagement.models.Event;
 import com.example.fms.festmanagement.models.Organiser;
+import com.example.fms.festmanagement.models.Participant;
 import com.example.fms.festmanagement.models.SubEvent;
 
 @Service
@@ -57,19 +58,23 @@ public class OrganiserDashboardService {
         return queriesRepo.getCompetitions(subEvent.getSubEventId(),subEvent.getEventId());
     }
 
-    public SubEvent getSubEventById(int i, int j){
-        return queriesRepo.getSubEventById(i,j);
+    public SubEvent getSubEventById(int i, Event e){
+        return queriesRepo.getSubEventById(i,e);
     }
 
     public void AddCompetition(Competition competition) {
         competitionRepo.insertCompetition(competition);
     }
 
-    public Competition getCompetitionById(int competitionId, int subEventId, int eventId) {
-        return queriesRepo.getCompetitionById(competitionId,subEventId,eventId);
+    public Competition getCompetitionById(int competitionId, SubEvent s) {
+        return queriesRepo.getCompetitionById(competitionId,s,s.getSubEventId(), s.getEventId());
     }
 
-    public List<Participant> getAllParticipants(int competitionId, int eventId, int subEventId) {
-        return queriesRepo.getAllParticipants(competitionId,eventId,subEventId);
+    public List<Participant> getAllParticipants(Competition c) {
+        return queriesRepo.getAllParticipants(c.getCompetitionId(),c.getSubEventId(),c.getEventId());
+    }
+
+    public void deleteParticipation(String participantEmail, Competition c) {
+        participationRepo.deleteParticipation(participantEmail,c.getCompetitionId(),c.getSubEventId(),c.getEventId());
     }
 }
