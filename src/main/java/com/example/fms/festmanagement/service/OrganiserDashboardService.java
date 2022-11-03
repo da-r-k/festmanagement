@@ -89,15 +89,22 @@ public class OrganiserDashboardService {
         }
     }
 
-    public void DeleteSubEvent(int subEventId, Event e) {
+    public void deleteOrganiser(String organiserEmail) {
+
+        organiserRepo.deleteOrganiser(organiserEmail);
+
+    }
+
+    public void DeleteSubEvent(int subEventId,Event e) {
+
         subEventRepo.deleteSubEvent(subEventId, e.getEventId());
+
     }
 
     public void deleteCompetition(Competition c) {
-        competitionRepo.deleteCompetition(c.getCompetitionId(),c.getSubEventId(),c.getEventId());
+
+        competitionRepo.deleteCompetition(c.getCompetitionId(), c.getSubEventId(), c.getEventId());
+
     }
 
-    public void deleteOrganiser(String organiserEmail) {
-        organiserRepo.deleteOrganiser(organiserEmail);
-    }
 }
