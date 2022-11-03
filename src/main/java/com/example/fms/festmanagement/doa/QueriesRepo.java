@@ -85,7 +85,7 @@ public class QueriesRepo {
 
         try {
 
-            String x = "SELECT * FROM Event WHERE headEmail = '?'";
+            String x = "SELECT * FROM Event WHERE headEmail = ?";
 
             return t.queryForObject(x, new BeanPropertyRowMapper<>(Event.class), new Object[] { v });
 
@@ -232,7 +232,7 @@ public class QueriesRepo {
 
         try {
 
-            String x = "SELECT * FROM Competition WHERE competitionId AND subEventId = AND eventId = ?";
+            String x = "SELECT * FROM Competition WHERE competitionId=? AND subEventId =? AND eventId = ?";
 
             return t.queryForObject(x, new BeanPropertyRowMapper<>(Competition.class), new Object[] { c, s, ee });
 
