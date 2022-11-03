@@ -28,7 +28,7 @@ public class UserDashboardController extends Helper {
         addDefaultAttributes(model, session);
         System.out.println(model.getAttribute("userRole"));
         if(model.getAttribute("userRole").equals("participant")){
-            model.addAttribute("subevents", dashboardService.getSubEventToday());
+            model.addAttribute("subEvents", dashboardService.getSubEventToday());
             model.addAttribute("correspondingevents", dashboardService.getEventFromSubEvent(dashboardService.getSubEventToday()));
             return "dashboard";
         }

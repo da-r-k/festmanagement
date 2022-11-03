@@ -2,14 +2,18 @@ package com.example.fms.festmanagement.models;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class SubEvent {
 
     private int subEventId;
 
     private String subEventName;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date startDate;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date endDate;
 
     private String venue;
@@ -30,6 +34,18 @@ public class SubEvent {
 
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " subEventId='" + getSubEventId() + "'" +
+            ", subEventName='" + getSubEventName() + "'" +
+            ", startDate='" + getStartDate() + "'" +
+            ", endDate='" + getEndDate() + "'" +
+            ", venue='" + getVenue() + "'" +
+            ", eventId='" + getEventId() + "'" +
+            "}";
     }
 
     public Date getEndDate() {

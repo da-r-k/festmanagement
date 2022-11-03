@@ -89,8 +89,8 @@ public class OrganiserDashboardService {
         }
     }
 
-    public void DeleteSubEvent(int subeventId, Event e) {
-        subEventRepo.deleteSubEvent(subeventId, e.getEventId());
+    public void DeleteSubEvent(int subEventId, Event e) {
+        subEventRepo.deleteSubEvent(subEventId, e.getEventId());
     }
 
     public void deleteCompetition(Competition c) {

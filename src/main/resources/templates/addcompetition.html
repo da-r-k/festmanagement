@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<head th:replace="organiserbaseh"></head>
+<div class="main-panel">
+  <div class="content-wrapper">
+<div class="card">
+  <div class="card-body">
+    <h3 class="card-title" th:inline="text">Add Competition to [[${subEvent.subEventName}]]</h3>
+    <p class="card-description">
+      TO BE DECIDED
+    </p>
+    <form class="forms-sample" method="POST" th:action="@{/{sid}/addcompetition(sid=${subEvent.subEventId})}">
+      <div class="form-group row">
+        <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Competition Id</label>
+        <div class="col-sm-9">
+          <input type="number" step="1" class="form-control" id="exampleInputUsername2" placeholder="Sub-Event Id" th:value="${competition.competitionId}" name="competitionId">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Competition Name</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Competition Name" th:value="${competition.competitionName}" name="competitionName">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Prizes Worth (in ₹)</label>
+        <div class="col-sm-9">
+          <input type="number" class="form-control" id="exampleInputEmail2" placeholder="Last Name" th:value="${competition.prize}" name="prize">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg btn-block me-2">Submit</button>
+      <button class="btn btn-light btn-block" type="Reset">Cancel</button>
+    </form>
+  </div>
+</div>
+</div>
+</div>
+</div>
+<footer th:replace="userbasef"></footer>

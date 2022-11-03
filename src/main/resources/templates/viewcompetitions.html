@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<head th:replace="organiserbaseh"></head>
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Competitions</h4>
+            <p class="card-description">
+              Competitions in <code th:text="${subEvent.subEventName}"></code>,<code th:text="${event.eventName}"></code>
+            </p>
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Competition</th>
+                    <th>Prizes worth</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="competition: ${competitions}">
+                    <td th:text="${competition.competitionName}" />
+                    <td th:text="${competition.prize}" />
+                    <td><a class="btn btn-danger btn-sm" th:href="@{{sid}/{cid}/delcompetition(sid=${subEvent.subEventId},cid=${competition.competitionId})}">Delete</a> <a class="btn btn-dark btn-sm" th:href="@{{sid}_{cid}_viewparticipants(sid=${subEvent.subEventId},cid=${competition.competitionId})}">View Participants</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        
+    </div>
+</div>
+<footer th:replace="userbasef"></footer>

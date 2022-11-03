@@ -29,7 +29,7 @@ public class SubEventRepo {
 
     public void insertSubEvent(SubEvent s) {
 
-        String x = "INSERT INTO TABLE SubEvent VALUES (?, ?, ?, ?, ?, ?)";
+        String x = "INSERT INTO SubEvent (subEventId,subEventName,startDate,endDate,venue,eventId) VALUES (?, ?, ?, ?, ?, ?)";
 
         t.update(x, s.getSubEventId(), s.getSubEventName(), s.getStartDate(), s.getEndDate(), s.getVenue(), s.getEventId());
 

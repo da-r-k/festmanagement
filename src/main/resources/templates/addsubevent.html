@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<head th:replace="organiserbaseh"></head>
+<div class="main-panel">
+  <div class="content-wrapper">
+<div class="card">
+  <div class="card-body">
+    <h3 class="card-title" th:inline="text">Add Sub-Event to [[${event.eventName}]]</h3>
+    <p class="card-description">
+      TO BE DECIDED
+    </p>
+    <form class="forms-sample" method="POST" th:action="@{/addsubEvent}">
+      <div class="form-group row">
+        <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Sub-Event Id</label>
+        <div class="col-sm-9">
+          <input type="number" step="1" class="form-control" id="exampleInputUsername2" placeholder="Sub-Event Id" th:value="${subEvent.subEventId}" name="subEventId">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Sub-Event Name</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="exampleInputEmail2" placeholder="First Name" th:value="${subEvent.subEventName}" name="subEventName">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Start Date</label>
+        <div class="col-sm-9">
+          <input type="date" class="form-control" id="exampleInputEmail2" placeholder="Last Name" th:value="${subEvent.startDate}" name="startDate">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="exampleInputEmail2" class="col-sm-3 col-form-label">End Date</label>
+        <div class="col-sm-9">
+          <input type="date" class="form-control" id="exampleInputEmail2" placeholder="Last Name" th:value="${subEvent.endDate}" name="endDate">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Venue</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Venue" th:value="${subEvent.venue}" name="venue">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg btn-block me-2">Submit</button>
+      <button class="btn btn-light btn-block" type="Reset">Cancel</button>
+    </form>
+  </div>
+</div>
+</div>
+</div>
+</div>
+<footer th:replace="userbasef"></footer>

@@ -230,7 +230,7 @@ public class QueriesRepo {
 
         String x="SELECT * FROM Participant WHERE participantEmail IN (SELECT participantEmail FROM Participation WHERE competitionId = ? AND subEventId = ? AND eventId = ?)";
 
-        return t.query(x, new BeanPropertyRowMapper<>(Participant.class));
+        return t.query(x, new BeanPropertyRowMapper<>(Participant.class), competitionId);
 
     }
 
