@@ -13,16 +13,14 @@
                 <thead>
                   <tr>
                     <th>Email</th>
-                    <th>Name</th>
-                    <th>Mobile</th>
+                    <th>Position</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr th:each="participant: ${participants}">
                     <td th:text="${participant.participantEmail}" />
-                    <td th:text="${participant.firstName}+' '+${participant.lastName}"/>
-                    <td th:text="${participant.mobileNumber}" />
+                    <td th:text="${participant.leaderBoardPosition}"/>
                     <td><a class="btn btn-danger btn-sm" th:href="@{{sid}/{cid}/{pemail}/delparticipant(sid=${subEvent.subEventId},cid=${competition.competitionId},pemail=${participant.participantEmail})}">Delete</a></td>
                   </tr>
                 </tbody>

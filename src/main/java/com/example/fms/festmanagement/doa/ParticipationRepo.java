@@ -23,7 +23,7 @@ public class ParticipationRepo {
 
         String x = "INSERT INTO Participation VALUES (?, ?, ?, ?, ?)";
 
-        t.update(x, p.getParticipantEmail(), p.getPosition(), p.getCompetitionId(), p.getSubEventId(), p.getEventId());
+        t.update(x, p.getParticipantEmail(), p.getLeaderBoardPosition(), p.getCompetitionId(), p.getSubEventId(), p.getEventId());
 
     }
 
@@ -39,7 +39,7 @@ public class ParticipationRepo {
 
         String x = "UPDATE Participation SET leaderBoardPosition = ? WHERE participantEmail = ? AND competitionId = ? AND subEventId = ? AND eventId = ?";
 
-        t.update(x, p.getPosition(), p.getParticipantEmail(), p.getCompetitionId(), p.getSubEventId(), p.getEventId());
+        t.update(x, p.getLeaderBoardPosition(), p.getParticipantEmail(), p.getCompetitionId(), p.getSubEventId(), p.getEventId());
 
     }
 }

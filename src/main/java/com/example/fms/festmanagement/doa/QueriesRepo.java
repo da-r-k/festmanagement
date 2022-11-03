@@ -37,24 +37,6 @@ public class QueriesRepo {
 
     }
 
-    public List<Participant> getAllParticipants(int c, int s, int ee) {
-
-        try {
-
-            String x = "SELECT * FROM Participation WHERE competitionId = ? AND subEventId = ? AND eventId = ?";
-
-            return t.query(x, new BeanPropertyRowMapper<>(Participant.class), c, s, ee);
-
-        }
-
-        catch (EmptyResultDataAccessException e) {
-
-            return null;
-
-        }
-
-    }
-
     public List<Competition> getCompetitions(int i, int j) {
 
         String x = "SELECT * FROM Competition WHERE subEventId = ? AND EventId = ?";

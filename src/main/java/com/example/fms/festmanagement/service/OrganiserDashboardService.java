@@ -71,10 +71,6 @@ public class OrganiserDashboardService {
         return queriesRepo.getCompetitionById(competitionId, s.getSubEventId(), s.getEventId());
     }
 
-    public List<Participant> getAllParticipants(Competition c) {
-        return queriesRepo.getAllParticipants(c.getCompetitionId(),c.getSubEventId(),c.getEventId());
-    }
-
     public void deleteParticipation(String participantEmail, Competition c) {
         participationRepo.deleteParticipation(participantEmail,c.getCompetitionId(),c.getSubEventId(),c.getEventId());
     }
@@ -83,10 +79,8 @@ public class OrganiserDashboardService {
         return queriesRepo.getAllParticipations(c.getCompetitionId(),c.getSubEventId(),c.getEventId());
     }
 
-    public void updateLeaderboard(List<Participation> allParticipations, Competition c) {
-        for(Participation p : allParticipations){
-            participationRepo.updateParticipation(p);
-        }
+    public void updateParticipant(Participation allParticipations) {
+        participationRepo.updateParticipation(allParticipations);
     }
 
     public void deleteOrganiser(String organiserEmail) {

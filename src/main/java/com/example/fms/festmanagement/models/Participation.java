@@ -4,11 +4,19 @@ public class Participation {
 
     private String participantEmail;
 
-    private int leaderBoardPosition;
+    private Long leaderBoardPosition;
 
     private int competitionId;
 
     private int subEventId;
+
+    public Long getLeaderBoardPosition() {
+        return this.leaderBoardPosition;
+    }
+
+    public void setLeaderBoardPosition(Long leaderBoardPosition) {
+        this.leaderBoardPosition = leaderBoardPosition;
+    }
 
     private int eventId;
 
@@ -20,20 +28,23 @@ public class Participation {
         this.participantEmail = participantEmail;
     }
 
-    public int getPosition() {
-        return leaderBoardPosition;
-    }
-
-    public void setPosition(int position) {
-        this.leaderBoardPosition = position;
-    }
-
     public int getCompetitionId() {
         return competitionId;
     }
 
     public void setCompetitionId(int competitionId) {
         this.competitionId = competitionId;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " participantEmail='" + getParticipantEmail() + "'" +
+            ", leaderBoardPosition='" + getLeaderBoardPosition() + "'" +
+            ", competitionId='" + getCompetitionId() + "'" +
+            ", subEventId='" + getSubEventId() + "'" +
+            ", eventId='" + getEventId() + "'" +
+            "}";
     }
 
     public int getSubEventId() {

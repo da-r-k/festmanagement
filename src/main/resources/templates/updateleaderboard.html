@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<head th:replace="organiserbaseh"></head>
+<div class="main-panel">
+  <div class="content-wrapper">
+<div class="card">
+  <div class="card-body">
+    <h3 class="card-title" th:inline="text">Update leaderboard of [[${competition.competitionName}]], [[${subEvent.subEventName}]]</h3>
+    <p class="card-description">
+      Enter positions of participants
+    </p>
+    <div th:each="participant: ${participants}">
+    <form class="forms-sample" method="POST" th:action="@{/{sid}/{cid}/{pemail}/update(sid=${subEvent.subEventId},cid=${competition.competitionId},pemail=${participant.participantEmail})}" th:object="${participants}">
+      <div class="form-group row">
+        <label for="exampleInputUsername2" class="col-sm-3 col-form-label" th:text="${participant.participantEmail}"/>
+        <div class="col-sm-3">
+          <input type="number" step="1" class="form-control" id="exampleInputUsername2" placeholder="Enter position" th:value="${participant.leaderBoardPosition}" th:name="leaderBoardPosition">
+        </div>
+        <div class="col-sm-3">
+        <button type="submit" class="btn btn-primary btn-md me-2">Update</button>
+        </div>
+    </form>
+</div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer th:replace="userbasef"></footer>
