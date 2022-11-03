@@ -42,4 +42,5 @@ public class ParticipationRepo {
         t.update(x, p.getPosition(), p.getParticipantEmail(), p.getCompetitionId(), p.getSubEventId(), p.getEventId());
 
     }
+
 }
