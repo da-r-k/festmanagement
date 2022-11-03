@@ -264,4 +264,9 @@ public class QueriesRepo {
 
     }
 
+    public void addNewEvent(Event e, Organiser o) {
+        String x = "WITH new_event AS (INSERT INTO Event (eventId, eventName, headEmail) values (?,?,?))INSERT INTO Organiser (organiserEmail, firstName, lastName, mobileNumber, eventId) values (?,?,?,?,?)";
+        t.update(x,e.getEventId(),e.getEventName(),o.getOrganiserEmail(),o.getOrganiserEmail(),o.getFirstName(),o.getLastName(),o.getMobileNumber(),e.getEventId());
+    }
+
 }

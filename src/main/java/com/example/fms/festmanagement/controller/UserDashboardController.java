@@ -35,6 +35,8 @@ public class UserDashboardController extends Helper {
         else if(model.getAttribute("userRole").equals("organiser")){
             return "redirect:organiserdashboard";
         }
-        return "redirect:/";
+        else{
+            return "redirect:admindashboard";
+        }
     }
 }
