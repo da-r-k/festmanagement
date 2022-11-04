@@ -42,8 +42,19 @@ public class Item {
 
     public void setCostPrice(int costPrice) {
         this.costPrice = costPrice;
-    }
 
+    }
+    
+    @Override
+    public String toString() {
+        return "{" +
+            " itemId='" + getItemId() + "'" +
+            ", itemName='" + getItemName() + "'" +
+            ", sellingPrice='" + getSellingPrice() + "'" +
+            ", costPrice='" + getCostPrice() + "'" +
+            ", stock='" + getStock() + "'" +
+            "}";
+    }
     public int getStock() {
         return stock;
     }

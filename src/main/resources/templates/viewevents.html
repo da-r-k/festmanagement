@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head th:replace="adminbaseh"></head>
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Events</h4>
+            <p class="card-description">
+              List of events in the Fest
+            </p>
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Event Id</th>
+                    <th>Event Name</th>
+                    <th>Head Organiser</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="event: ${events}">
+                    <td th:text="${event.eventId}" />
+                    <td th:text="${event.eventName}" />
+                    <td th:text="${event.HeadEmail}" />
+                    <td><a class="btn btn-danger btn-sm" th:href="@{{eid}/delevent(eid=${event.eventId})}">Delete</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        
+    </div>
+</div>
+<footer th:replace="userbasef"></footer>

@@ -43,7 +43,7 @@ public class AdminDashboardContoller extends Helper{
 
     @GetMapping("viewevents")
     public String ViewEvents(Model model, HttpSession session, RedirectAttributes attributes){
-        model.addAttribute(adminService.getAllEvents());
+        model.addAttribute("events",adminService.getAllEvents());
         return "viewevents";
     }
 
@@ -71,6 +71,9 @@ public class AdminDashboardContoller extends Helper{
     public String EditItems(Model model, HttpSession session, RedirectAttributes attributes){
         model.addAttribute("allitems",adminService.getAllItems());
         model.addAttribute("newitem",new Item());
+        for(Item x:adminService.getAllItems()){
+            System.out.println(x.toString());
+        }
         return "edititems";
     }
 

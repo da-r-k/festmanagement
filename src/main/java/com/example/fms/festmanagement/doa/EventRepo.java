@@ -19,7 +19,7 @@ public class EventRepo {
     @Autowired
     private JdbcTemplate t;
 
-    private void initEvent() {
+    public void initEvent() {
 
         String x = "CREATE TABLE IF NOT EXITS Event (eventId INT PRIMARY KEY, eventName VARCHAR(255), headEmail VARCHAR(255))";
 
@@ -27,7 +27,7 @@ public class EventRepo {
 
     }
 
-    private void insertEvent(Event e) {
+    public void insertEvent(Event e) {
 
         String x = "INSERT INTO EVENT VALUES (?, ?, ?)";
 
@@ -35,7 +35,7 @@ public class EventRepo {
 
     }
 
-    private void updateEvent(Event e) {
+    public void updateEvent(Event e) {
 
         String x = "UPDATE Event SET eventName = ?, headEmail = ? WHERE eventId = ?";
 
@@ -43,7 +43,7 @@ public class EventRepo {
 
     }
 
-    private void deleteEvent(int e) {
+    public void deleteEvent(int e) {
 
         String x = "DELETE FROM Event WHERE eventId = ?";
 

@@ -21,9 +21,9 @@ public class ItemRepo {
 
     public void insertItem(Item i) {
 
-        String x = "INSERT INTO Item VALUES (?, ?, ?, ?, ?)";
+        String x = "INSERT INTO Item (itemName,sellingPrice,costPrice,stock) VALUES ( ?, ?, ?, ?)";
 
-        t.update(x, i.getItemId(), i.getItemName(), i.getSellingPrice(), i.getCostPrice(), i.getStock());
+        t.update(x, i.getItemName(), i.getSellingPrice(), i.getCostPrice(), i.getStock());
 
     }
 
@@ -32,6 +32,14 @@ public class ItemRepo {
         String x = "DELETE FROM Item WHERE itemId = ?";
 
         t.update(x, i);
+
+    }
+
+    public void updateItem(Item item) {
+
+        String x = "UPDATE item SET sellingPrice = ?, costPrice = ?, stock = ? WHERE itemId = ?";
+
+        t.update(x, item.getSellingPrice(), item.getCostPrice(), item.getStock(), item.getItemId());
 
     }
 

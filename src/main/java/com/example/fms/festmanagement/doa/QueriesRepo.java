@@ -269,4 +269,54 @@ public class QueriesRepo {
         t.update(x,e.getEventId(),e.getEventName(),o.getOrganiserEmail(),o.getOrganiserEmail(),o.getFirstName(),o.getLastName(),o.getMobileNumber(),e.getEventId());
     }
 
+    public List<Event> getAllEvents() {
+        try {
+
+            String x = "SELECT * FROM Event";
+
+            return t.query(x, new BeanPropertyRowMapper<>(Event.class));
+
+        }
+
+        catch (EmptyResultDataAccessException e) {
+            System.out.println("ono");
+
+            return null;
+
+        }
+
+    }
+
+    public List<Item> getAllItems() {
+        try {
+
+            String x = "SELECT * FROM Item";
+
+            return t.query(x, new BeanPropertyRowMapper<>(Item.class));
+
+        }
+
+        catch (EmptyResultDataAccessException e) {
+
+            return null;
+
+        }
+    }
+
+    public List<Sponsor> getAllSponsors() {
+        try {
+
+            String x = "SELECT * FROM Sponsor";
+
+            return t.query(x, new BeanPropertyRowMapper<>(Sponsor.class));
+
+        }
+
+        catch (EmptyResultDataAccessException e) {
+
+            return null;
+
+        }
+    }
+
 }
