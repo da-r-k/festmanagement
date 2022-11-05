@@ -101,4 +101,8 @@ public class OrganiserDashboardService {
 
     }
 
+    public Event getEvent(int eventId) {
+        return queriesRepo.getEvent(eventId);
+    }
+
 }

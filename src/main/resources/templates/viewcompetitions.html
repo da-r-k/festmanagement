@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head th:replace="organiserbaseh"></head>
-<a th:href="@{addcompetition}" type="button" style="position: fixed; bottom: 20px;right: 30px;z-index: 99;" class="btn btn-primary btn-icon-text">
+<a th:href="@{${subEvent.subEventId}+'_addcompetition'}" type="button" style="position: fixed; bottom: 20px;right: 30px;z-index: 99;" class="btn btn-primary btn-icon-text">
   <i class="icon-plus btn-icon-prepend"></i>
   Add Competition
 </a>

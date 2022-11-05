@@ -23,6 +23,7 @@ import com.example.fms.festmanagement.models.SubEvent;
 import com.example.fms.festmanagement.models.User;
 import com.example.fms.festmanagement.service.AuthenticationService;
 import com.example.fms.festmanagement.service.DashboardService;
+import com.example.fms.festmanagement.service.OrganiserDashboardService;
 
 @Controller
 public class UserDashboardController extends Helper {
@@ -32,6 +33,9 @@ public class UserDashboardController extends Helper {
 
     @Autowired
     private DashboardService dashboardService;
+
+    @Autowired
+    private OrganiserDashboardService organiserDashboardService;
 
     @GetMapping("/dashboard")
     public String dashboard(Model model, HttpSession session) {
@@ -63,11 +67,12 @@ public class UserDashboardController extends Helper {
         model.addAttribute("events", e);
         model.addAttribute("subevents", s);
         model.addAttribute("competitions", c);
+        model.addAttribute("participations", p);
         return "showevents";
     }
 
-    @PostMapping("{eventId}/{subeventId}/{competitionId}/participate")
-    public String Participate(@PathVariable("eventId") int eventId, @PathVariable("subeventId") int subEventId, @PathVariable("competitionId") int competitionId, Model model, HttpSession session){
+    @GetMapping("{eventId}/{subEventId}/{competitionId}/participate")
+    public String Participate(@PathVariable("eventId") int eventId, @PathVariable("subEventId") int subEventId, @PathVariable("competitionId") int competitionId, Model model, HttpSession session){
         Participation p=new Participation();
         addDefaultAttributes(model, session);
         p.setParticipantEmail(authenticationService.getCurrentUser(session));
@@ -75,12 +80,16 @@ public class UserDashboardController extends Helper {
         p.setSubEventId(subEventId);
         p.setLeaderBoardPosition(null);
         p.setCompetitionId(competitionId);
+        System.out.println(p.toString());
         dashboardService.addParticipation(p);
-        return "redirect:/participated";
+        return "redirect:/showevents";
     }
 
-    @GetMapping("{eventId}_{subeventId}_{competitionId}_leaderboard")
-    public String Leaderboard(@PathVariable("eventId") int eventId, @PathVariable("subeventId") int subEventId, @PathVariable("competitionId") int competitionId, Model model, HttpSession session){
+    @GetMapping("{eventId}_{subEventId}_{competitionId}_leaderboard")
+    public String Leaderboard(@PathVariable("eventId") int eventId, @PathVariable("subEventId") int subEventId, @PathVariable("competitionId") int competitionId, Model model, HttpSession session){
+        Event e= organiserDashboardService.getEvent(eventId);
+        SubEvent s = organiserDashboardService.getSubEventById(subEventId,e);
+        Competition c =organiserDashboardService.getCompetitionById(competitionId,s);
         model.addAttribute("leaderboard",dashboardService.getLeaderboard(eventId,subEventId,competitionId));
         return "leaderboard";
     }
@@ -161,6 +170,7 @@ public class UserDashboardController extends Helper {
     public String PostCheckout(Model model, HttpSession session, @ModelAttribute Participant p){
         Cart c=dashboardService.getActiveCart(authenticationService.getCurrentUser(session));
         dashboardService.updateParticipant(p);
+        dashboardService.createTransaction(c);
         model.addAttribute("transaction",dashboardService.getTransaction(c));
         model.addAttribute("user",p);
         return "receipt";

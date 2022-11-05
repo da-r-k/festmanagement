@@ -364,7 +364,7 @@ public class QueriesRepo {
 
         String x = "SELECT * FROM Participation WHERE eventId = ? AND subEventId = ? AND competitionId = ? ORDER BY leaderBoardPosition";
 
-        return t.query(x, new BeanPropertyRowMapper<>(), ee, s, c);
+        return t.query(x, new BeanPropertyRowMapper<>(Participation.class), ee, s, c);
 
     }
 
