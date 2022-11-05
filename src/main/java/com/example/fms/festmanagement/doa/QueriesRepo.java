@@ -479,4 +479,21 @@ public class QueriesRepo {
         }
 
     }
+
+    public Item getItembyId(int itemId) {
+
+        try {
+
+            String x = "SELECT * FROM Event Item itemId = ?";
+
+            return t.queryForObject(x, new BeanPropertyRowMapper<>(Item.class), itemId);
+
+        }
+
+        catch (EmptyResultDataAccessException e) {
+
+            return null;
+
+        }
+    }
 }
