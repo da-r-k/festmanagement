@@ -91,6 +91,9 @@ public class UserDashboardController extends Helper {
         SubEvent s = organiserDashboardService.getSubEventById(subEventId,e);
         Competition c =organiserDashboardService.getCompetitionById(competitionId,s);
         model.addAttribute("leaderboard",dashboardService.getLeaderboard(eventId,subEventId,competitionId));
+        model.addAttribute("e",e);
+        model.addAttribute("s",s);
+        model.addAttribute("c",c);
         return "leaderboard";
     }
 

@@ -191,7 +191,7 @@ public class DashboardService {
 
     public List<Item> getItemDetails(List<CartItemDetails> cid) {
         List<Item>ret=new ArrayList<Item>();
-        for(c:cid){
+        for(CartItemDetails c:cid){
             ret.add(queriesRepo.getItembyId(c.getItemId()));
         }
         return null;
