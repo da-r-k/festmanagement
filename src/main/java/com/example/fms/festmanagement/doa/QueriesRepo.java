@@ -242,7 +242,7 @@ public class QueriesRepo {
 
         try {
 
-            String x = "SELECT * FROM Cart WHERE cartId NOT IN (SELECT cartId FROM Transaction) AND userId = ?";
+            String x = "SELECT * FROM Cart WHERE cartId NOT IN (SELECT cartId FROM Transaction) AND participantEmail = ?";
 
             return t.queryForObject(x, new BeanPropertyRowMapper<>(Cart.class), currentUser);
 
@@ -448,7 +448,7 @@ public class QueriesRepo {
 
             String x = "SELECT * FROM CartItemDetails WHERE cartId = ? AND itemId = ?";
 
-            CartItemDetails temp = t.queryForObject(x, new BeanPropertyRowMapper<>(CartItemDetails.class), i, c.getCartId());
+            CartItemDetails temp = t.queryForObject(x, new BeanPropertyRowMapper<>(CartItemDetails.class), i.getItemId(), c.getCartId());
 
             return true;
 

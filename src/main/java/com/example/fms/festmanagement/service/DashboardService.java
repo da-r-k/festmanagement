@@ -72,6 +72,8 @@ public class DashboardService {
         List<Boolean>ret=new ArrayList<Boolean>();
         for(Item x:g){
             Boolean b=queriesRepo.checkAdded(x,c);
+            System.out.println(x.getItemId());
+            System.out.println(c.getCartId());
             ret.add(b);
         }
         return ret;

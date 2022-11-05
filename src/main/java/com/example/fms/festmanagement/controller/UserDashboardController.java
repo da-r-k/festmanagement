@@ -102,6 +102,10 @@ public class UserDashboardController extends Helper {
     @GetMapping("goodies")
     public String Goodies(Model model, HttpSession session){
         Cart c=dashboardService.getActiveCart(authenticationService.getCurrentUser(session));
+        if(c==null){
+            dashboardService.makeCart(authenticationService.getCurrentUser(session));
+            c=dashboardService.getActiveCart(authenticationService.getCurrentUser(session));
+        }
         List<Item> g=dashboardService.getGoodies();
         List<Boolean> added = dashboardService.checkAdded(g,c);
         model.addAttribute("goodies", g);
@@ -113,7 +117,8 @@ public class UserDashboardController extends Helper {
     public String Cart(Model model, HttpSession session){
         Cart c=dashboardService.getActiveCart(authenticationService.getCurrentUser(session));
         if(c==null){
-            model.addAttribute("cid",null);    
+            dashboardService.makeCart(authenticationService.getCurrentUser(session));
+            c=dashboardService.getActiveCart(authenticationService.getCurrentUser(session));
         }
         else{
             List<CartItemDetails> cid=dashboardService.getCartItemDetails(c);
@@ -123,7 +128,7 @@ public class UserDashboardController extends Helper {
         return "cart";
     }
 
-    @GetMapping("{itemId}/add")
+    @GetMapping("{itemId}/additem")
     public String AddGoodies(Model model, HttpSession session, @PathVariable("itemId") int itemId){
         Cart c=dashboardService.getActiveCart(authenticationService.getCurrentUser(session));
         if(c==null){

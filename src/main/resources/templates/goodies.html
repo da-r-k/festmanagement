@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<head th:replace="adminbaseh"></head>
+<link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Items</h4>
+            <p class="card-description">
+              List of goodies that participants can buy
+            </p>
+            <div class="row">
+            <div th:each="item,i:${goodies}" class="card col-md-3">
+                <div class="card" style="background:#e3effa">
+                    <div class="card-body">
+                    <h3 th:text="${item.itemName}"/>
+                    
+                    <table class="table">
+                        <tr>
+                            <td>Price</td>
+                            <td class="card-title" th:inline="text">₹ [[${item.sellingPrice}]]</td>
+                        </tr>
+                    
+                    
+                        <tr>
+                            <td>Items in Stock</td>
+                            <td class="card-title" th:inline="text">[[${item.stock}]]</td>
+                        </tr>
+                    </table>
+                    
+                    <div type="button" th:if="${added[i.index]}" class="btn btn-success btn-icon-text btn-block">
+                        <i class="icon-check btn-icon-prepend"></i>                                                    
+                        Added to cart
+                      </div>
+                      <a type="button" th:unless="${added[i.index]}" class="btn btn-primary btn-icon-text btn-block" th:href="@{{iid}/additem(iid=${item.itemId})}">
+                        <i class="icon-plus btn-icon-prepend"></i>                                                    
+                        Add to cart
+                      </a>
+                      
+                      
+                    </div>    
+                </div>
+            </div>  
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/modal-demo.js"></script>
+<footer th:replace="userbasef"></footer>
