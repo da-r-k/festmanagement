@@ -12,6 +12,7 @@ import com.example.fms.festmanagement.doa.CartItemDetailsRepo;
 import com.example.fms.festmanagement.doa.CartRepo;
 import com.example.fms.festmanagement.doa.EventRepo;
 import com.example.fms.festmanagement.doa.ParticipantRepo;
+import com.example.fms.festmanagement.doa.ParticipationRepo;
 import com.example.fms.festmanagement.doa.SubEventRepo;
 import com.example.fms.festmanagement.doa.TransactionRepo;
 import com.example.fms.festmanagement.models.Cart;
@@ -47,6 +48,9 @@ public class DashboardService {
 
     @Autowired 
     private ParticipantRepo participantRepo;
+
+    @Autowired
+    private ParticipationRepo participationRepo;
 
     public List<SubEvent> getSubEventToday(){
         return queriesRepo.getSubEventByDate(new Date());
@@ -160,7 +164,7 @@ public class DashboardService {
             for(List<Competition>lc:llc){
                 List<Boolean>lb=new ArrayList<Boolean>();
                 for(Competition comp:lc){
-                    lb.add(queriesRepo.checkParticipation(comp,currentuser));
+                    lb.add(queriesRepo.checkParticipation(comp,currentUser));
                 }
                 llb.add(lb);
             }
@@ -170,10 +174,11 @@ public class DashboardService {
     }
 
     public void addParticipation(Participation p) {
+        participationRepo.insertParticipation(p);
     }
 
     public List<Participation> getLeaderboard(int eventId, int subEventId, int competitionId) {
-        return null;
+        return queriesRepo.getLeaderboard(eventId,subEventId,competitionId);
     }
 
 	public Object getTransaction(Cart c) {
