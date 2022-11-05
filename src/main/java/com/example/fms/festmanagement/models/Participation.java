@@ -9,6 +9,8 @@ public class Participation {
     private int competitionId;
 
     private int subEventId;
+    
+    private int eventId;
 
     public Long getLeaderBoardPosition() {
         return this.leaderBoardPosition;
@@ -18,7 +20,6 @@ public class Participation {
         this.leaderBoardPosition = leaderBoardPosition;
     }
 
-    private int eventId;
 
     public String getParticipantEmail() {
         return participantEmail;

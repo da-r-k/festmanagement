@@ -246,13 +246,13 @@ public class QueriesRepo {
 
     }
 
-    public Cart activeCart(int u) {
+    public Cart activeCart(String currentUser) {
 
         try {
 
             String x = "SELECT * FROM Cart WHERE cartId NOT IN (SELECT cartId FROM Transaction) AND userId = ?";
 
-            return t.queryForObject(x, new BeanPropertyRowMapper<>(Cart.class), u);
+            return t.queryForObject(x, new BeanPropertyRowMapper<>(Cart.class), currentUser);
 
         }
 
