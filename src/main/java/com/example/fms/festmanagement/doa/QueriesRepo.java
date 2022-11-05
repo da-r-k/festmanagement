@@ -484,7 +484,7 @@ public class QueriesRepo {
 
         try {
 
-            String x = "SELECT * FROM Event Item itemId = ?";
+            String x = "SELECT * FROM Item WHERE itemId = ?";
 
             return t.queryForObject(x, new BeanPropertyRowMapper<>(Item.class), itemId);
 

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<head th:replace="organiserbaseh"></head>
+<div class="main-panel">
+  <div class="content-wrapper">
+<div class="card">
+  <div class="card-body">
+
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Item Id</th>
+            <th>Item</th>
+            <th>Price(per Item in ₹)</th>
+            <th>Quantity</th>
+            <th>Price (in ₹)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="item,i: ${items}">
+            <td th:text="${item.itemId}" />
+            <td th:text="${item.itemName}" />
+            <td th:text="${item.sellingPrice}" />
+            <td th:text="${cid[i.index].quantity}"/>
+            <td th:with="cost=${item.sellingPrice*cid[i.index].quantity}" th:text="${cost}">
+          </tr>
+        </tbody>
+        
+      </table>
+      <br>
+      <br>
+    </div>
+      <div class="row">
+        <div class="col-md-3">
+          <a class="btn btn-primary btn-icon-text" th:href="@{cart}"><i class=" icon-arrow-left btn-icon-prepend"></i>Back to cart</a>
+      </div>
+      <div class="col-md-3"></div>
+      <div class="col-md-3"></div>
+          <div class="col-md-3">
+            
+              <h3 th:inline="text"><small class="text-muted"> Total :</small> ₹ [[${amount}]] </h3>
+            
+          </div>
+      </div>
+      
+<br>
+<br>
+<br>
+<hr>
+<br>
+<br>
+
+
+    
+
+    <h3 class="card-title" th:inline="text">Address</h3>
+    <p class="card-description">
+      Fill in your address details in the form
+    </p>
+    <form th:action="@{checkout}" method="POST" id="pincode">
+      <div class="form-group row">
+        <label for="exampleInputUsername2" class="col-sm-3 col-form-label">PINCODE</label>
+        <div class="col-sm-7">
+          <input type="number" step="1" class="form-control" id="exampleInputUsername2" placeholder="ENter valid PINCODE" th:value="${participant.pinCode}" name="pinCode">
+          <code id="errormessage"></code>
+        </div>
+        <div class="col-sm-2">
+            <button type="button" class="btn btn-primary btn-block me-2" onclick="getAddress()">Check</button>
+        </div>
+      </div>
+        <div class="form-group row">
+        <label for="exampleInputEmail2" class="col-sm-3 col-form-label">District</label>
+        <div class="col-sm-9">
+          <input type="text" disabled class="form-control" id="district" placeholder="Enter pincode" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="exampleInputEmail2" class="col-sm-3 col-form-label">State</label>
+        <div class="col-sm-9">
+          <input type="text" disabled class="form-control" id="state" placeholder="Enter pincode">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Street Address</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Street address" required th:value="${participant.streetName}" name="streetName">
+        </div>
+      </div>
+      <button type="submit" id="submitform" disabled class="btn btn-primary btn-lg btn-block me-2">Proceed to Payment</button>
+    </form>
+  </div>
+</div>
+</div>
+</div>
+</div>
+<script src="js/pincode.js"></script>
+<footer th:replace="userbasef"></footer>

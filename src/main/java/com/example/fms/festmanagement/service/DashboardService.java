@@ -99,8 +99,8 @@ public class DashboardService {
         return c;
     }
 
-    public void updateCart(Cart c, int itemId, int quantity) {
-        cartItemDetailsRepo.updateCartItemDetails(c,itemId,quantity);
+    public void updateCart(CartItemDetails cid) {
+        cartItemDetailsRepo.updateCartItemDetails(cid);
     }
 
     public void removeFromCart(Cart c, int itemId) {
@@ -194,7 +194,7 @@ public class DashboardService {
         for(CartItemDetails c:cid){
             ret.add(queriesRepo.getItembyId(c.getItemId()));
         }
-        return null;
+        return ret;
     }
 
 

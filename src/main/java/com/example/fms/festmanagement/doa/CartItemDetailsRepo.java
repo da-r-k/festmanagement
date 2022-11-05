@@ -30,17 +30,17 @@ public class CartItemDetailsRepo {
 
     public void deleteCartItemDetails(Cart cart, int c) {
 
-        String x = "DELETE FROM CartItemDetails WHERE cartItemId = ?";
+        String x = "DELETE FROM CartItemDetails WHERE cartId = ? AND itemid=?";
 
-        t.update(x, c);
+        t.update(x,cart.getCartId(), c);
 
     }
 
-    public void updateCartItemDetails(Cart c, int itemId, int quantity) {
+    public void updateCartItemDetails(CartItemDetails cid) {
 
         String x = "UPDATE CartItemDetails SET quantity = ? WHERE itemId = ? and cartId = ?";
 
-        t.update(x, quantity, itemId, c.getCartId());
+        t.update(x, cid.getQuantity(), cid.getItemId(), cid.getCartId());
 
     }
 

@@ -141,17 +141,17 @@ public class UserDashboardController extends Helper {
             c=dashboardService.getActiveCart(authenticationService.getCurrentUser(session));
         }
         dashboardService.addtoCart(c,itemId);
+        return "redirect:/goodies";
+    }
+
+    @PostMapping("updateitemincart")
+    public String UpdateGoodies(Model model, HttpSession session, @ModelAttribute("cid") CartItemDetails cid){
+        System.out.println(cid.toString());
+        dashboardService.updateCart(cid);
         return "redirect:/cart";
     }
 
-    @GetMapping("{itemId}/{quantity}/update")
-    public String AddGoodies(Model model, HttpSession session, @PathVariable("itemId") int itemId, @PathVariable("quantity") int quantity){
-        Cart c=dashboardService.getActiveCart(authenticationService.getCurrentUser(session));
-        dashboardService.updateCart(c,itemId,quantity);
-        return "redirect:/cart";
-    }
-
-    @GetMapping("{itemId}/remove")
+    @GetMapping("{itemId}/removeitem")
     public String RemoveGoodie(Model model, HttpSession session,@PathVariable("itemId") int itemId){
         Cart c=dashboardService.getActiveCart(authenticationService.getCurrentUser(session));
         dashboardService.removeFromCart(c,itemId);
@@ -170,8 +170,12 @@ public class UserDashboardController extends Helper {
         model.addAttribute("user",dashboardService.getParticipant(authenticationService.getCurrentUser(session)));
         Cart c=dashboardService.getActiveCart(authenticationService.getCurrentUser(session));
         List<CartItemDetails>cid=dashboardService.getCartItemDetails(c);
+        List<Item> items=dashboardService.getItemDetails(cid);
+        Participant p=dashboardService.getParticipant(authenticationService.getCurrentUser(session));
         model.addAttribute("cid",cid);
+        model.addAttribute("items",items);
         model.addAttribute("amount",dashboardService.calculateAmount(cid));
+        model.addAttribute("participant",p);
 
         return "checkout";
     }

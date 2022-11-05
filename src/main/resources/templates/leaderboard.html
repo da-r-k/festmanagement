@@ -6,8 +6,12 @@
         <div class="card-body">
             <h4 class="card-title">LeaderBoard</h4>
             <p class="card-description" th:inline="text">
-              Results of [[$c.competitionId]]
+              Results of [[${c.competitionName}]] held under [[${s.subEventName}]], [[${e.eventName}]]
             </p>
+            <p class="code">
+              If your position does not display, the competition results are not out yet
+            </p>
+            <hr>
             <div class="table-responsive">
               <table class="table table-hover">
                 <thead>
