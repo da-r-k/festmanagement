@@ -161,7 +161,7 @@ public class UserDashboardController extends Helper {
     public String PostCheckout(Model model, HttpSession session, @ModelAttribute Participant p){
         Cart c=dashboardService.getActiveCart(authenticationService.getCurrentUser(session));
         dashboardService.updateParticipant(p);
-        model.addAttribute("transaction",dashboardService.createTransaction(c));
+        model.addAttribute("transaction",dashboardService.getTransaction(c));
         model.addAttribute("user",p);
         return "receipt";
     }

@@ -120,7 +120,7 @@ public class DashboardService {
         t.setCartId(c.getCartId());
         t.setDateTime(new Date());
         t.setAmount(calculateAmount(getCartItemDetails(c)));
-        return transactionRepo.insertTransaction(t);
+        transactionRepo.insertTransaction(t);
     }
 
     public void updateParticipant(Participant p) {
@@ -154,6 +154,10 @@ public class DashboardService {
     public List<Participation> getLeaderboard(int eventId, int subEventId, int competitionId) {
         return null;
     }
+
+	public Object getTransaction(Cart c) {
+		return queriesRepo.getTransaction(c);
+	}
 
 
 
