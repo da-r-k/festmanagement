@@ -1,5 +1,6 @@
 package com.example.fms.festmanagement.doa;
 
+import com.example.fms.festmanagement.models.Cart;
 import com.example.fms.festmanagement.models.CartItemDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -27,11 +28,27 @@ public class CartItemDetailsRepo {
 
     }
 
-    public void deleteCartItemDetails(int c) {
+    public void deleteCartItemDetails(Cart cart, int c) {
 
         String x = "DELETE FROM CartItemDetails WHERE cartItemId = ?";
 
         t.update(x, c);
+
+    }
+
+    public void updateCartItemDetails(Cart c, int itemId, int quantity) {
+
+        String x = "UPDATE CartItemDetails SET quantity = ? WHERE itemId = ? and cartId = ?";
+
+        t.update(x, quantity, itemId, c.getCartId());
+
+    }
+
+    public void removeFromCart(Cart c, int itemId) {
+
+        String x = "DELETE FROM CartItemDetails WHERE itemId = ? AND cartId = ?";
+
+        t.update(x, itemId, c.getCartId());
 
     }
 

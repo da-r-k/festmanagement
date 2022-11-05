@@ -93,6 +93,7 @@ public class DashboardService {
         Cart c=new Cart();
         c.setParticipantEmail(currentUser);
         cartRepo.insertCart(c);
+        return c;
     }
 
     public void updateCart(Cart c, int itemId, int quantity) {
@@ -104,7 +105,7 @@ public class DashboardService {
     }
 
     public List<Cart> getPreviousCarts(String currentUser) {
-        queriesRepo.getPreviousCarts(currentUser);
+        return queriesRepo.getPreviousCarts(currentUser);
     }
 
     public int calculateAmount(List<CartItemDetails> cid) {
@@ -149,7 +150,7 @@ public class DashboardService {
         for(List<SubEvent>ss:s){
             List<List<Competition>> lc = new ArrayList<List<Competition>>();
             for(SubEvent subevent:ss){
-                List<Competition>c=getCompetitions(subevent.getSubEventId(),subevent.getEventId);
+                List<Competition>c=queriesRepo.getCompetitions(subevent.getSubEventId(),subevent.getEventId());
                 lc.add(c);
             }
             ret.add(lc);
