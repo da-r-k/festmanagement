@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<head th:replace="adminbaseh"></head>
+<link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Cart</h4>
+            <p class="card-description">
+              Goodies you wish to buy
+            </p>
+            <div class="row">
+            <div th:each="item:${cid}" class="card col-md-3">
+                <div class="card" style="background:#e3effa">
+                    <div class="card-body">
+                    <h3 th:text="${item.itemName}"/>
+                    
+                    <table class="table">
+                        <tr>
+                            <td>Selling Price</td>
+                            <td class="card-title" th:inline="text">₹ [[${item.sellingPrice}]]</td>
+                        </tr>
+                    
+                        <tr>
+                            <td>Cost Price</td>
+                            <td class="card-title" th:inline="text">₹ [[${item.costPrice}]]</td>
+                        </tr>
+                    
+                        <tr>
+                            <td>Items in Stock</td>
+                            <td class="card-title" th:inline="text">[[${item.stock}]]</td>
+                        </tr>
+                    </table>
+                    
+                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" th:data-target="'#modal'+${item.itemId}">
+                        Edit Item
+                      </button>
+                      
+                      <div class="modal fade" th:id="'modal'+${item.itemId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel" th:inline="text">Edit Item - [[${item.itemName}]]</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card-body">
+                                    <form class="forms-sample" method="POST" th:action="@{/{sid}/update(sid=${item.itemId})}">
+                                      <div class="form-group">
+                                        <label for="exampleInputUsername1">Selling Price (in ₹)</label>
+                                        <input type="number" step="0.01" class="form-control" id="exampleInputUsername1" th:placeholder="${item.sellingPrice}" th:value="${item.sellingPrice}" name="sellingPrice">
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="exampleInputUsername1">Cost Price (in ₹)</label>
+                                        <input type="number" step="0.01" class="form-control" id="exampleInputUsername1" th:placeholder="${item.costPrice}" th:value="${item.costPrice}" name="costPrice">
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="exampleInputConfirmPassword1">In Stock</label>
+                                        <input type="number" step="1" class="form-control" id="exampleInputUsername1" th:placeholder="${item.stock}" th:value="${item.stock}" name="stock">
+                                      </div>
+                                      <button type="submit" class="btn btn-primary me-2">Submit</button>
+                                    </form>
+                                  </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>      
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/modal-demo.js"></script>
+<footer th:replace="userbasef"></footer>

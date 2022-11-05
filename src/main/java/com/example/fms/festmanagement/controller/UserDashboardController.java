@@ -122,7 +122,9 @@ public class UserDashboardController extends Helper {
         }
         else{
             List<CartItemDetails> cid=dashboardService.getCartItemDetails(c);
+            List<Item> items=dashboardService.getItemDetails(cid);
             model.addAttribute("cid",cid);
+            model.addAttribute("items",items);
             model.addAttribute("amount",dashboardService.calculateAmount(cid));
         }
         return "cart";

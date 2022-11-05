@@ -74,6 +74,7 @@ public class DashboardService {
             Boolean b=queriesRepo.checkAdded(x,c);
             System.out.println(x.getItemId());
             System.out.println(c.getCartId());
+            System.out.println(b);
             ret.add(b);
         }
         return ret;
@@ -187,6 +188,14 @@ public class DashboardService {
 	public Object getTransaction(Cart c) {
 		return queriesRepo.getTransaction(c);
 	}
+
+    public List<Item> getItemDetails(List<CartItemDetails> cid) {
+        List<Item>ret=new ArrayList<Item>();
+        for(c:cid){
+            ret.add(queriesRepo.getItembyId(c.getItemId()));
+        }
+        return null;
+    }
 
 
 

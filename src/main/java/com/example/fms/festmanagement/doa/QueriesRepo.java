@@ -448,7 +448,7 @@ public class QueriesRepo {
 
             String x = "SELECT * FROM CartItemDetails WHERE cartId = ? AND itemId = ?";
 
-            CartItemDetails temp = t.queryForObject(x, new BeanPropertyRowMapper<>(CartItemDetails.class), i.getItemId(), c.getCartId());
+            CartItemDetails temp = t.queryForObject(x, new BeanPropertyRowMapper<>(CartItemDetails.class), c.getCartId(), i.getItemId());
 
             return true;
 

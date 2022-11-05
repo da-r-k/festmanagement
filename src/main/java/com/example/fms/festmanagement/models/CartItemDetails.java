@@ -42,4 +42,14 @@ public class CartItemDetails {
         this.itemId = itemId;
     }
 
+    @Override
+    public String toString() {
+        return "{" +
+            " cartItemId='" + getCartItemId() + "'" +
+            ", quantity='" + getQuantity() + "'" +
+            ", cartId='" + getCartId() + "'" +
+            ", itemId='" + getItemId() + "'" +
+            "}";
+    }
+
 }

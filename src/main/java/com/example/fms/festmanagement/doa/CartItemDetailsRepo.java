@@ -22,9 +22,9 @@ public class CartItemDetailsRepo {
 
     public void insertCartItemDetails(CartItemDetails c) {
 
-        String x = "INSERT INTO CartItemDetails VALUES (?, ?, ?, ?)";
+        String x = "INSERT INTO CartItemDetails VALUES (?, ?, ?)";
 
-        t.update(x, c.getCartItemId(), c.getQuantity(), c.getCartId(), c.getItemId());
+        t.update(x, c.getQuantity(), c.getCartId(), c.getItemId());
 
     }
 
