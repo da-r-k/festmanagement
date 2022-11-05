@@ -304,6 +304,7 @@ public class QueriesRepo {
     }
 
     public List<Sponsor> getAllSponsors() {
+
         try {
 
             String x = "SELECT * FROM Sponsor";
@@ -318,5 +319,55 @@ public class QueriesRepo {
 
         }
     }
+
+    public Transaction getTransaction(Cart c) {
+
+        try {
+
+            String x = "SELECT * FROM Transaction WHERE cartId = ?";
+
+            return t.queryForObject(x, new BeanPropertyRowMapper<>(Transaction.class), c.getCartId());
+
+        }
+
+        catch (EmptyResultDataAccessException e) {
+
+            return null;
+
+        }
+
+    }
+
+    public Participant getParticipant(String currentUser) {
+
+        try {
+
+            String x = "SELECT * FROM Participant WHERE participantEmail = ?";
+
+            return t.queryForObject(x, new BeanPropertyRowMapper<>(Participant.class), currentUser);
+
+        }
+
+        catch (EmptyResultDataAccessException e) {
+
+            return null;
+
+        }
+
+    }
+
+    public int getAmount(CartItemDetails c) {
+
+        String x = "SELECT * FROM Item WHERE itemId = ?";
+
+        Item str = t.queryForObject(x, new BeanPropertyRowMapper<>(Item.class), c.getItemId());
+
+        int temp = c.getQuantity()*str.getSellingPrice();
+
+        return temp;
+
+    }
+
+
 
 }
