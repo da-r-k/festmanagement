@@ -2,19 +2,11 @@ package com.example.fms.festmanagement.models;
 
 public class Fund {
 
-    private int fundId;
-
     private int sponsorId;
 
     private int eventId;
 
-    public int getFundId() {
-        return fundId;
-    }
-
-    public void setFundId(int fundId) {
-        this.fundId = fundId;
-    }
+    private int amount;
 
     public int getSponsorId() {
         return sponsorId;
@@ -30,6 +22,14 @@ public class Fund {
 
     public void setEventId(int eventId) {
         this.eventId = eventId;
+    }
+
+    public int getAmount() {
+        return this.amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
 }

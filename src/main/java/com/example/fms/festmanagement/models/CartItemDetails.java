@@ -2,21 +2,11 @@ package com.example.fms.festmanagement.models;
 
 public class CartItemDetails {
 
-    private int cartItemId;
-
     private int quantity;
 
     private int cartId;
 
     private int itemId;
-
-    public int getCartItemId() {
-        return cartItemId;
-    }
-
-    public void setCartItemId(int cartItemId) {
-        this.cartItemId = cartItemId;
-    }
 
     public int getQuantity() {
         return quantity;
@@ -45,11 +35,11 @@ public class CartItemDetails {
     @Override
     public String toString() {
         return "{" +
-            " cartItemId='" + getCartItemId() + "'" +
-            ", quantity='" + getQuantity() + "'" +
+            " quantity='" + getQuantity() + "'" +
             ", cartId='" + getCartId() + "'" +
             ", itemId='" + getItemId() + "'" +
             "}";
     }
+    
 
 }
