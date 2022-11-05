@@ -115,7 +115,7 @@ public class DashboardService {
         return queriesRepo.getParticipant(currentUser);
     }
 
-    public Transaction createTransaction(Cart c) {
+    public void createTransaction(Cart c) {
         Transaction t = new Transaction();
         t.setCartId(c.getCartId());
         t.setDateTime(new Date());
@@ -135,17 +135,38 @@ public class DashboardService {
         List<List<SubEvent>>ret = new ArrayList<List<SubEvent>>();
         for(Event event:e){
             List<SubEvent>s=queriesRepo.getSubEventsByEvent(event.getEventId());
+            ret.add(s);
         }
         return ret;
     }
 
     public List<List<List<Competition>>> showCompetitions(List<List<SubEvent>> s) {
-        List<List<List<Competition>>> ret=new ArrayList<List<List<List<Competition>>>();
+        List<List<List<Competition>>> ret=new ArrayList<List<List<Competition>>>();
+        for(List<SubEvent>ss:s){
+            List<List<Competition>> lc = new ArrayList<List<Competition>>();
+            for(SubEvent subevent:ss){
+                List<Competition>c=getCompetitions(subevent.getSubEventId(),subevent.getEventId);
+                lc.add(c);
+            }
+            ret.add(lc);
+        }
         return ret;
     }
 
     public List<List<List<Boolean>>> checkParticipation(String currentUser, List<List<List<Competition>>> c) {
-        return null;
+        List<List<List<Boolean>>>ret=new ArrayList<List<List<Boolean>>>();
+        for(List<List<Competition>>llc:c){
+            List<List<Boolean>>llb=new ArrayList<List<Boolean>>();
+            for(List<Competition>lc:llc){
+                List<Boolean>lb=new ArrayList<Boolean>();
+                for(Competition comp:lc){
+                    lb.add(queriesRepo.checkParticipation(comp,currentuser));
+                }
+                llb.add(lb);
+            }
+            ret.add(llb);
+        }
+        return ret;
     }
 
     public void addParticipation(Participation p) {
