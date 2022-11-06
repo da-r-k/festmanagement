@@ -29,7 +29,7 @@
                     <td th:text="${organiser.firstName}" />
                     <td th:text="${organiser.lastName}" />
                     <td th:text="${organiser.mobileNumber}" />
-                    <td><a th:href="@{{id}/del(id=${organiser.organiserEmail})}" class="btn btn-danger btn-sm">Delete</a></td>
+                    <td><a th:unless="${#strings.equals(emailId,organiser.organiserEmail) or #strings.equals(event.headEmail,organiser.organiserEmail)}" th:href="@{{id}/delorganiser(id=${organiser.organiserEmail})}" class="btn btn-danger btn-sm">Delete</a></td>
                   </tr>
                 </tbody>
               </table>

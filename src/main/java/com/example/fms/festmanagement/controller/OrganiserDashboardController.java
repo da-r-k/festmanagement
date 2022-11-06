@@ -61,8 +61,10 @@ public class OrganiserDashboardController extends Helper{
 
     @PostMapping("addorganisers")
     public String postAddOrganisers(@ModelAttribute User users, @ModelAttribute Organiser organiser, Model model, HttpSession session, RedirectAttributes attributes) {
+        Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
         System.out.println(users.toString());
         System.out.println(organiser.toString());
+        organiser.setEventId(e.getEventId());
         registrationService.addOrganisers(users,organiser);
         System.out.println("added");
         return  "redirect:/vieworganisers";
@@ -70,9 +72,16 @@ public class OrganiserDashboardController extends Helper{
 
     @GetMapping("vieworganisers")
     public String ViewOrganisers(Model model, HttpSession session){
+        if (!isAuthenticated(session)) {
+            return "redirect:/";
+        }
+        addDefaultAttributes(model,session);
+
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
+        System.out.println(e.toString());
         model.addAttribute("organisers", organiserDashboardService.getOrganisersByEvent(e));
         model.addAttribute("event", e);
+        System.out.println(e.toString());
         return "vieworganisers";
     } 
 

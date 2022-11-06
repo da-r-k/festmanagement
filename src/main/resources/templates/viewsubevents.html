@@ -26,8 +26,8 @@
                 <tbody>
                   <tr th:each="subEvent: ${subEvents}">
                     <td th:text="${subEvent.subEventName}" />
-                    <td th:text="${subEvent.startDate}" />
-                    <td th:text="${subEvent.endDate}" />
+                    <td th:text="${#dates.format(subEvent.startDate,'dd-MM-yyyy')}" />
+                    <td th:text="${#dates.format(subEvent.endDate,'dd-MM-yyyy')}" />
                     <td th:text="${subEvent.venue}" />
                     <td><a th:href="@{{id}/delsubEvent(id=${subEvent.subEventId})}" class="btn btn-danger btn-sm">Delete</a>  <a th:href="@{{id}_viewcompetitions(id=${subEvent.subEventId})}" class="btn btn-dark btn-sm">View Competitions</a></td>
                   </tr>

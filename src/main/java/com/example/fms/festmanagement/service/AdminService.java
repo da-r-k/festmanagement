@@ -51,6 +51,8 @@ public class AdminService {
     }
 
     public void deleteEvent(int eventId) {
+        Event e=queriesRepo.selectEvent(eventId);
+        userRepo.deleteUser(e.getHeadEmail());
         eventRepo.deleteEvent(eventId);
     }
 

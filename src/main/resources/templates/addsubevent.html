@@ -8,17 +8,11 @@
     <p class="card-description">
       TO BE DECIDED
     </p>
-    <form class="forms-sample" method="POST" th:action="@{/addsubEvent}">
-      <div class="form-group row">
-        <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Sub-Event Id</label>
-        <div class="col-sm-9">
-          <input type="number" step="1" class="form-control" id="exampleInputUsername2" placeholder="Sub-Event Id" th:value="${subEvent.subEventId}" name="subEventId">
-        </div>
-      </div>
+    <form class="forms-sample" method="POST" th:action="@{/addsubevent}">
       <div class="form-group row">
         <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Sub-Event Name</label>
         <div class="col-sm-9">
-          <input type="text" class="form-control" id="exampleInputEmail2" placeholder="First Name" th:value="${subEvent.subEventName}" name="subEventName">
+          <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Name" th:value="${subEvent.subEventName}" name="subEventName">
         </div>
       </div>
       <div class="form-group row">

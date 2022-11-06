@@ -11,17 +11,9 @@ public class ParticipationRepo {
     @Autowired
     private JdbcTemplate t;
 
-    public void initParticipation() {
-
-        String x = "CREATE TABLE IF NOT EXISTS Participation (participantEmail VARCHAR(255), position INT, competitionId INT, subEventId INT, eventId INT, PRIMARY KEY (participationEmail, competitionId, eventId, subEventId))";
-
-        t.update(x);
-
-    }
-
     public void insertParticipation(Participation p) {
 
-        String x = "INSERT INTO Participation VALUES (?, ?, ?, ?, ?)";
+        String x = "INSERT INTO Participation(participantEmail,leaderboardposition,competitionId,subEventId,eventId) VALUES (?, ?, ?, ?, ?)";
 
         t.update(x, p.getParticipantEmail(), p.getLeaderBoardPosition(), p.getCompetitionId(), p.getSubEventId(), p.getEventId());
 

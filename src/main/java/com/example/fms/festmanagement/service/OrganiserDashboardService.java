@@ -14,7 +14,6 @@ import com.example.fms.festmanagement.doa.SubEventRepo;
 import com.example.fms.festmanagement.models.Competition;
 import com.example.fms.festmanagement.models.Event;
 import com.example.fms.festmanagement.models.Organiser;
-import com.example.fms.festmanagement.models.Participant;
 import com.example.fms.festmanagement.models.Participation;
 import com.example.fms.festmanagement.models.SubEvent;
 
@@ -102,7 +101,7 @@ public class OrganiserDashboardService {
     }
 
     public Event getEvent(int eventId) {
-        return queriesRepo.getEvent(eventId);
+        return queriesRepo.selectEvent(eventId);
     }
 
 }

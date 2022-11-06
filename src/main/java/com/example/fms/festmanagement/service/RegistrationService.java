@@ -3,7 +3,6 @@ package com.example.fms.festmanagement.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.fms.festmanagement.doa.EventRepo;
 import com.example.fms.festmanagement.doa.OrganiserRepo;
 import com.example.fms.festmanagement.doa.ParticipantRepo;
 import com.example.fms.festmanagement.doa.UserRepo;

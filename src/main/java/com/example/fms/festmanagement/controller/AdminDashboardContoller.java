@@ -1,10 +1,5 @@
 package com.example.fms.festmanagement.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,20 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.fms.festmanagement.models.Competition;
 import com.example.fms.festmanagement.models.Event;
 import com.example.fms.festmanagement.models.Item;
 import com.example.fms.festmanagement.models.Organiser;
-import com.example.fms.festmanagement.models.Participation;
 import com.example.fms.festmanagement.models.Sponsor;
-import com.example.fms.festmanagement.models.SubEvent;
 import com.example.fms.festmanagement.models.User;
 import com.example.fms.festmanagement.service.AdminService;
-import com.example.fms.festmanagement.service.AuthenticationService;
-import com.example.fms.festmanagement.service.DashboardService;
-import com.example.fms.festmanagement.service.OrganiserDashboardService;
-import com.example.fms.festmanagement.service.RegistrationService;
-
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -102,6 +89,11 @@ public class AdminDashboardContoller extends Helper{
         return "redirect:/editsponsors";
     }
 
+    @GetMapping("{sponsorId}/delsponsor")
+    public String DeleteSponsor(@PathVariable("sponsorId") String sponsorId,Model model, HttpSession session, RedirectAttributes attributes){
+        adminService.deleteSponsors(sponsorId);
+        return "editsponsors";
+    }
     
 
 }

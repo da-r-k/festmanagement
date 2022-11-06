@@ -11,14 +11,6 @@ public class ItemRepo {
     @Autowired
     private JdbcTemplate t;
 
-    public void initItem() {
-
-        String x = "CREATE TABLE IF NOT EXISTS Item (itemId INT PRIMARY KEY, itemName VARCHAR(255) NOT NULL, sellingPrice INT NOT NULL, costPrice INT NOT NULL DEFAULT 0, stock INT)";
-
-        t.update(x);
-
-    }
-
     public void insertItem(Item i) {
 
         String x = "INSERT INTO Item (itemName,sellingPrice,costPrice,stock) VALUES ( ?, ?, ?, ?)";

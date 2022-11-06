@@ -12,17 +12,9 @@ public class CartItemDetailsRepo {
     @Autowired
     private JdbcTemplate t;
 
-    public void initCartItemDetails() {
-
-        String x = "CREATE TABLE IF NOT EXISTS CartItemDetails (cartItemId INT PRIMARY KEY, quantity INT DEFAULT 0, cartId INT NOT NULL, itemId INT NOT NULL)";
-
-        t.update(x);
-
-    }
-
     public void insertCartItemDetails(CartItemDetails c) {
 
-        String x = "INSERT INTO CartItemDetails VALUES (?, ?, ?)";
+        String x = "INSERT INTO CartItemDetails (quantity,cartid,itemid) VALUES (?, ?, ?)";
 
         t.update(x, c.getQuantity(), c.getCartId(), c.getItemId());
 

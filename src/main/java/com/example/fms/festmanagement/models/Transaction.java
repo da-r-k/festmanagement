@@ -12,23 +12,12 @@ public class Transaction {
 
     private int cartId;
 
-    private String participantEmail;
-
     public int getTransactionId() {
         return transactionId;
     }
 
     public void setTransactionId(int transactionId) {
         this.transactionId = transactionId;
-    }
-
-
-    public String getParticipantEmail() {
-        return this.participantEmail;
-    }
-
-    public void setParticipantEmail(String participantEmail) {
-        this.participantEmail = participantEmail;
     }
     
 

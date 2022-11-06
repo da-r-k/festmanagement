@@ -1,10 +1,7 @@
 package com.example.fms.festmanagement.doa;
 
 import com.example.fms.festmanagement.models.Participant;
-import com.example.fms.festmanagement.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -13,14 +10,6 @@ public class ParticipantRepo {
 
     @Autowired
     private JdbcTemplate t;
-
-    public void initParticipant() {
-
-        String x = "CREATE TABLE IF NOT EXISTS Participant (participantEmail VARCHAR(255) PRIMARY KEY, firstName VARCHAR(255), lastName VARCHAR(255), mobileNumber CHAR(10), sex VARCHAR(255), college VARCHAR(255), pinCode VARCHAR(6), streetName VARCHAR(255))";
-
-        t.update(x);
-
-    }
 
     public void insertParticipant(Participant p) {
 

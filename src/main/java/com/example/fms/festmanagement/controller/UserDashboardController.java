@@ -136,6 +136,7 @@ public class UserDashboardController extends Helper {
     @GetMapping("{itemId}/additem")
     public String AddGoodies(Model model, HttpSession session, @PathVariable("itemId") int itemId){
         Cart c=dashboardService.getActiveCart(authenticationService.getCurrentUser(session));
+        
         if(c==null){
             dashboardService.makeCart(authenticationService.getCurrentUser(session));
             c=dashboardService.getActiveCart(authenticationService.getCurrentUser(session));

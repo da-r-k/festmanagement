@@ -11,19 +11,11 @@ public class TransactionRepo {
     @Autowired
     private JdbcTemplate t;
 
-    public void initTransaction() {
-
-        String x = "CREATE TABLE IF NOT EXISTS Transaction (transactionId INT PRIMARY KEY, amount INT NOT NULL, dateTime DATETIME, cartId INT NOT NULL)";
-
-        t.update(x);
-
-    }
-
     public void insertTransaction(Transaction r) {
 
-        String x = "INSERT INTO Transaction VALUES (?, ?, ?, ?)";
+        String x = "INSERT INTO Transaction(amount,datetime,cartid) VALUES (?, ?, ?)";
 
-        t.update(x, r.getTransactionId(), r.getAmount(), r.getDateTime(), r.getCartId());
+        t.update(x, r.getAmount(), r.getDateTime(), r.getCartId());
 
     }
 

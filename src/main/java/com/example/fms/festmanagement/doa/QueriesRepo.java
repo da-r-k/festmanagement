@@ -59,7 +59,25 @@ public class QueriesRepo {
 
         try {
 
-            String x = "SELECT * FROM Event WHERE headEmail = ?";
+            String x = "SELECT * FROM Event WHERE eventId IN (SELECT eventId FROM Organiser WHERE organiserEmail=?)";
+
+            return t.queryForObject(x, new BeanPropertyRowMapper<>(Event.class), new Object[] { v });
+
+        }
+
+        catch (EmptyResultDataAccessException e) {
+
+            return null;
+
+        }
+
+    }
+
+    public Event selectEventFromHead(String v) {
+
+        try {
+
+            String x = "SELECT * FROM Event WHERE headEmail=?";
 
             return t.queryForObject(x, new BeanPropertyRowMapper<>(Event.class), new Object[] { v });
 
@@ -85,23 +103,6 @@ public class QueriesRepo {
         return e;
     }
 
-    public Fund selectFund(int f) {
-
-        try {
-
-            String x = "SELECT * FROM Fund WHERE fundId = ?";
-
-            return t.queryForObject(x, new BeanPropertyRowMapper<>(Fund.class), new Object[] { f });
-
-        }
-
-        catch (EmptyResultDataAccessException e) {
-
-            return null;
-
-        }
-
-    }
 
     public Organiser selectOrganiser(String o) {
 
@@ -139,23 +140,6 @@ public class QueriesRepo {
 
     }
 
-    public Sponsor selectSponsor(int s) {
-
-        try {
-
-            String x = "SELECT * FROM Sponsor WHERE sponsorId = ?";
-
-            return t.queryForObject(x, new BeanPropertyRowMapper<>(Sponsor.class), new Object[] { s });
-
-        }
-
-        catch (EmptyResultDataAccessException e) {
-
-            return null;
-
-        }
-
-    }
 
     public List<SubEvent> getSubEventByDate(Date d) {
 
@@ -257,8 +241,13 @@ public class QueriesRepo {
     }
 
     public void addNewEvent(Event e, Organiser o) {
-        String x = "WITH new_event AS (INSERT INTO Event (eventId, eventName, headEmail) values (?,?,?))INSERT INTO Organiser (organiserEmail, firstName, lastName, mobileNumber, eventId) values (?,?,?,?,?)";
-        t.update(x,e.getEventId(),e.getEventName(),o.getOrganiserEmail(),o.getOrganiserEmail(),o.getFirstName(),o.getLastName(),o.getMobileNumber(),e.getEventId());
+        String x = "INSERT INTO Organiser(organiserEmail,firstName,lastName,mobileNumber) VALUES(?,?,?,?)";
+        t.update(x,o.getOrganiserEmail(),o.getFirstName(),o.getLastName(),o.getMobileNumber());
+        String y = "INSERT INTO Event(eventName,headEmail) VALUES(?,?)";
+        t.update(y,e.getEventName(),o.getOrganiserEmail());
+        Event ee = selectEventFromHead(o.getOrganiserEmail());
+        String z = "UPDATE Organiser SET eventId=? WHERE organiserEmail=?";
+        t.update(z,ee.getEventId(),o.getOrganiserEmail());
     }
 
     public List<Event> getAllEvents() {
@@ -446,7 +435,7 @@ public class QueriesRepo {
 
         try {
 
-            String x = "SELECT * FROM CartItemDetails WHERE cartId = ? AND itemId = ?";
+            String x = "SELECT * FROM CartItemDetails WHERE cartId = ? AND itemId = ? ";
 
             CartItemDetails temp = t.queryForObject(x, new BeanPropertyRowMapper<>(CartItemDetails.class), c.getCartId(), i.getItemId());
 
@@ -457,24 +446,6 @@ public class QueriesRepo {
         catch (EmptyResultDataAccessException e) {
 
             return false;
-
-        }
-
-    }
-
-    public Event getEvent(int eventId) {
-
-        try {
-
-            String x = "SELECT * FROM Event WHERE eventId = ?";
-
-            return t.queryForObject(x, new BeanPropertyRowMapper<>(Event.class), eventId);
-
-        }
-
-        catch (EmptyResultDataAccessException e) {
-
-            return null;
 
         }
 

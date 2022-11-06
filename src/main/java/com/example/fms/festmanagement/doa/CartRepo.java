@@ -2,7 +2,6 @@ package com.example.fms.festmanagement.doa;
 
 import com.example.fms.festmanagement.models.Cart;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.batch.BatchProperties;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -12,27 +11,11 @@ public class CartRepo {
     @Autowired
     private JdbcTemplate t;
 
-    public void initCart() {
-
-        String x = "CREATE TABLE IF NOT EXISTS Cart (cartId INT PRIMARY KEY, participantEmail VARCHAR(255) NOT NULL)";
-
-        t.update(x);
-
-    }
-
     public void insertCart(Cart c) {
 
-        String x = "INSERT INTO Cart VALUES (?, ?)";
+        String x = "INSERT INTO Cart (participantEmail) VALUES (?)";
 
-        t.update(x, c.getCartId(), c.getParticipantEmail());
-
-    }
-
-    public void deleteCart(int c) {
-
-        String x = "DELETE FROM Cart WHERE cartId = ?";
-
-        t.update(x, c);
+        t.update(x, c.getParticipantEmail());
 
     }
 

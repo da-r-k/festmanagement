@@ -2,10 +2,7 @@ package com.example.fms.festmanagement.doa;
 
 import com.example.fms.festmanagement.models.Competition;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -15,19 +12,11 @@ public class CompetitionRepo {
     @Autowired
     private JdbcTemplate t;
 
-    public void initCompetition() {
-
-        String x = "CREATE TABLE IF NOT EXISTS Competition (competitionId INT, competitionName VARCHAR(255) NOT NULL, prize INT DEFAULT 0, eventId INT NOT NULL, subEventId INT NOT NULL, PRIMARY KEY (competitionId, eventId, subEventId))";
-
-        t.update(x);
-
-    }
-
     public void insertCompetition(Competition c) {
 
-        String x = "INSERT INTO Competition VALUES (?, ?, ?, ?, ?)";
+        String x = "INSERT INTO Competition(competitionName, prize, eventId, SubEventId) VALUES (?, ?, ?, ?)";
 
-        t.update(x, c.getCompetitionId(), c.getCompetitionName(), c.getPrize(), c.getEventId(), c.getSubEventId());
+        t.update(x, c.getCompetitionName(), c.getPrize(), c.getEventId(), c.getSubEventId());
 
     }
 
