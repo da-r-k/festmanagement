@@ -11,7 +11,8 @@ CREATE TABLE CartItemDetails
 (
   quantity INT NULL    ,
   itemId   INT NOT NULL,
-  cartId   INT NOT NULL
+  cartId   INT NOT NULL,
+  PRIMARY KEY (itemId, cartId)
 );
 
 CREATE TABLE Competition
