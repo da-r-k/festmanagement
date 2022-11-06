@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<head th:replace="adminbaseh"></head>
+<link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+<button style="position: fixed; bottom: 20px;right: 30px;z-index: 99;" class="btn btn-primary btn-icon-text"  data-toggle="modal" data-target="#add_item">
+    <i class="icon-plus btn-icon-prepend"></i>
+    Add New Fund
+</button>
+<div class="modal fade" id="add_item" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel" th:inline="text">Add New Funding</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="card-body">
+                <form class="forms-sample" method="POST" th:action="@{/addfunding}">
+                    <div class="form-group">
+                        <label for="exampleInputUsername1">Sponsor Name</label>
+                        <select th:value="${newfund.sponsorId}" class="form-control form-control-lg" id="exampleFormControlSelect2" name="sponsorId">
+                          <option value="" disabled selected hidden>Select sponsor</option>
+                          <option th:each="sponsor:${sponsors}" th:value="${sponsor.sponsorId}" th:text="${sponsor.sponsorName}"></option>
+                        </select>
+                    </div>
+                  <div class="form-group">
+                    <label for="exampleInputUsername1">Amount (in ₹)</label>
+                    <input type="number" step="1000" class="form-control" id="exampleInputUsername1" th:placeholder="1000" th:value="${newfund.amount}" name="amount">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputUsername1">Event Name</label>
+                    <select th:value="${newfund.eventId}" class="form-control form-control-lg" id="exampleFormControlSelect2" name="eventId">
+                      <option value="" disabled selected hidden>Select sponsor</option>
+                      <option th:each="event:${events}" th:value="${event.eventId}" th:text="${event.eventName}"></option>
+                    </select>
+                </div>
+                  <button type="submit" class="btn btn-primary me-2">Submit</button>
+                </form>
+              </div>
+        </div>
+      </div>
+    </div>
+</div> 
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Sponsors</h4>
+            <p class="card-description">
+              List of sponsors for the Fest
+            </p>
+            <div class="row">
+            <div th:each="sponsor:${sponsors}" class="card col-md-3">
+                <a class="card btn btn-inverse-primary" data-toggle="modal" th:data-target="'#modal'+${sponsor.sponsorId}">
+                    <div class="card-body">
+                    <h3 th:text="${sponsor.sponsorName}"/>
+                    Click to view funding details
+
+                </div>
+                </a>
+                <div class="modal fade" th:id="'modal'+${sponsor.sponsorId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" th:inline="text">[[${sponsor.sponsorName}]] Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="card-body">
+                            
+                          
+
+                          </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+              </div>      
+                
+            </div>
+            <div class="card col-md-3">
+            <a class="card btn btn-inverse-primary" data-toggle="modal" data-target="#modaladdsponsor">
+              <div class="card-body">
+                <div class="col d-flex justify-content-center">
+                  <i class="icon-plus icon-lg"></i>
+                </div>
+                <br>
+                <span class="d-flex justify-content-center">Add New Sponsor</span>
+            </div>
+          </a>
+          <div class="modal fade" id="modaladdsponsor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel" th:inline="text">Add Details of the sponsor</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="card-body">
+                      <form class="forms-sample" method="POST" th:action="@{/addsponsor}">
+                          <div class="form-group">
+                              <label for="exampleInputUsername1">Sponsor Name</label>
+                              <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Item Name" th:value="${newsponsor.sponsorName}" name="sponsorName">
+                          </div>
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                      </form>
+                    </div>
+              </div>
+              </div>
+            </div>
+        </div> 
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script src="js/modal-demo.js"></script>
+<footer th:replace="userbasef"></footer>

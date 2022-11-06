@@ -13,7 +13,7 @@ public class FundRepo {
 
     public void insertFund(Fund f) {
 
-        String x = "INSERT INTO Fund(sponsorId, eventId, getAmount) VALUES (?, ?, ?)";
+        String x = "INSERT INTO Fund(sponsorId, eventId, amount) VALUES (?, ?, ?)";
 
         t.update(x, f.getSponsorId(), f.getEventId(), f.getAmount());
 

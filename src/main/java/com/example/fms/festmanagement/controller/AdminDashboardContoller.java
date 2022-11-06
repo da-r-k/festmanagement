@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.fms.festmanagement.models.Event;
+import com.example.fms.festmanagement.models.Fund;
 import com.example.fms.festmanagement.models.Item;
 import com.example.fms.festmanagement.models.Organiser;
 import com.example.fms.festmanagement.models.Sponsor;
@@ -79,21 +80,27 @@ public class AdminDashboardContoller extends Helper{
     @GetMapping("editsponsors")
     public String EditSponsors(Model model, HttpSession session, RedirectAttributes attributes){
         model.addAttribute("sponsors",adminService.getSponsors());
+        model.addAttribute("events",adminService.getAllEvents());
         model.addAttribute("newsponsor",new Sponsor());
+        model.addAttribute("newfund",new Fund());
         return "editsponsors";
     }
 
-    @PostMapping("addsponsors")
-    public String EditSponsors(@ModelAttribute Sponsor sponsor,Model model, HttpSession session, RedirectAttributes attributes){
+    @PostMapping("addsponsor")
+    public String AddSponsors(@ModelAttribute Sponsor sponsor,Model model, HttpSession session, RedirectAttributes attributes){
         adminService.addSponsors(sponsor);
         return "redirect:/editsponsors";
     }
 
     @GetMapping("{sponsorId}/delsponsor")
-    public String DeleteSponsor(@PathVariable("sponsorId") String sponsorId,Model model, HttpSession session, RedirectAttributes attributes){
+    public String DeleteSponsor(@PathVariable("sponsorId") int sponsorId,Model model, HttpSession session, RedirectAttributes attributes){
         adminService.deleteSponsors(sponsorId);
-        return "editsponsors";
+        return "redirect:/editsponsors";
     }
-    
 
+    @PostMapping("/addfunding")
+    public String AddFunding(@ModelAttribute Fund fund, Model model, HttpSession session){
+        adminService.addFund(fund);
+        return "redirect:/editsponsors";
+    }
 }

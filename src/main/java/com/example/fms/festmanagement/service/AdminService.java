@@ -13,6 +13,7 @@ import com.example.fms.festmanagement.doa.QueriesRepo;
 import com.example.fms.festmanagement.doa.SubEventRepo;
 import com.example.fms.festmanagement.models.Competition;
 import com.example.fms.festmanagement.models.Event;
+import com.example.fms.festmanagement.models.Fund;
 import com.example.fms.festmanagement.models.Item;
 import com.example.fms.festmanagement.models.Organiser;
 import com.example.fms.festmanagement.models.Participant;
@@ -38,6 +39,9 @@ public class AdminService {
 
     @Autowired
     private SponsorRepo sponsorRepo;
+
+    @Autowired
+    private FundRepo fundRepo;
 
     public void addEvent(User user, Event event, Organiser organiser) {
         organiser.setOrganiserEmail(user.getUserEmail());
@@ -74,6 +78,14 @@ public class AdminService {
 
     public void addSponsors(Sponsor sponsor) {
         sponsorRepo.insertSponsor(sponsor);
+    }
+
+    public void deleteSponsors(int sponsorId) {
+        sponsorRepo.deleteSponsor(sponsorId);
+    }
+
+    public void addFund(Fund fund) {
+        fundRepo.insertFund(fund);
     }
     
 }
