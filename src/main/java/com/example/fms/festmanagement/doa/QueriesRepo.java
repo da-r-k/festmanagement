@@ -469,10 +469,36 @@ public class QueriesRepo {
     }
 
     public List<Event> getCorrEvents(Sponsor s) {
-        return null;
+
+        try {
+
+            String x = "SELECT * FROM Event e WHERE e.eventId IN (SELECT f.eventId FROM fund f WHERE f.sponsorId = ?)";
+
+            return t.query(x, new BeanPropertyRowMapper<>(Event.class), s.getSponsorId());
+
+        }
+
+        catch (EmptyResultDataAccessException e) {
+
+            return null;
+
+        }
     }
 
-    public Integer getAmt(List<Event> e, Sponsor s) {
-        return null;
+    public Integer getAmt(Event ee, Sponsor s) {
+        
+        try {
+
+            String x = "SELECT amount FROM Fund WHERE eventId = ? AND sponsorId = ?";
+
+            return t.queryForObject(x, new BeanPropertyRowMapper<>(Integer.class), ee.getEventId(), s.getSponsorId());
+
+        }
+
+        catch (EmptyResultDataAccessException e) {
+
+            return null;
+
+        }
     }
 }

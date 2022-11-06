@@ -105,7 +105,7 @@ public class AdminService {
             List<Event> e=events.get(i);
             List<Integer>temp=new ArrayList<Integer>();
             for(Event ee:e){
-                temp.add(queriesRepo.getAmt(e,s));
+                temp.add(queriesRepo.getAmt(ee,s));
             }
             ret.add(temp);
         }
