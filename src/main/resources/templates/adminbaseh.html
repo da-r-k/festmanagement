@@ -80,23 +80,30 @@
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
           <ul class="nav">
             <li class="nav-item">
-              <a class="nav-link" th:href="@{organiserdashboard}">
+              <a class="nav-link" th:href="@{admindashboard}">
                 <i class="icon-grid menu-icon"></i>
                 <span class="menu-title">Dashboard</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" th:href="@{vieworganisers}">
-                <i class="icon-head menu-icon"></i>
-                <span class="menu-title">View Organisers</span>
+              <a class="nav-link" th:href="@{viewevents}">
+                <i class="icon-loader menu-icon"></i>
+                <span class="menu-title">Events</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" th:href="@{viewsubevents}">
-                <i class="icon-loader menu-icon"></i>
-                <span class="menu-title">Sub-Events</span>
+              <a class="nav-link" th:href="@{edititems}">
+                <i class="icon-tag menu-icon"></i>
+                <span class="menu-title">Edit Items</span>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{editsponsors}">
+                <i class="icon-contract menu-icon"></i>
+                <span class="menu-title">Sponsors</span>
+              </a>
+            </li>
+            
             
           </ul>
         </nav>
