@@ -10,13 +10,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.fms.festmanagement.models.User;
 import com.example.fms.festmanagement.service.AuthenticationService;
+import com.example.fms.festmanagement.service.MessageService;
 
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class AuthenticationController {
+public class AuthenticationController extends Helper{
     @Autowired
     private AuthenticationService authenticationService;
+
+    @Autowired
+    private MessageService messageService;
 
     @GetMapping("/login")
     public String login(Model model, HttpSession session) {
@@ -29,10 +33,19 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public String postLogin(@ModelAttribute User credentials, Model model, HttpSession session,
-            RedirectAttributes redirectAttributes) {
+    public String postLogin(@ModelAttribute User credentials, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
         if (authenticationService.isAuthenticated(session)) {
-            return "redirect:/dashboard";
+            addDefaultAttributes(model, session);
+            System.out.println(model.getAttribute("userRole"));
+            if(model.getAttribute("userRole").equals("participant")){
+                return "redirect:dashboard";
+            }
+            else if(model.getAttribute("userRole").equals("organiser")){
+                return "redirect:organiserdashboard";
+            }
+            else{
+                return "redirect:admindashboard";
+            }
         }
 
         String emailId = credentials.getUserEmail();
@@ -42,10 +55,18 @@ public class AuthenticationController {
         try {
             if (authenticationService.checkCredentials(emailId, password)) {
                 authenticationService.loginUser(session, emailId);
-
-                model.addAttribute("successToast", "Successfully logged in");
-                System.out.println("loggedin");
-                return "redirect:/dashboard";
+                addDefaultAttributes(model, session);
+                System.out.println(model.getAttribute("userRole"));
+                messageService.redirectWithSuccess(redirectAttributes,"Successfully logged in");
+                if(model.getAttribute("userRole").equals("participant")){
+                    return "redirect:dashboard";
+                }
+                else if(model.getAttribute("userRole").equals("organiser")){
+                    return "redirect:organiserdashboard";
+                }
+                else{
+                    return "redirect:admindashboard";
+                }
             }
             else{
                 message="Incorrect password entered";
@@ -55,10 +76,10 @@ public class AuthenticationController {
             message="The Email ID does not belong to an account";
         }
 
-        model.addAttribute("errorToast", message);
+        messageService.redirectWithError(redirectAttributes,message);
         model.addAttribute("credentials", credentials);
         System.out.println(message);
-        return "redirect:/login";
+        return "redirect:login";
     }
 
     @GetMapping("/logout")

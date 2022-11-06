@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<head th:replace="adminbaseh"></head>
+<head th:replace="userbaseh"></head>
 <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
 
 
@@ -80,10 +80,10 @@
             
             </div>
             <hr>
-            <span class="pull-left">
+            <span class="float-left">
            <h3 th:inline="text"><small class="text-muted"> Cart Subtotal :</small> ₹ [[${amount}]] </h3>
             </span>
-            <span class="pull-right">
+            <span class="float-right">
             <a class="btn btn-primary btn-icon-text" th:href="@{checkout}">Proceed to checkout<i class="icon-arrow-right btn-icon-append"></i></a>  
             </span>
         

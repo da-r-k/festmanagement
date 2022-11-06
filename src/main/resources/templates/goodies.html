@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<head th:replace="adminbaseh"></head>
+<head th:replace="userbaseh"></head>
 <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
-
+<a style="position: fixed; bottom: 20px;right: 30px;z-index: 99;" class="btn btn-primary btn-icon-text" th:href="@{cart}">
+    <i class="ti-shopping-cart btn-icon-prepend"></i>
+    View Cart
+</a>
 <div class="main-panel">
   <div class="content-wrapper">
     <div class="card">

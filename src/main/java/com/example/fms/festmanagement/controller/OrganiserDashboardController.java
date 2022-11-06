@@ -192,7 +192,7 @@ public class OrganiserDashboardController extends Helper{
     }
 
     @PostMapping("{subEventId}/addcompetition")
-    public String PostAddCompetition(@PathVariable("subEventId") int subEventId,@ModelAttribute Competition competition, HttpSession session){
+    public String PostAddCompetition(@PathVariable("subEventId") int subEventId,@ModelAttribute Competition competition, HttpSession session, Model model){
         if (!isAuthenticated(session)) {
             return "redirect:/";
         }

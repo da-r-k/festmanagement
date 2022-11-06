@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -23,6 +24,7 @@ import com.example.fms.festmanagement.models.SubEvent;
 import com.example.fms.festmanagement.models.User;
 import com.example.fms.festmanagement.service.AuthenticationService;
 import com.example.fms.festmanagement.service.DashboardService;
+import com.example.fms.festmanagement.service.MessageService;
 import com.example.fms.festmanagement.service.OrganiserDashboardService;
 
 @Controller
@@ -37,25 +39,18 @@ public class UserDashboardController extends Helper {
     @Autowired
     private OrganiserDashboardService organiserDashboardService;
 
+    @Autowired 
+    private MessageService messageService;
+
     @GetMapping("/dashboard")
     public String dashboard(Model model, HttpSession session) {
         if (!isAuthenticated(session)) {
             return "redirect:/";
         }
-
         addDefaultAttributes(model, session);
-        System.out.println(model.getAttribute("userRole"));
-        if(model.getAttribute("userRole").equals("participant")){
-            model.addAttribute("subEvents", dashboardService.getSubEventToday());
-            model.addAttribute("correspondingevents", dashboardService.getEventFromSubEvent(dashboardService.getSubEventToday()));
-            return "dashboard";
-        }
-        else if(model.getAttribute("userRole").equals("organiser")){
-            return "redirect:organiserdashboard";
-        }
-        else{
-            return "redirect:admindashboard";
-        }
+        model.addAttribute("subEvents", dashboardService.getSubEventToday());
+        model.addAttribute("correspondingevents", dashboardService.getEventFromSubEvent(dashboardService.getSubEventToday()));        
+        return "dashboard";
     }
 
     @GetMapping("showevents")
@@ -72,7 +67,7 @@ public class UserDashboardController extends Helper {
     }
 
     @GetMapping("{eventId}/{subEventId}/{competitionId}/participate")
-    public String Participate(@PathVariable("eventId") int eventId, @PathVariable("subEventId") int subEventId, @PathVariable("competitionId") int competitionId, Model model, HttpSession session){
+    public String Participate(@PathVariable("eventId") int eventId, @PathVariable("subEventId") int subEventId, @PathVariable("competitionId") int competitionId, Model model, HttpSession session, RedirectAttributes attributes){
         Participation p=new Participation();
         addDefaultAttributes(model, session);
         p.setParticipantEmail(authenticationService.getCurrentUser(session));
@@ -82,6 +77,7 @@ public class UserDashboardController extends Helper {
         p.setCompetitionId(competitionId);
         System.out.println(p.toString());
         dashboardService.addParticipation(p);
+        messageService.redirectWithSuccess(attributes,"Successfully registered");
         return "redirect:/showevents";
     }
 
