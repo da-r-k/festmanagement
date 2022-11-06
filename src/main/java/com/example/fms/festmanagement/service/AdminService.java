@@ -1,6 +1,8 @@
 package com.example.fms.festmanagement.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.example.fms.festmanagement.doa.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,5 +89,29 @@ public class AdminService {
     public void addFund(Fund fund) {
         fundRepo.insertFund(fund);
     }
+
+    public List<List<Event>> getCorrEvents(List<Sponsor> sponsors) {
+        List<List<Event>>ret=new ArrayList<List<Event>>();
+        for(Sponsor s:sponsors) {
+            ret.add(queriesRepo.getCorrEvents(s));
+        }
+        return ret;
+    }
+
+    public List<List<Integer>> getCorrAmt(List<List<Event>> events, List<Sponsor>sponsors) {
+        List<List<Integer>>ret=new ArrayList<List<Integer>>();
+        for(int i=0;i<events.size();i++) {
+            Sponsor s=sponsors.get(i);
+            List<Event> e=events.get(i);
+            List<Integer>temp=new ArrayList<Integer>();
+            for(Event ee:e){
+                temp.add(queriesRepo.getAmt(e,s));
+            }
+            ret.add(temp);
+        }
+        return ret;
+    }
+
+    
     
 }

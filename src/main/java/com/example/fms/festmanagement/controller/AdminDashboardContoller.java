@@ -1,5 +1,7 @@
 package com.example.fms.festmanagement.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -79,10 +81,14 @@ public class AdminDashboardContoller extends Helper{
 
     @GetMapping("editsponsors")
     public String EditSponsors(Model model, HttpSession session, RedirectAttributes attributes){
-        model.addAttribute("sponsors",adminService.getSponsors());
+        List<Sponsor>sponsors=adminService.getSponsors();
+        List<List<Event>> events=adminService.getCorrEvents(sponsors);
+        model.addAttribute("sponsors",sponsors);
         model.addAttribute("events",adminService.getAllEvents());
         model.addAttribute("newsponsor",new Sponsor());
         model.addAttribute("newfund",new Fund());
+        model.addAttribute("correvents", events);
+        model.addAttribute("corramts", adminService.getCorrAmt(events,sponsors));
         return "editsponsors";
     }
 

@@ -467,4 +467,12 @@ public class QueriesRepo {
 
         }
     }
+
+    public List<Event> getCorrEvents(Sponsor s) {
+        return null;
+    }
+
+    public Integer getAmt(List<Event> e, Sponsor s) {
+        return null;
+    }
 }
