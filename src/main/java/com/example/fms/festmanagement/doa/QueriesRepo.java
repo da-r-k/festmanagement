@@ -485,13 +485,13 @@ public class QueriesRepo {
         }
     }
 
-    public Integer getAmt(Event ee, Sponsor s) {
+    public Fund getAmt(Event ee, Sponsor s) {
         
         try {
 
-            String x = "SELECT amount FROM Fund WHERE eventId = ? AND sponsorId = ?";
+            String x = "SELECT * FROM Fund WHERE eventId = ? AND sponsorId = ?";
 
-            return t.queryForObject(x, new BeanPropertyRowMapper<>(Integer.class), ee.getEventId(), s.getSponsorId());
+            return t.queryForObject(x, new BeanPropertyRowMapper<>(Fund.class), ee.getEventId(), s.getSponsorId());
 
         }
 

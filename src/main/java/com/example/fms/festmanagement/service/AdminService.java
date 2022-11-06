@@ -98,14 +98,14 @@ public class AdminService {
         return ret;
     }
 
-    public List<List<Integer>> getCorrAmt(List<List<Event>> events, List<Sponsor>sponsors) {
-        List<List<Integer>>ret=new ArrayList<List<Integer>>();
+    public List<List<Long>> getCorrAmt(List<List<Event>> events, List<Sponsor>sponsors) {
+        List<List<Long>>ret=new ArrayList<List<Long>>();
         for(int i=0;i<events.size();i++) {
             Sponsor s=sponsors.get(i);
             List<Event> e=events.get(i);
-            List<Integer>temp=new ArrayList<Integer>();
+            List<Long>temp=new ArrayList<Long>();
             for(Event ee:e){
-                temp.add(queriesRepo.getAmt(ee,s));
+                temp.add(Long.valueOf(queriesRepo.getAmt(ee,s).getAmount()));
             }
             ret.add(temp);
         }

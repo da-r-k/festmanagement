@@ -51,7 +51,7 @@
               List of sponsors for the Fest
             </p>
             <div class="row">
-            <div th:each="sponsor:${sponsors}" class="card col-md-3">
+            <div th:each="sponsor,i:${sponsors}" class="card col-md-3">
                 <a class="card btn btn-inverse-primary" data-toggle="modal" th:data-target="'#modal'+${sponsor.sponsorId}">
                     <div class="card-body">
                     <h3 th:text="${sponsor.sponsorName}"/>
@@ -63,7 +63,7 @@
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel" th:inline="text">[[${sponsor.sponsorName}]] Details</h5>
+                        <h5 class="modal-title" id="exampleModalLabel" th:inline="text">[[${sponsor.sponsorName}]] Sponsorship</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -71,7 +71,9 @@
                       <div class="modal-body">
                         <div class="card-body">
                             
-                          
+                          <ul class="list-arrow">
+                            <li th:each="event,j:${correvents[i.index]}" th:inline-"text">Sponsored [[${event.eventName}]] ₹[[${corramts[i.index][j.index]}]]</li>
+                          </ul>
 
                           </div>
                       </div>
