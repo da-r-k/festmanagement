@@ -27,18 +27,42 @@ public class AdminDashboardContoller extends Helper{
     private AdminService adminService;
 
     @GetMapping("admindashboard")
-    public String OrganiserDashboard(Model model, HttpSession session, RedirectAttributes attributes){
+    public String AdminDashboard(Model model, HttpSession session, RedirectAttributes attributes){
+        if (!isAuthenticated(session)) {
+            return "redirect:/";
+        }
+
+        addDefaultAttributes(model, session);
+        if(!model.getAttribute("userRole").equals("admin")){
+            return "redirect:accessdenied";
+        }
         return "admindashboard";
     }
 
     @GetMapping("viewevents")
     public String ViewEvents(Model model, HttpSession session, RedirectAttributes attributes){
+        if (!isAuthenticated(session)) {
+            return "redirect:/";
+        }
+
+        addDefaultAttributes(model, session);
+        if(!model.getAttribute("userRole").equals("admin")){
+            return "redirect:accessdenied";
+        }
         model.addAttribute("events",adminService.getAllEvents());
         return "viewevents";
     }
 
     @GetMapping("addevent")
     public String AddEvent(Model model, HttpSession session, RedirectAttributes attributes){
+        if (!isAuthenticated(session)) {
+            return "redirect:/";
+        }
+
+        addDefaultAttributes(model, session);
+        if(!model.getAttribute("userRole").equals("admin")){
+            return "redirect:accessdenied";
+        }
         model.addAttribute("event", new Event());
         model.addAttribute("organiser", new Organiser());
         model.addAttribute("user", new User());
@@ -47,18 +71,42 @@ public class AdminDashboardContoller extends Helper{
 
     @PostMapping("addevent")
     public String PostAddEvent(@ModelAttribute User user, @ModelAttribute Organiser organiser, @ModelAttribute Event event, Model model, HttpSession session, RedirectAttributes attributes){
+        if (!isAuthenticated(session)) {
+            return "redirect:/";
+        }
+
+        addDefaultAttributes(model, session);
+        if(!model.getAttribute("userRole").equals("admin")){
+            return "redirect:accessdenied";
+        }
         adminService.addEvent(user,event,organiser);
         return "redirect:/viewevents";
     }
 
     @GetMapping("{eventId}/delevent")
     public String DeleteEvent(@PathVariable("eventId") int eventId,Model model, HttpSession session, RedirectAttributes attributes){
+        if (!isAuthenticated(session)) {
+            return "redirect:/";
+        }
+
+        addDefaultAttributes(model, session);
+        if(!model.getAttribute("userRole").equals("admin")){
+            return "redirect:accessdenied";
+        }
         adminService.deleteEvent(eventId);
         return "redirect:/viewevents";
     }
 
     @GetMapping("edititems")
     public String EditItems(Model model, HttpSession session, RedirectAttributes attributes){
+        if (!isAuthenticated(session)) {
+            return "redirect:/";
+        }
+
+        addDefaultAttributes(model, session);
+        if(!model.getAttribute("userRole").equals("admin")){
+            return "redirect:accessdenied";
+        }
         model.addAttribute("allitems",adminService.getAllItems());
         model.addAttribute("newitem",new Item());
         for(Item x:adminService.getAllItems()){
@@ -69,18 +117,42 @@ public class AdminDashboardContoller extends Helper{
 
     @PostMapping("{ItemId}/update")
     public String UpdateItem(@ModelAttribute Item item,Model model, HttpSession session, RedirectAttributes attributes){
+        if (!isAuthenticated(session)) {
+            return "redirect:/";
+        }
+
+        addDefaultAttributes(model, session);
+        if(!model.getAttribute("userRole").equals("admin")){
+            return "redirect:accessdenied";
+        }
         adminService.updateItem(item);
         return "redirect:/edititems";
     }
 
     @PostMapping("additem")
     public String AddItem(@ModelAttribute Item item,Model model, HttpSession session, RedirectAttributes attributes){
+        if (!isAuthenticated(session)) {
+            return "redirect:/";
+        }
+
+        addDefaultAttributes(model, session);
+        if(!model.getAttribute("userRole").equals("admin")){
+            return "redirect:accessdenied";
+        }
         adminService.addItem(item);
         return "redirect:/edititems";
     }
 
     @GetMapping("editsponsors")
     public String EditSponsors(Model model, HttpSession session, RedirectAttributes attributes){
+        if (!isAuthenticated(session)) {
+            return "redirect:/";
+        }
+
+        addDefaultAttributes(model, session);
+        if(!model.getAttribute("userRole").equals("admin")){
+            return "redirect:accessdenied";
+        }
         List<Sponsor>sponsors=adminService.getSponsors();
         List<List<Event>> events=adminService.getCorrEvents(sponsors);
         model.addAttribute("sponsors",sponsors);
@@ -94,18 +166,42 @@ public class AdminDashboardContoller extends Helper{
 
     @PostMapping("addsponsor")
     public String AddSponsors(@ModelAttribute Sponsor sponsor,Model model, HttpSession session, RedirectAttributes attributes){
+        if (!isAuthenticated(session)) {
+            return "redirect:/";
+        }
+
+        addDefaultAttributes(model, session);
+        if(!model.getAttribute("userRole").equals("admin")){
+            return "redirect:accessdenied";
+        }
         adminService.addSponsors(sponsor);
         return "redirect:/editsponsors";
     }
 
     @GetMapping("{sponsorId}/delsponsor")
     public String DeleteSponsor(@PathVariable("sponsorId") int sponsorId,Model model, HttpSession session, RedirectAttributes attributes){
+        if (!isAuthenticated(session)) {
+            return "redirect:/";
+        }
+
+        addDefaultAttributes(model, session);
+        if(!model.getAttribute("userRole").equals("admin")){
+            return "redirect:accessdenied";
+        }
         adminService.deleteSponsors(sponsorId);
         return "redirect:/editsponsors";
     }
 
     @PostMapping("/addfunding")
     public String AddFunding(@ModelAttribute Fund fund, Model model, HttpSession session){
+        if (!isAuthenticated(session)) {
+            return "redirect:/";
+        }
+
+        addDefaultAttributes(model, session);
+        if(!model.getAttribute("userRole").equals("admin")){
+            return "redirect:accessdenied";
+        }
         adminService.addFund(fund);
         return "redirect:/editsponsors";
     }

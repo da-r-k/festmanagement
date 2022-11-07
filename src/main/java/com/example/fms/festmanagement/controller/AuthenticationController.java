@@ -34,6 +34,7 @@ public class AuthenticationController extends Helper{
 
     @PostMapping("/login")
     public String postLogin(@ModelAttribute User credentials, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+        
         if (authenticationService.isAuthenticated(session)) {
             addDefaultAttributes(model, session);
             System.out.println(model.getAttribute("userRole"));

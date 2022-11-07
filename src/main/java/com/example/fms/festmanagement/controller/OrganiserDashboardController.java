@@ -46,6 +46,9 @@ public class OrganiserDashboardController extends Helper{
         }
 
         addDefaultAttributes(model, session);
+        if(!model.getAttribute("userRole").equals("organiser")){
+            return "redirect:accessdenied";
+        }
         return "organiserdashboard";
     }
 
@@ -55,7 +58,9 @@ public class OrganiserDashboardController extends Helper{
             return "redirect:/";
         }
         addDefaultAttributes(model,session);
-        
+        if(!model.getAttribute("userRole").equals("organiser")){
+            return "redirect:accessdenied";
+        }
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
         model.addAttribute("user", new User());
         model.addAttribute("organiser", new Organiser());
@@ -71,6 +76,9 @@ public class OrganiserDashboardController extends Helper{
         }
 
         addDefaultAttributes(model, session);
+        if(!model.getAttribute("userRole").equals("organiser")){
+            return "redirect:accessdenied";
+        }
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
         System.out.println(users.toString());
         System.out.println(organiser.toString());
@@ -86,7 +94,9 @@ public class OrganiserDashboardController extends Helper{
             return "redirect:/";
         }
         addDefaultAttributes(model,session);
-
+        if(!model.getAttribute("userRole").equals("organiser")){
+            return "redirect:accessdenied";
+        }
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
         System.out.println(e.toString());
         model.addAttribute("organisers", organiserDashboardService.getOrganisersByEvent(e));
@@ -102,6 +112,9 @@ public class OrganiserDashboardController extends Helper{
         }
 
         addDefaultAttributes(model, session);
+        if(!model.getAttribute("userRole").equals("organiser")){
+            return "redirect:accessdenied";
+        }
         organiserDashboardService.deleteOrganiser(organiserEmail);
         authenticationService.deleteUser(organiserEmail);
         return "redirect:/vieworganisers";
@@ -114,6 +127,9 @@ public class OrganiserDashboardController extends Helper{
         }
 
         addDefaultAttributes(model, session);
+        if(!model.getAttribute("userRole").equals("organiser")){
+            return "redirect:accessdenied";
+        }
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
         model.addAttribute("subEvents",organiserDashboardService.getSubEvents(e));
         model.addAttribute("event", e);
@@ -127,6 +143,9 @@ public class OrganiserDashboardController extends Helper{
         }
 
         addDefaultAttributes(model, session);
+        if(!model.getAttribute("userRole").equals("organiser")){
+            return "redirect:accessdenied";
+        }
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
         organiserDashboardService.DeleteSubEvent(subEventId,e);
         return "redirect:/viewsubevents";
@@ -139,6 +158,9 @@ public class OrganiserDashboardController extends Helper{
         }
 
         addDefaultAttributes(model, session);
+        if(!model.getAttribute("userRole").equals("organiser")){
+            return "redirect:accessdenied";
+        }
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
         model.addAttribute("subEvent",new SubEvent());
         model.addAttribute("event",e);
@@ -154,6 +176,9 @@ public class OrganiserDashboardController extends Helper{
         }
 
         addDefaultAttributes(model, session);
+        if(!model.getAttribute("userRole").equals("organiser")){
+            return "redirect:accessdenied";
+        }
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
         subEvent.setEventId(e.getEventId());
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
@@ -169,6 +194,9 @@ public class OrganiserDashboardController extends Helper{
         }
 
         addDefaultAttributes(model, session);
+        if(!model.getAttribute("userRole").equals("organiser")){
+            return "redirect:accessdenied";
+        }
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
         SubEvent s = organiserDashboardService.getSubEventById(subEventId,e);
         model.addAttribute("competitions",organiserDashboardService.getCompetitions(s));
@@ -184,6 +212,9 @@ public class OrganiserDashboardController extends Helper{
         }
 
         addDefaultAttributes(model, session);
+        if(!model.getAttribute("userRole").equals("organiser")){
+            return "redirect:accessdenied";
+        }
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
         SubEvent s = organiserDashboardService.getSubEventById(subEventId,e);
         model.addAttribute("competition",new Competition());
@@ -198,6 +229,9 @@ public class OrganiserDashboardController extends Helper{
         }
 
         addDefaultAttributes(model, session);
+        if(!model.getAttribute("userRole").equals("organiser")){
+            return "redirect:accessdenied";
+        }
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
         SubEvent s = organiserDashboardService.getSubEventById(subEventId,e);
         competition.setEventId(s.getEventId());
@@ -213,6 +247,9 @@ public class OrganiserDashboardController extends Helper{
         }
 
         addDefaultAttributes(model, session);
+        if(!model.getAttribute("userRole").equals("organiser")){
+            return "redirect:accessdenied";
+        }
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
         SubEvent s = organiserDashboardService.getSubEventById(subEventId,e);
         Competition c =organiserDashboardService.getCompetitionById(competitionId,s);
@@ -230,6 +267,9 @@ public class OrganiserDashboardController extends Helper{
         }
 
         addDefaultAttributes(model, session);
+        if(!model.getAttribute("userRole").equals("organiser")){
+            return "redirect:accessdenied";
+        }
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
         SubEvent s = organiserDashboardService.getSubEventById(subEventId,e);
         Competition c =organiserDashboardService.getCompetitionById(competitionId,s);
@@ -244,6 +284,9 @@ public class OrganiserDashboardController extends Helper{
         }
 
         addDefaultAttributes(model, session);
+        if(!model.getAttribute("userRole").equals("organiser")){
+            return "redirect:accessdenied";
+        }
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
         SubEvent s = organiserDashboardService.getSubEventById(subEventId,e);
         Competition c =organiserDashboardService.getCompetitionById(competitionId,s);
@@ -258,6 +301,9 @@ public class OrganiserDashboardController extends Helper{
         }
 
         addDefaultAttributes(model, session);
+        if(!model.getAttribute("userRole").equals("organiser")){
+            return "redirect:accessdenied";
+        }
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
         SubEvent s = organiserDashboardService.getSubEventById(subEventId,e);
         Competition c =organiserDashboardService.getCompetitionById(competitionId,s);
@@ -275,6 +321,9 @@ public class OrganiserDashboardController extends Helper{
         }
 
         addDefaultAttributes(model, session);
+        if(!model.getAttribute("userRole").equals("organiser")){
+            return "redirect:accessdenied";
+        }
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
         SubEvent s = organiserDashboardService.getSubEventById(subEventId,e);
         Competition c =organiserDashboardService.getCompetitionById(competitionId,s);

@@ -11,6 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.fms.festmanagement.models.Participant;
 import com.example.fms.festmanagement.models.User;
+import com.example.fms.festmanagement.service.AuthenticationService;
 import com.example.fms.festmanagement.service.RegistrationService;
 
 import jakarta.servlet.http.HttpSession;
@@ -22,13 +23,42 @@ public class HomeController extends Helper{
     @Autowired
     private RegistrationService registrationService;
 
+    @Autowired
+    private AuthenticationService authenticationService;
+
     @GetMapping("/")
-    public String home(Model model) {
+    public String home(Model model, HttpSession session){
+        if (authenticationService.isAuthenticated(session)) {
+            addDefaultAttributes(model, session);
+            System.out.println(model.getAttribute("userRole"));
+            if(model.getAttribute("userRole").equals("participant")){
+                return "redirect:dashboard";
+            }
+            else if(model.getAttribute("userRole").equals("organiser")){
+                return "redirect:organiserdashboard";
+            }
+            else{
+                return "redirect:admindashboard";
+            }
+        }
         return "home";
     }
 
     @GetMapping("/register")
     public String registration(Model model, HttpSession session, RedirectAttributes attributes) {
+        if (authenticationService.isAuthenticated(session)) {
+            addDefaultAttributes(model, session);
+            System.out.println(model.getAttribute("userRole"));
+            if(model.getAttribute("userRole").equals("participant")){
+                return "redirect:dashboard";
+            }
+            else if(model.getAttribute("userRole").equals("organiser")){
+                return "redirect:organiserdashboard";
+            }
+            else{
+                return "redirect:admindashboard";
+            }
+        }
         addDefaultAttributes(model, session);
 
         model.addAttribute("users", new User());
@@ -43,6 +73,11 @@ public class HomeController extends Helper{
         registrationService.register(users,participant);
         System.out.println("registered");
         return  "redirect:/";
+    }
+
+    @GetMapping("accessdenied")
+    public String AccessDenied(HttpSession session, Model model){
+        return "accessdenied";
     }
 
 }

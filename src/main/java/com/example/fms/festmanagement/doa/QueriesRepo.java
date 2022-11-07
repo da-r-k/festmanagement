@@ -399,7 +399,7 @@ public class QueriesRepo {
 
         try {
 
-            String x = "SELECT * FROM Cart WHERE participantEmail = ?";
+            String x = "SELECT * FROM Cart WHERE participantEmail = ? AND cartId IN (SELECT cartId FROM Transaction)";
 
             return t.query(x, new BeanPropertyRowMapper<>(Cart.class), u);
 

@@ -185,7 +185,7 @@ public class DashboardService {
         return queriesRepo.getLeaderboard(eventId,subEventId,competitionId);
     }
 
-	public Object getTransaction(Cart c) {
+	public Transaction getTransaction(Cart c) {
 		return queriesRepo.getTransaction(c);
 	}
 
