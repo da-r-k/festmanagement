@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head th:replace="organiserbaseh"></head>
-<a th:href="@{addsubevent}" type="button" style="position: fixed; bottom: 20px;right: 30px;z-index: 99;" class="btn btn-primary btn-icon-text">
+<a th:if="${ishead}" th:href="@{addsubevent}" type="button" style="position: fixed; bottom: 20px;right: 30px;z-index: 99;" class="btn btn-primary btn-icon-text">
   <i class="icon-plus btn-icon-prepend"></i>
   Add Sub-Event
 </a>
@@ -29,7 +29,7 @@
                     <td th:text="${#dates.format(subEvent.startDate,'dd-MM-yyyy')}" />
                     <td th:text="${#dates.format(subEvent.endDate,'dd-MM-yyyy')}" />
                     <td th:text="${subEvent.venue}" />
-                    <td><a th:href="@{{id}/delsubEvent(id=${subEvent.subEventId})}" class="btn btn-danger btn-sm">Delete</a>  <a th:href="@{{id}_viewcompetitions(id=${subEvent.subEventId})}" class="btn btn-dark btn-sm">View Competitions</a></td>
+                    <td><a th:if="${ishead}" th:href="@{{id}/delsubEvent(id=${subEvent.subEventId})}" class="btn btn-danger btn-sm">Delete</a>  <a th:href="@{{id}_viewcompetitions(id=${subEvent.subEventId})}" class="btn btn-dark btn-sm">View Competitions</a></td>
                   </tr>
                 </tbody>
               </table>

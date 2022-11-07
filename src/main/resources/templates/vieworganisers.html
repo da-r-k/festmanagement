@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head th:replace="organiserbaseh"></head>
-<a th:href="@{addorganisers}" type="button" style="position: fixed; bottom: 20px;right: 30px;z-index: 99;" class="btn btn-primary btn-icon-text">
+<a th:if="${ishead}" th:href="@{addorganisers}" type="button" style="position: fixed; bottom: 20px;right: 30px;z-index: 99;" class="btn btn-primary btn-icon-text">
   <i class="icon-plus btn-icon-prepend"></i>
   Add Organiser
 </a>
@@ -20,7 +20,7 @@
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Mobile Number</th>
-                    <th>Action</th>
+                    <th th:if="${ishead}">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -29,7 +29,7 @@
                     <td th:text="${organiser.firstName}" />
                     <td th:text="${organiser.lastName}" />
                     <td th:text="${organiser.mobileNumber}" />
-                    <td><a th:unless="${#strings.equals(emailId,organiser.organiserEmail) or #strings.equals(event.headEmail,organiser.organiserEmail)}" th:href="@{{id}/delorganiser(id=${organiser.organiserEmail})}" class="btn btn-danger btn-sm">Delete</a></td>
+                    <td th:if="${ishead}"><a th:unless="${#strings.equals(emailId,organiser.organiserEmail) or #strings.equals(event.headEmail,organiser.organiserEmail)}" th:href="@{{id}/delorganiser(id=${organiser.organiserEmail})}" class="btn btn-danger btn-sm">Delete</a></td>
                   </tr>
                 </tbody>
               </table>

@@ -104,4 +104,11 @@ public class OrganiserDashboardService {
         return queriesRepo.selectEvent(eventId);
     }
 
+    public Boolean checkHead(String currentUser) {
+        if(getEventFromOrganiser(currentUser).getHeadEmail().equals(currentUser)){
+            return true;
+        }
+        return false;
+    }
+
 }
