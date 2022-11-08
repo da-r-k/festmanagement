@@ -72,23 +72,8 @@
 </video>
 
 <div class="content d-flex justify-content-center">
-  <h3><a class="card-title text-white" th:href="@{login}">LOGIN</a> | <a class="card-title text-white" th:href="@{register}">REGISTER</a></h3>
+  <h4><a class="card-title text-white" th:href="@{login}">Login</a> | <a class="card-title text-white" th:href="@{register}">Register</a></h4>
 </div>
-
-<script>
-var video = document.getElementById("myVideo");
-var btn = document.getElementById("myBtn");
-
-function myFunction() {
-  if (video.paused) {
-    video.play();
-    btn.innerHTML = "Pause";
-  } else {
-    video.pause();
-    btn.innerHTML = "Play";
-  }
-}
-</script>
 
 </body>
 </html>

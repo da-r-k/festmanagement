@@ -84,7 +84,7 @@
            <h3 th:inline="text"><small class="text-muted"> Cart Subtotal :</small> ₹ [[${amount}]] </h3>
             </span>
             <span class="float-right">
-            <a class="btn btn-primary btn-icon-text" th:href="@{checkout}">Proceed to checkout<i class="icon-arrow-right btn-icon-append"></i></a>  
+            <a th:if="${not #lists.isEmpty(items)}" class="btn btn-primary btn-icon-text" th:href="@{checkout}">Proceed to checkout<i class="icon-arrow-right btn-icon-append"></i></a>  
             </span>
         
         </div>

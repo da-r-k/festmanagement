@@ -36,10 +36,11 @@
                         <i class="icon-check btn-icon-prepend"></i>                                                    
                         Added to cart
                       </div>
-                      <a type="button" th:unless="${added[i.index]}" class="btn btn-primary btn-icon-text btn-block" th:href="@{{iid}/additem(iid=${item.itemId})}">
+                      <a type="button" th:unless="${added[i.index] or item.stock le 0}" class="btn btn-primary btn-icon-text btn-block" th:href="@{{iid}/additem(iid=${item.itemId})}">
                         <i class="icon-plus btn-icon-prepend"></i>                                                    
                         Add to cart
                       </a>
+                      
                       
                       
                     </div>    

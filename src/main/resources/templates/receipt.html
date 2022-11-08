@@ -30,8 +30,9 @@
               <div class="brand-logo">
                 <img src="images/logo-big.png" alt="logo">
               </div>
-              <h4>RECEIPT</h4>
+              <h4><u>RECEIPT</u></h4>
               <h6 class="font-weight-light" th:inline="text">Transaction Id : [[${transaction.transactionId}]]</h6>
+              <h6 class="font-weight-light" th:inline="text">Date of transaction : [[${transaction.dateTime}]]</h6>
               <h6 class="font-weight-light" th:inline="text">Name : [[${user.firstName}]] [[${user.lastName}]]</h6>
               <h6 class="font-weight-light" th:inline="text">Mobile : [[${user.mobileNumber}]]</h6>
               <h6 class="font-weight-light" th:inline="text">Address : [[${user.streetName}]], [[${user.pinCode}]]</h6>
@@ -68,6 +69,9 @@
                     <h3 th:inline="text">Total :₹ [[${transaction.amount}]] </h3>
                   </div>
               </div>
+            </div>
+            <div class="text-center mt-4 font-weight-light">
+              <a th:href="@{/}" class="text-primary">Back to home</a>
             </div>
           </div>
         </div>
