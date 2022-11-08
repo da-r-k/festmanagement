@@ -357,6 +357,8 @@ public class OrganiserDashboardController extends Helper{
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
         SubEvent s = organiserDashboardService.getSubEventById(subEventId,e);
         Competition c =organiserDashboardService.getCompetitionById(competitionId,s);
+        allParticipations.setEventId(e.getEventId());
+        System.out.println(allParticipations.toString());
         organiserDashboardService.updateParticipant(allParticipations);
         return "redirect:/{subEventId}_{competitionId}_viewparticipants";
     }

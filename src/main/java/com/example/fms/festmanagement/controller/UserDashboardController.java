@@ -275,10 +275,17 @@ public class UserDashboardController extends Helper {
             return "redirect:accessdenied";
         }
         Cart c=dashboardService.getActiveCart(authenticationService.getCurrentUser(session));
-        dashboardService.updateParticipant(p);
+        List<CartItemDetails>cid=dashboardService.getCartItemDetails(c);
+        List<Item> items=dashboardService.getItemDetails(cid);
+        Participant pp=dashboardService.getParticipant(authenticationService.getCurrentUser(session));
+        pp.setPinCode(p.getPinCode());
+        pp.setStreetName(p.getStreetName());
+        dashboardService.updateParticipant(pp);
         dashboardService.createTransaction(c);
+        model.addAttribute("cid",cid);
+        model.addAttribute("items",items);
         model.addAttribute("transaction",dashboardService.getTransaction(c));
-        model.addAttribute("user",p);
+        model.addAttribute("user",pp);
         return "receipt";
     }
 

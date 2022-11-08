@@ -30,6 +30,7 @@ public class ParticipationRepo {
     public void updateParticipation(Participation p) {
 
         String x = "UPDATE Participation SET leaderBoardPosition = ? WHERE participantEmail = ? AND competitionId = ? AND subEventId = ? AND eventId = ?";
+        System.out.println(p.toString());
 
         t.update(x, p.getLeaderBoardPosition(), p.getParticipantEmail(), p.getCompetitionId(), p.getSubEventId(), p.getEventId());
 
