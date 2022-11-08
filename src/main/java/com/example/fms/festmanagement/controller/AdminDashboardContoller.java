@@ -125,6 +125,7 @@ public class AdminDashboardContoller extends Helper{
         if(!model.getAttribute("userRole").equals("admin")){
             return "redirect:accessdenied";
         }
+        System.out.println(item.toString());
         adminService.updateItem(item);
         return "redirect:/edititems";
     }

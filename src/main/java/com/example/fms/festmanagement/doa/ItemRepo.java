@@ -29,7 +29,7 @@ public class ItemRepo {
 
     public void updateItem(Item item) {
 
-        String x = "UPDATE item SET sellingPrice = ?, costPrice = ?, stock = ? WHERE itemId = ?";
+        String x = "UPDATE Item SET sellingPrice = ?, costPrice = ?, stock = ? WHERE itemId = ?";
 
         t.update(x, item.getSellingPrice(), item.getCostPrice(), item.getStock(), item.getItemId());
 

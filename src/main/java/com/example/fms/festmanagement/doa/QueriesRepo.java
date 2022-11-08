@@ -472,7 +472,7 @@ public class QueriesRepo {
 
         try {
 
-            String x = "SELECT * FROM Event e WHERE e.eventId IN (SELECT f.eventId FROM fund f WHERE f.sponsorId = ?)";
+            String x = "SELECT * FROM Event e WHERE e.eventId IN (SELECT f.eventId FROM Fund f WHERE f.sponsorId = ?)";
 
             return t.query(x, new BeanPropertyRowMapper<>(Event.class), s.getSponsorId());
 
