@@ -27,15 +27,33 @@
   <body>
     
     <div class="container-scroller">
+      <div class="alert alert-danger alert-dismissible fade show" style="position: fixed; top: 90px;right: 30px;z-index: 99;" role="alert" th:unless="${#strings.isEmpty(errorToast)}">
+        <div th:text="${errorToast}"/>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="alert alert-success alert-dismissible fade show" style="position: fixed; top: 90px;right: 30px;z-index: 99;" role="alert" th:unless="${#strings.isEmpty(successToast)}">
+        <div th:text="${successToast}"/>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="alert alert-info alert-dismissible fade show" style="position: fixed; top: 90px;right: 30px;z-index: 99;" role="alert" th:unless="${#strings.isEmpty(infoToast)}">
+        <div th:text="${infoToast}"/>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
       <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div
           class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center"
         >
-          <a class="navbar-brand brand-logo mr-5" href="index.html"
-            ><img src="images/logo.svg" class="mr-2" alt="logo"
+          <a class="navbar-brand brand-logo mr-5" th:href="@{/}"
+            ><img src="images/logo-big.png" class="mr-2" alt="logo"
           /></a>
-          <a class="navbar-brand brand-logo-mini" href="index.html"
-            ><img src="images/logo-mini.svg" alt="logo"
+          <a class="navbar-brand brand-logo-mini" th:href="@{/}"
+            ><img src="images/logo.png" alt="logo"
           /></a>
         </div>
         <div
@@ -63,10 +81,7 @@
                 class="dropdown-menu dropdown-menu-right navbar-dropdown"
                 aria-labelledby="profileDropdown"
               >
-                <a class="dropdown-item">
-                  <i class="ti-settings text-primary"></i>
-                  Settings
-                </a>
+                
                 <a class="dropdown-item" th:href="@{~/logout}">
                   <i class="ti-power-off text-primary"></i>
                   Logout

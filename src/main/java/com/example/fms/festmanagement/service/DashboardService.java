@@ -35,6 +35,9 @@ public class DashboardService {
     private EventRepo eventRepo;
 
     @Autowired
+    private AdminService adminService;
+
+    @Autowired
     private QueriesRepo queriesRepo;
 
     @Autowired
@@ -128,6 +131,13 @@ public class DashboardService {
         t.setCartId(c.getCartId());
         t.setDateTime(new Date());
         t.setAmount(calculateAmount(getCartItemDetails(c)));
+        List<CartItemDetails> cid= getCartItemDetails(c);
+        List<Item> l=getItemDetails(cid);
+        for(int i=0;i<l.size(); i++){
+            Item ii=l.get(i);
+            ii.setStock(l.get(i).getStock()-cid.get(i).getQuantity());
+            adminService.updateItem(ii);
+        }
         transactionRepo.insertTransaction(t);
     }
 
@@ -195,6 +205,22 @@ public class DashboardService {
             ret.add(queriesRepo.getItembyId(c.getItemId()));
         }
         return ret;
+    }
+
+    public int getPrizeWorth() {
+        return queriesRepo.getPrizeWorth();
+    }
+
+    public List<SubEvent> getRecentEvents() {
+        return queriesRepo.getRecentEvents();
+    }
+
+    public int getCountSubEvents() {
+        return queriesRepo.getCountSubEvents();
+    }
+
+    public int getCountParticipants() {
+        return queriesRepo.getCountParticipants();
     }
 
 

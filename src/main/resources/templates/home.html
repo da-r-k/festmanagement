@@ -1,20 +1,79 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org/">
-    <head>
-        <meta charset="ISO-8859-1">
-        <title>
-            FEST MANAGEMENT
-        </title>
-        <link rel="stylesheet" href="css/extra/homepage.css" />
-    </head>
-    <body style="background:black">
-        <div id="app">
-            <div id="hero">
-              <h1>TECHNEX '22</h1>
-              <a  th:href="@{/register}">Register</a>
-            </br>
-              <a  th:href="@{/login}">Login</a>
-            </div>
-          </div>
-    </body>
+<html>
+<head>
+  
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Skydash Admin</title>
+    <link rel="stylesheet" href="vendors/feather/feather.css" />
+    <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css" />
+    <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css" />
+    <link rel="stylesheet" href="css/extra/timeline.css" />
+    <link
+      rel="stylesheet"
+      href="vendors/datatables.net-bs4/dataTables.bootstrap4.css"
+    />
+    <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="js/select.dataTables.min.css"
+    />
+    <link rel="stylesheet" href="css/vertical-layout-light/style.css" />
+    <link rel="shortcut icon" href="images/favicon.png" />
+  
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+}
+
+.content {
+  position: fixed;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
+}
+
+#myBtn {
+  width: 200px;
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+#myBtn:hover {
+  background: #ddd;
+  color: black;
+}
+</style>
+</head>
+<body>
+
+<video autoplay muted loop id="myVideo">
+  <source src="rain.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+
+<div class="content d-flex justify-content-center">
+  <h4><a class="card-title text-white" th:href="@{login}">Login</a> | <a class="card-title text-white" th:href="@{register}">Register</a></h4>
+</div>
+
+</body>
 </html>

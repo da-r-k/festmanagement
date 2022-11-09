@@ -25,7 +25,7 @@ public class AuthenticationController extends Helper{
     @GetMapping("/login")
     public String login(Model model, HttpSession session) {
         if (authenticationService.isAuthenticated(session)) {
-            return "redirect:/dashboard";
+            return "redirect:/";
         }
 
         model.addAttribute("credentials", new User());

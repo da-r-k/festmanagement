@@ -501,4 +501,54 @@ public class QueriesRepo {
 
         }
     }
+
+    public int getPrizeWorth() {
+
+        String x = "SELECT * FROM Competition";
+
+        List<Competition> c= t.query(x, new BeanPropertyRowMapper<>(Competition.class));
+
+        int ret=0;
+
+        for(Competition cc : c){
+            ret+=cc.getPrize();
+        }
+
+        return ret;
+
+    }
+
+    public List<SubEvent> getRecentEvents() {
+        try {
+
+            String x = "SELECT * FROM SubEvent where startDate>=curdate() ORDER BY startDate;";
+
+            return t.query(x, new BeanPropertyRowMapper<>(SubEvent.class));
+
+        }
+
+        catch (EmptyResultDataAccessException e) {
+
+            return null;
+
+        }
+    }
+
+    public int getCountSubEvents() {
+
+        String x = "SELECT * FROM SubEvent";
+
+        List<SubEvent> c= t.query(x, new BeanPropertyRowMapper<>(SubEvent.class));
+
+        return c.size();
+    }
+
+    public int getCountParticipants() {
+        
+        String x = "SELECT * FROM Participant";
+
+        List<Participant> p= t.query(x, new BeanPropertyRowMapper<>(Participant.class));
+
+        return p.size();
+    }
 }

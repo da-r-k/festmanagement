@@ -22,6 +22,7 @@ import com.example.fms.festmanagement.models.SubEvent;
 import com.example.fms.festmanagement.models.User;
 import com.example.fms.festmanagement.service.AuthenticationService;
 import com.example.fms.festmanagement.service.DashboardService;
+import com.example.fms.festmanagement.service.MessageService;
 import com.example.fms.festmanagement.service.OrganiserDashboardService;
 import com.example.fms.festmanagement.service.RegistrationService;
 
@@ -39,6 +40,9 @@ public class OrganiserDashboardController extends Helper{
     @Autowired
     private AuthenticationService authenticationService;
 
+    @Autowired
+    private MessageService messageService;
+
     @GetMapping("organiserdashboard")
     public String OrganiserDashboard(Model model, HttpSession session, RedirectAttributes attributes){
         if (!isAuthenticated(session)) {
@@ -49,6 +53,8 @@ public class OrganiserDashboardController extends Helper{
         if(!model.getAttribute("userRole").equals("organiser")){
             return "redirect:accessdenied";
         }
+        Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
+        model.addAttribute("event", e);
         return "organiserdashboard";
     }
 
@@ -91,6 +97,7 @@ public class OrganiserDashboardController extends Helper{
         organiser.setEventId(e.getEventId());
         registrationService.addOrganisers(users,organiser);
         System.out.println("added");
+        messageService.redirectWithSuccess(attributes, "Organiser added to "+e.getEventName());
         return  "redirect:/vieworganisers";
     }
 
@@ -113,7 +120,7 @@ public class OrganiserDashboardController extends Helper{
     } 
 
     @GetMapping("{organiseremail}/delorganiser")
-    public String DeleteOrganisers(@PathVariable("organiseremail") String organiserEmail, Model model, HttpSession session){
+    public String DeleteOrganisers(@PathVariable("organiseremail") String organiserEmail, Model model, HttpSession session, RedirectAttributes attributes){
         if (!isAuthenticated(session)) {
             return "redirect:/";
         }
@@ -127,6 +134,7 @@ public class OrganiserDashboardController extends Helper{
         }
         organiserDashboardService.deleteOrganiser(organiserEmail);
         authenticationService.deleteUser(organiserEmail);
+        messageService.redirectWithSuccess(attributes, "Organiser deleted");
         return "redirect:/vieworganisers";
     } 
 
@@ -148,7 +156,7 @@ public class OrganiserDashboardController extends Helper{
     }
 
     @GetMapping("{subEventId}/delsubEvent")
-    public String DeleteSubEvent(Model model,HttpSession session,@PathVariable("subEventId") int subEventId){
+    public String DeleteSubEvent(Model model,HttpSession session,@PathVariable("subEventId") int subEventId,RedirectAttributes attributes){
         if (!isAuthenticated(session)) {
             return "redirect:/";
         }
@@ -162,6 +170,7 @@ public class OrganiserDashboardController extends Helper{
         }
         Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
         organiserDashboardService.DeleteSubEvent(subEventId,e);
+        messageService.redirectWithSuccess(attributes, "Sub-Event added to "+e.getEventName());
         return "redirect:/viewsubevents";
     }
 
@@ -187,7 +196,7 @@ public class OrganiserDashboardController extends Helper{
     }
 
     @PostMapping("addsubevent")
-    public String PostAddSubEvent(@ModelAttribute SubEvent subEvent, HttpSession session, Model model){
+    public String PostAddSubEvent(@ModelAttribute SubEvent subEvent, HttpSession session, Model model, RedirectAttributes attributes){
         if (!isAuthenticated(session)) {
             return "redirect:/";
         }
@@ -204,6 +213,7 @@ public class OrganiserDashboardController extends Helper{
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
         System.out.println(subEvent.toString());
         organiserDashboardService.AddSubEvent(subEvent);
+        messageService.redirectWithSuccess(attributes, "Sub-Event added to "+e.getEventName());
         return "redirect:viewsubevents";
     }
 
@@ -247,7 +257,7 @@ public class OrganiserDashboardController extends Helper{
     }
 
     @PostMapping("{subEventId}/addcompetition")
-    public String PostAddCompetition(@PathVariable("subEventId") int subEventId,@ModelAttribute Competition competition, HttpSession session, Model model){
+    public String PostAddCompetition(@PathVariable("subEventId") int subEventId,@ModelAttribute Competition competition, HttpSession session, Model model,RedirectAttributes attributes){
         if (!isAuthenticated(session)) {
             return "redirect:/";
         }
@@ -264,6 +274,7 @@ public class OrganiserDashboardController extends Helper{
         competition.setEventId(s.getEventId());
         competition.setSubEventId(s.getSubEventId());
         organiserDashboardService.AddCompetition(competition);
+        messageService.redirectWithSuccess(attributes, "Competition added to "+s.getSubEventName()+","+e.getEventName());
         return "redirect:/{subEventId}_viewcompetitions";
     }
 
@@ -308,7 +319,7 @@ public class OrganiserDashboardController extends Helper{
     }
 
     @GetMapping("{subEventId}/{competitionId}/{participantEmail}/delparticipant")
-    public String DeleteParticipant(Model model, @PathVariable("subEventId") int subEventId, @PathVariable("competitionId") int competitionId,@PathVariable("participantEmail") String participantEmail, HttpSession session){
+    public String DeleteParticipant(RedirectAttributes attributes,Model model, @PathVariable("subEventId") int subEventId, @PathVariable("competitionId") int competitionId,@PathVariable("participantEmail") String participantEmail, HttpSession session){
         if (!isAuthenticated(session)) {
             return "redirect:/";
         }
@@ -321,6 +332,7 @@ public class OrganiserDashboardController extends Helper{
         SubEvent s = organiserDashboardService.getSubEventById(subEventId,e);
         Competition c =organiserDashboardService.getCompetitionById(competitionId,s);
         organiserDashboardService.deleteParticipation(participantEmail,c);
+        messageService.redirectWithSuccess(attributes, "Participation removed");
         return "redirect:/{subEventId}_{competitionId}_viewparticipants";
     }
 
@@ -345,7 +357,7 @@ public class OrganiserDashboardController extends Helper{
     }
 
     @PostMapping("{subEventId}/{competitionId}/{participantEmail}/update")
-    public String PostUpdateLeaderboard(Model model, @ModelAttribute Participation allParticipations,@PathVariable("subEventId") int subEventId, @PathVariable("competitionId") int competitionId, @PathVariable("participantEmail") String participantEmail, HttpSession session){
+    public String PostUpdateLeaderboard(Model model, @ModelAttribute Participation allParticipations,@PathVariable("subEventId") int subEventId, @PathVariable("competitionId") int competitionId, @PathVariable("participantEmail") String participantEmail, HttpSession session, RedirectAttributes attributes){
         if (!isAuthenticated(session)) {
             return "redirect:/";
         }
@@ -360,6 +372,7 @@ public class OrganiserDashboardController extends Helper{
         allParticipations.setEventId(e.getEventId());
         System.out.println(allParticipations.toString());
         organiserDashboardService.updateParticipant(allParticipations);
+        messageService.redirectWithSuccess(attributes, "Updated leaderboard");
         return "redirect:/{subEventId}_{competitionId}_viewparticipants";
     }
 

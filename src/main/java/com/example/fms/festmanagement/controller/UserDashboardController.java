@@ -53,8 +53,14 @@ public class UserDashboardController extends Helper {
         if(!model.getAttribute("userRole").equals("participant")){
             return "redirect:accessdenied";
         }
+        Participant p=dashboardService.getParticipant(authenticationService.getCurrentUser(session));
+        model.addAttribute("participant",p);
         model.addAttribute("subEvents", dashboardService.getSubEventToday());
-        model.addAttribute("correspondingevents", dashboardService.getEventFromSubEvent(dashboardService.getSubEventToday()));        
+        model.addAttribute("correspondingevents", dashboardService.getEventFromSubEvent(dashboardService.getSubEventToday()));   
+        model.addAttribute("prizes",dashboardService.getPrizeWorth());
+        model.addAttribute("recentevents",dashboardService.getRecentEvents());
+        model.addAttribute("countsubevents",dashboardService.getCountSubEvents());
+        model.addAttribute("countparticipants",dashboardService.getCountParticipants());
         return "dashboard";
     }
 
