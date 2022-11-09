@@ -207,6 +207,22 @@ public class DashboardService {
         return ret;
     }
 
+    public int getPrizeWorth() {
+        return queriesRepo.getPrizeWorth();
+    }
+
+    public List<SubEvent> getRecentEvents() {
+        return queriesRepo.getRecentEvents();
+    }
+
+    public int getCountSubEvents() {
+        return queriesRepo.getCountSubEvents();
+    }
+
+    public int getCountParticipants() {
+        return queriesRepo.getCountParticipants();
+    }
+
 
 
 }
