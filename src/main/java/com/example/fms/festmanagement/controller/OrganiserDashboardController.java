@@ -49,6 +49,8 @@ public class OrganiserDashboardController extends Helper{
         if(!model.getAttribute("userRole").equals("organiser")){
             return "redirect:accessdenied";
         }
+        Event e=organiserDashboardService.getEventFromOrganiser(authenticationService.getCurrentUser(session));
+        model.addAttribute("event", e);
         return "organiserdashboard";
     }
 
